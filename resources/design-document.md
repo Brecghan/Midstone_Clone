@@ -2,33 +2,39 @@
 
 ## Instructions
 
-_Replace italicized text (including this text!) with details of the design you are proposing for your team project. (Your replacement text shouldn't be in italics)._
-
-_You should take a look at the [example design document](example-design-document.md) in the same folder as this template for more guidance on the types of information to capture, and the level of detail to aim for._
-
-## _Project Title_ Design
+## Mint Chip's Digital Pantry Design
 
 ## 1. Problem Statement
 
-_Explain clearly what problem you are trying to solve._
+MCDP is a service designed to digitize a user's pantry. It allows them to keep an inventory of what is available in their household.
+
+This design document describes the service that will provide the digital pantry functionality to meet our customers' needs. It is designed to contain a pantry, a meal plan, as well as a grocery list function. It will be able to return current items in the pantry, recipes that are in the recipe book, and a grocery list of items needed to create that recipe.
 
 ## 2. Top Questions to Resolve in Review
 
-_List the most important questions you have about your design, or things that you are still debating internally that you might like help working through._
-
-1.
-2.
-3.
+1. Scope: How many features should we have? (Current thoughts: Pantry which holds inventory, meal plan which consists of selected recipes, recipe-book which consists of entered recipes, grocery list which is populated by checking meal plan's recipe requirements vs pantry's inventory)
+2. How many of the items should be POJOs vs just Strings?
+3. Do you know of any other teams out there who are working on related problems? Or might have the same concerns about how to best structure the data for use as well as database storage?
 
 ## 3. Use Cases
 
-_This is where we work backwards from the customer and define what our customers would like to do (and why). You may also include use cases for yourselves (as developers), or for the organization providing the product to customers._
+U1. As a MCDP customer, I want to create a personal digital pantry when I join the service
 
-U1. _As a [product] customer, I want to `<result>` when I `<action>`_
+U2. As a MCDP customer, I want to view my grocery list when I log into the grocery list page
 
-U2. _As a [product] customer, I want to view my grocery list when I log into the grocery list page_
+U3. As a MCDP customer, I want to be able to add inventory to my pantry
 
-U3. ...
+U4. As a MCDP customer, I want to be able to add/view recipes in the recipe-book
+
+U5. As a MCDP customer, I want to be able to create my own meal plan
+
+U6. As a MCDP customer, I want to be able to select recipes and add it to my meal plan
+
+U7. As a MCDP customer, I want to be able to make a recipe and have it be removed from my meal plan and the ingredients removed from my pantry
+
+U8. As a MCDP customer, I want to be able to view my pantry inventory
+
+U9. As a MCDP customer, I want to be able to have the selected recipe populate my grocery list based off of what is missing from my pantry
 
 ## 4. Project Scope
 
