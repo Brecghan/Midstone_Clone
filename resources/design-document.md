@@ -8,7 +8,7 @@
 
 MCDP is a service designed to digitize a user's pantry. It allows them to keep an inventory of what is available in their household.
 
-This design document describes the service that will provide the digital pantry functionality to meet our customers' needs. It is designed to contain a pantry, a meal plan, as well as a grocery list function. It will be able to return current items in the pantry, recipes that are in the recipe book, and a grocery list of items needed to create that recipe.
+This design document describes the service that will provide the digital pantry functionality to meet our customers' needs. It is designed to contain a pantry, a meal plan, a recipe book, as well as a grocery list function. It will be able to return current items in the pantry, recipes that are in the recipe book, and a grocery list of items needed to create chosen recipes.
 
 ## 2. Top Questions to Resolve in Review
 
@@ -36,21 +36,21 @@ U8. As a MCDP customer, I want to be able to view my pantry inventory
 
 U9. As a MCDP customer, I want to be able to have the selected recipe populate my grocery list based off of what is missing from my pantry
 
+U10. As a MCDP customer, I want to be able to take the items from my grocery list and have them added to the pantry when I purchase them
+
+U11. As a MCDP customer, I want to be able to use any measurement when adding ingredients
+
 ## 4. Project Scope
 
 _Clarify which parts of the problem you intend to solve. It helps reviewers know what questions to ask to make sure you are solving for what you say and stops discussions from getting sidetracked by aspects you do not intend to handle in your design._
 
 ### 4.1. In Scope
 
-_Which parts of the problem defined in Sections 1 and 2 will you solve with this design? This should include the base functionality of your product. What pieces are required for your product to work?_
-
-_The functionality described above should be what your design is focused on. You do not need to include the design for any out of scope features or expansions._
+A pantry that can be created, have items added and removed, and the ability to see what is in the inventory. Also a recipe list that allows you to select recipes to make and compare your items on hand with what the recipe calls for.
 
 ### 4.2. Out of Scope
 
-_Based on your problem description in Sections 1 and 2, are there any aspects you are not planning to solve? Do potential expansions or related problems occur to you that you want to explicitly say you are not worrying about now? Feel free to put anything here that you think your team can't accomplish in the unit, but would love to do with more time._
-
-_The functionality here does not need to be accounted for in your design._
+Measurements, grocery list, adding recipes, ability to search for recipes, ability to see popular recipes (what is in the cache).
 
 # 5. Proposed Architecture Overview
 
@@ -73,6 +73,9 @@ _(You should have a separate section for each of the endpoints you are expecting
 _(repeat, but you can use shorthand here, indicating what is different, likely primarily the data in/out and error conditions. If the sequence diagram is nearly identical, you can say in a few words how it is the same/different from the first endpoint)_
 
 # 7. Tables
+
+User Table which is a user id(S) and then a user object which contains the pantry and meal plan serialized through JSON(S)
+Recipe table which contains recipeID(S), recipe name(S), ingredients(Map), ethnicity(S), dietary restrictions(SS)
 
 _Define the DynamoDB tables you will need for the data your service will use. It may be helpful to first think of what objects your service will need, then translate that to a table structure, like with the *`Playlist` POJO* versus the `playlists` table in the Unit 3 project._
 
