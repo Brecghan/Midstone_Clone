@@ -20,65 +20,162 @@ This design document describes the service that will provide the digital pantry 
 
 U1. As a MCDP customer, I want to create a personal digital pantry when I join the service
 
-U2. As a MCDP customer, I want to view my grocery list when I log into the grocery list page
+U2. As a MCDP customer, I want to be able to add inventory to my pantry
 
-U3. As a MCDP customer, I want to be able to add inventory to my pantry
+U3. As a MCDP customer, I want to be able to add/view recipes in the recipe-book
 
-U4. As a MCDP customer, I want to be able to add/view recipes in the recipe-book
+U4. As a MCDP customer, I want to be able to create my own meal plan
 
-U5. As a MCDP customer, I want to be able to create my own meal plan
+U5. As a MCDP customer, I want to be able to select recipes and add it to my meal plan
 
-U6. As a MCDP customer, I want to be able to select recipes and add it to my meal plan
+U6. As a MCDP customer, I want to be able to make a recipe and have it be removed from my meal plan and the ingredients removed from my pantry
 
-U7. As a MCDP customer, I want to be able to make a recipe and have it be removed from my meal plan and the ingredients removed from my pantry
+U7. As a MCDP customer, I want to be able to view my pantry inventory
 
-U8. As a MCDP customer, I want to be able to view my pantry inventory
+U8. As a MCDP customer, I want to be able to have the selected recipe populate my grocery list based off of what is missing from my pantry
 
-U9. As a MCDP customer, I want to be able to have the selected recipe populate my grocery list based off of what is missing from my pantry
+
+Stretch goals
+
+U9. As a MCDP customer, I want to view my grocery list when I log into the grocery list page
 
 U10. As a MCDP customer, I want to be able to take the items from my grocery list and have them added to the pantry when I purchase them
 
 U11. As a MCDP customer, I want to be able to use any measurement when adding ingredients
 
-## 4. Project Scope
 
-_Clarify which parts of the problem you intend to solve. It helps reviewers know what questions to ask to make sure you are solving for what you say and stops discussions from getting sidetracked by aspects you do not intend to handle in your design._
+## 4. Project Scope
 
 ### 4.1. In Scope
 
-A pantry that can be created, have items added and removed, and the ability to see what is in the inventory. Also a recipe list that allows you to select recipes to make and compare your items on hand with what the recipe calls for.
+* Creating, retrieving, and updating a pantry
+* Recipe list that can be searched by name, region and dietary restrictions
+* Recipes can be retrieved and individual recipes added to meal plan
+* A user's meal plan which consists of chosen recipes
 
 ### 4.2. Out of Scope
 
-Measurements, grocery list, adding recipes, ability to search for recipes, ability to see popular recipes (what is in the cache).
+* A grocery list that is created by comparing pantry inventory to meal plan requirements
+* A measurement converter
+* Ability to add recipes
+* Ability to see popular recipes (what is in the cache)
 
 # 5. Proposed Architecture Overview
 
-_Describe broadly how you are proposing to solve for the requirements you described in Section 2. This may include class diagram(s) showing what components you are planning to build. You should argue why this architecture (organization of components) is reasonable. That is, why it represents a good data flow and a good separation of concerns. Where applicable, argue why this architecture satisfies the stated requirements._
+This initial iteration will provide the minimum lovable product (MLP) including
+creating, retrieving, and updating a pantry, as well as retrieving a recipe and adding it to a user's meal plan.
+
+We will use API Gateway and Lambda to create four endpoints (`GetUser`,
+`CreateUser`, `UpdateUser`, and `GetRecipes`)
+that will handle the creation, update, and retrieval of Users and Recipes to satisfy our
+requirements.
+
+We will store recipes available for users in a table in DynamoDB. Users
+themselves will also be stored in DynamoDB. For simpler tracking, we
+will store the list of pantry items and chosen recipes for a given user directly in the users
+table.
+
+Mint Chip's Digital Pantry will also provide a web interface for users to manage
+their pantry and meal plan. A main page providing a list view of all of their pantry items
+will let them create new items and link off to pages containing recipes to view available recipes
+and add them to the user's meal plan.
 
 # 6. API
 
 ## 6.1. Public Models
 
-_Define the data models your service will expose in its responses via your *`-Model`* package. These will be equivalent to the *`PlaylistModel`* and *`SongModel`* from the Unit 3 project._
+```
+// UserModel
 
-## 6.2. _First Endpoint_
+String id;
+String name;
+List<Recipe> mealPlan
+List<Ingredients> userPantry
+```
 
-_Describe the behavior of the first endpoint you will build into your service API. This should include what data it requires, what data it returns, and how it will handle any known failure cases. You should also include a sequence diagram showing how a user interaction goes from user to website to service to database, and back. This first endpoint can serve as a template for subsequent endpoints. (If there is a significant difference on a subsequent endpoint, review that with your team before building it!)_
+```
+// RecipeModel
 
-_(You should have a separate section for each of the endpoints you are expecting to build...)_
+String name;
+List<Ingredients> neededIngredients;
+String region;
+List<Strings> dietaryRestrictions;
+```
 
-## 6.3 _Second Endpoint_
+```
+// IngredientModel
 
-_(repeat, but you can use shorthand here, indicating what is different, likely primarily the data in/out and error conditions. If the sequence diagram is nearly identical, you can say in a few words how it is the same/different from the first endpoint)_
+String name;
+Int quantity;
+```
+
+## 6.2. Get User Endpoint
+
+* Accepts `GET` requests to `/user/:id`
+* Accepts a user ID and returns the corresponding UserModel.
+    * If the given user ID is not found, will throw a
+      `UserNotFoundException`
+
+### 6.3. Create User Endpoint
+
+* Accepts `POST` requests to `/user`
+* Accepts data to create a new user with a provided name, a given user
+  ID, and an optional list of ingredients. Returns the new user, including a unique
+  User ID assigned by the User Service.
+* For security concerns, we will validate the provided user name does not
+  contain any invalid characters: `" ' \`
+    * If the user name contains any of the invalid characters, will throw an
+      `InvalidAttributeValueException`.
+
+### 6.4. Update User Endpoint
+
+* Accepts `PUT` requests to `/user/:id`
+* Accepts data to update a user including a user ID, an updated user name, updated pantry inventory, and updated meal plan. 
+* Returns the updated user.
+    * If the user ID is not found, will throw a `UserNotFoundException`
+* For security concerns, we will validate the provided user name does not
+  contain invalid characters: `" ' \`
+    * If the user name contains invalid characters, will throw an
+      `InvalidAttributeValueException`
+
+### 6.5. Get Recipe Endpoint
+
+* Accepts `GET` requests to `/recipe/:id`
+* Accepts a recipe ID and returns the corresponding recipe.
+    * If the given recipe ID is not found, will throw a
+      `RecipeNotFoundException`
 
 # 7. Tables
 
-User Table which is a user id(S) and then a user object which contains the pantry and meal plan serialized through JSON(S)
-Recipe table which contains recipeID(S), recipe name(S), ingredients(Map), ethnicity(S), dietary restrictions(SS)
+### 7.1. `Users`
 
-_Define the DynamoDB tables you will need for the data your service will use. It may be helpful to first think of what objects your service will need, then translate that to a table structure, like with the *`Playlist` POJO* versus the `playlists` table in the Unit 3 project._
+```
+id // partition key, string
+name // string
+userObject // string
+```
+
+### 7.2. `Recipes`
+
+```
+id // partition key, string
+name // string
+ingredientsList // map
+recipe_region // string  recipe_region-recipe-region-index partition key
+dietary_needs // string set dietary_needs-dietary-needs-index partition key
+```
+
+- `recipe-region-index` includes ALL attributes
+- `dietary-needs-index` includes ALL attributes
 
 # 8. Pages
 
-_Include mock-ups of the web pages you expect to build. These can be as sophisticated as mockups/wireframes using drawing software, or as simple as hand-drawn pictures that represent the key customer-facing components of the pages. It should be clear what the interactions will be on the page, especially where customers enter and submit data. You may want to accompany the mockups with some description of behaviors of the page (e.g. “When customer submits the submit-dog-photo button, the customer is sent to the doggie detail page”)_
+![](images/MCDP 1.png)
+
+![](images/MCDP 2.png)
+
+![](images/MCDP 3.png)
+
+![](images/MCDP 4.png)
+
+![](images/MCDP 5.png)
