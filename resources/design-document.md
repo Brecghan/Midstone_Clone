@@ -22,7 +22,7 @@ U1. As a MCDP customer, I want to create a personal digital pantry when I join t
 
 U2. As a MCDP customer, I want to be able to add inventory to my pantry
 
-U3. As a MCDP customer, I want to be able to add/view recipes in the recipe-book
+U3. As a MCDP customer, I want to be able to view recipes in the recipe-book
 
 U4. As a MCDP customer, I want to be able to create my own meal plan
 
@@ -42,6 +42,8 @@ U9. As a MCDP customer, I want to view my grocery list when I log into the groce
 U10. As a MCDP customer, I want to be able to take the items from my grocery list and have them added to the pantry when I purchase them
 
 U11. As a MCDP customer, I want to be able to use any measurement when adding ingredients
+
+U11. As a MCDP customer, I want to be able to add recipes to the recipe book
 
 
 ## 4. Project Scope
@@ -153,6 +155,8 @@ Int quantity;
 id // partition key, string
 name // string
 userObject // string
+(mealPlan // string)
+(inventory // string)
 ```
 
 ### 7.2. `Recipes`
