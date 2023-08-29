@@ -15,6 +15,7 @@ This design document describes the service that will provide the digital pantry 
 1. Scope: How many features should we have? (Current thoughts: Pantry which holds inventory, meal plan which consists of selected recipes, recipe-book which consists of entered recipes, grocery list which is populated by checking meal plan's recipe requirements vs pantry's inventory)
 2. How many of the items should be POJOs vs just Strings?
 3. Do you know of any other teams out there who are working on related problems? Or might have the same concerns about how to best structure the data for use as well as database storage?
+4. Should the User's meal plan be a List of Recipes or just a List of Strings using Recipe Ids?
 
 ## 3. Use Cases
 
@@ -91,13 +92,14 @@ and add them to the user's meal plan.
 
 String id;
 String name;
-List<Recipe> mealPlan
-List<Ingredients> userPantry
+Map<String, List<String>> mealPlans
+Map<String, List<Ingredients>> userPantry
 ```
 
 ```
 // RecipeModel
 
+String id;
 String name;
 List<Ingredients> neededIngredients;
 String region;
@@ -109,6 +111,7 @@ List<Strings> dietaryRestrictions;
 
 String name;
 Int quantity;
+Enum unitOfMeasure; (Possibly a stretch goal)
 ```
 
 ## 6.2. Get User Endpoint
@@ -149,17 +152,23 @@ Int quantity;
 
 # 7. Tables
 
-### 7.1. `Users`
+### 7.1. `digitalPantry`
 
 ```
 id // partition key, string
-name // string
-userObject // string
-(mealPlan // string)
-(inventory // string)
+pantryName // sort string, string
+inventory // map
 ```
 
-### 7.2. `Recipes`
+### 7.2. `mealPlans`
+
+```
+id // partition key, string
+mealPlanName // sort string, string
+mealPlan // string set
+```
+
+### 7.3. `Recipes`
 
 ```
 id // partition key, string
@@ -171,6 +180,13 @@ dietary_needs // string set dietary_needs-dietary-needs-index partition key
 
 - `recipe-region-index` includes ALL attributes
 - `dietary-needs-index` includes ALL attributes
+
+### 7.4. `User`  **DO WE NEED THIS**
+
+```
+id // partition key, string
+name // string
+```
 
 # 8. Pages
 
