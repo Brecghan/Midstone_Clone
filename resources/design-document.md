@@ -90,18 +90,36 @@ and add them to the user's meal plan.
 ```
 // UserModel
 
-String id;
-String name;
-Map<String, List<String>> mealPlans
-Map<String, List<Ingredients>> userPantry
+String userId;
+String displayName;
+********List<String> mealPlans; //S = mealPlanId
+********List<String> userPantries; //S = pantryId
+```
+
+```
+// PantryModel
+
+String pantryId;
+String pantryName;
+String userId;
+Set<Ingredient> inventory;
+
+```
+
+```
+// MealPlanModel
+String mealPlanId;
+String mealPlanName;
+String userId;
+Set<String> mealPlans; //S = recipeId
 ```
 
 ```
 // RecipeModel
 
-String id;
-String name;
-List<Ingredients> neededIngredients;
+String recipeId;
+String recipeName;
+Set<Ingredient> neededIngredients;
 String region;
 List<Strings> dietaryRestrictions;
 ```
@@ -110,7 +128,7 @@ List<Strings> dietaryRestrictions;
 // IngredientModel
 
 String name;
-Int quantity;
+Double quantity;
 Enum unitOfMeasure; (Possibly a stretch goal)
 ```
 
@@ -181,11 +199,11 @@ dietary_needs // string set dietary_needs-dietary-needs-index partition key
 - `recipe-region-index` includes ALL attributes
 - `dietary-needs-index` includes ALL attributes
 
-### 7.4. `User`  **DO WE NEED THIS**
+### 7.4. `User` 
 
 ```
-id // partition key, string
-name // string
+userId // partition key, string
+displayName // string
 ```
 
 # 8. Pages

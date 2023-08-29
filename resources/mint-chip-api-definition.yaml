@@ -1,0 +1,461 @@
+openapi: 3.0.0
+info:
+  title: Mint Chip's Digital Pantry
+  description: "This is the API definition for the Digital Pantry Service."
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000
+
+tags:
+  - name: Digital Pantry
+    description: Create, view, and update pantry
+
+  - name: Recipes
+    description: View and create recipes, and add recipes to meal plans
+
+  - name: Meal Plans
+    description: Create, view, and update meal plan
+
+  - name: User
+    description: Create and update user
+
+
+paths:
+
+  /digitalPantry:
+    post:
+      tags:
+        - Digital Pantry
+      summary: Create a new digital pantry(CreatePantryLambda)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pantryName:
+                  type: string
+                userId:
+                  type: string
+      responses:
+        "200":
+          description: A pantry object
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  pantryName:
+                    type: string
+                  pantryId:
+                    type: string
+                  userId:
+                    type: string
+                  inventory:
+                    type: array
+
+  /digitalPantry/{pantryId}:
+    get:
+      tags:
+        - Digital Pantry
+      summary: Get an existing pantry (GetPantryLambda)
+      parameters:
+        - name: pantryId
+          in: path
+          description: ID of pantry to retrieve
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: PantryResponse
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  pantryName:
+                    type: string
+                  pantryId:
+                    type: string
+                  userId:
+                    type: string
+                  inventory:
+                    type: array
+        "500":
+          description: "Invalid input parameters"
+
+    put:
+      tags:
+        - Digital Pantry
+      summary: Update the name of an existing pantry (UpdatePantryLambda)
+      parameters:
+        - name: pantryId
+          in: path
+          description: ID of pantry to retrieve
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pantryId:
+                  type: string
+                pantryName:
+                  type: string
+                userId:
+                  type: string
+
+      responses:
+        "200":
+          description: PantryResponse
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  pantryName:
+                    type: string
+                  pantryId:
+                    type: string
+                  userId:
+                    type: string
+                  inventory:
+                    type: array
+        "500":
+          description: "Invalid input parameters"
+
+  /digitalPantry/{pantryId}/inventory:
+    get:
+      tags:
+        - Digital Pantry
+      summary: Retrieves a list of all ingredients in a pantry (GetPantryInventoryLambda)
+      operationId: getInventory
+      parameters:
+        - name: pantryId
+          in: path
+          description: ID of pantry to return
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A pantry object
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  inventory:
+                    type: array
+                    items:
+                      properties:
+                        name:
+                          type: string
+                        quantity:
+                          type: number
+                        unitOfMeasure:
+                          type: string
+
+    put:
+      tags:
+        - Digital Pantry
+      summary: Update ingredient to a pantry(UpdatePantryIngredientLambda)
+      operationId: updateIngredient
+      parameters:
+        - name: pantryId
+          in: path
+          description: ID of pantry to return
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                quantity:
+                  type: number
+                unitOfMeasure:
+                  type: string
+
+      responses:
+        "200":
+          description: the ingredient
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  inventory:
+                    type: array
+                    items:
+                      properties:
+                        name:
+                          type: string
+                        quantity:
+                          type: number
+                        unitOfMeasure:
+                          type: string
+
+  /mealPlan:
+    post:
+      tags:
+        - Meal Plans
+      summary: Create a new meal plan(CreateMealPlanLambda)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mealPlanName:
+                  type: string
+                userId:
+                  type: string
+      responses:
+        "200":
+          description: A meal plan object
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mealPlanName:
+                    type: string
+                  mealPlanId:
+                    type: string
+                  userId:
+                    type: string
+                  mealPlans:
+                    type: array
+
+  /mealPlan/{mealPlanId}:
+    get:
+      tags:
+        - Meal Plans
+      summary: Get an existing meal plan (GetMealPlanLambda)
+      parameters:
+        - name: mealPlanId
+          in: path
+          description: ID of meal plan to retrieve
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: MealPlanResponse
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mealPlanName:
+                    type: string
+                  mealPlanId:
+                    type: string
+                  userId:
+                    type: string
+                  mealPlans:
+                    type: array
+
+
+    put:
+      tags:
+        - Meal Plans
+      summary: Update the name of an existing meal plan(UpdateMealPlanLambda)
+      parameters:
+        - name: mealPlanId
+          in: path
+          description: ID of meal plan to retrieve
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mealPlanId:
+                  type: string
+                mealPlanName:
+                  type: string
+                userId:
+                  type: string
+
+      responses:
+        "200":
+          description: MealPlanResponse
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mealPlanName:
+                    type: string
+                  mealPlanId:
+                    type: string
+                  userId:
+                    type: string
+                  mealPlans:
+                    type: array
+        "500":
+          description: "Invalid input parameters"
+
+  /mealPlan/{mealPlanId}/mealPlans:
+    get:
+      tags:
+        - Meal Plans
+      summary: Retrieves a user's created meal plans(GetMealPlansLambda)
+      operationId: getMealPlans
+      parameters:
+        - name: mealPlanId
+          in: path
+          description: ID of meal plan to return
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A meal plan object
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mealPlans:
+                    type: array
+                    items:
+                      properties:
+                        recipeId:
+                          type: string
+
+
+    put:
+      tags:
+        - Meal Plans
+      summary: Update a user's meal plans (UpdateMealPlansLambda)
+      operationId: updateMealPlans
+      parameters:
+        - name: mealPlanId
+          in: path
+          description: ID of mealPlan to return
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                recipeId:
+                  type: string
+                mealPlanId:
+                  type: string
+                userId:
+                  type: string
+
+
+      responses:
+        "200":
+          description: the meal plans
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mealPlans:
+                    type: array
+                    items:
+                      properties:
+                        recipeId:
+                          type: string
+
+  /user:
+    post:
+      tags:
+        - User
+      summary: Create a new user(CreateUserLambda)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                displayName:
+                  type: string
+
+      responses:
+        "200":
+          description: A user object
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  displayName:
+                    type: string
+                  userId:
+                    type: string
+
+    put:
+      tags:
+        - User
+      summary: Update a user (UpdateUserLambda)
+      operationId: updateUser
+      parameters:
+        - name: userId
+          in: path
+          description: ID of user to return
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+
+      responses:
+        "200":
+          description: A user object
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  displayName:
+                    type: string
+                  userId:
+                    type: string
+
+  /recipes:
+    get:
+      tags:
+        - Recipes
+      summary: Retrieves a list of all recipes (GetRecipesLambda)
+      operationId: getRecipes
+
+      responses:
+        "200":
+          description: A list of all recipes
+          content:
+            application/json:
+              schema:
+                type: array
+                properties:
+                  recipeId:
+                    type: string
+
