@@ -111,7 +111,7 @@ Set<Ingredient> inventory;
 String mealPlanId;
 String mealPlanName;
 String userId;
-Set<String> mealPlans; //S = recipeId
+Set<String> recipeSet; //S = recipeId
 ```
 
 ```
@@ -127,46 +127,62 @@ List<Strings> dietaryRestrictions;
 ```
 // IngredientModel
 
-String name;
+String ingredientName;
 Double quantity;
 Enum unitOfMeasure; (Possibly a stretch goal)
 ```
 
-## 6.2. Get User Endpoint
+## 6.2. Endpoints
 
-* Accepts `GET` requests to `/user/:id`
-* Accepts a user ID and returns the corresponding UserModel.
-    * If the given user ID is not found, will throw a
-      `UserNotFoundException`
+### Digital Pantry
 
-### 6.3. Create User Endpoint
+* Accepts `POST` requests to `/digitalPantry`
+* Accepts a pantryName and userId and returns the corresponding PantryModel including a unique pantryId assigned by the Pantry Service.
+
+* Accepts `GET` requests to `/digitalPantry/{pantryId}`
+* Accepts a userId and a pantryId and returns the corresponding PantryModel.
+
+* Accepts `PUT` requests to `/digitalPantry/{pantryId}`
+* Accepts data to update a pantry including an updated pantryName.
+
+* Accepts `GET` requests to `/digitalPantry/{pantryId}/inventory`
+* Accepts a userId and a pantryId and returns the corresponding inventory of pantry.
+
+* Accepts `PUT` requests to `/digitalPantry/{pantryId}/inventory`
+* Accepts data to update a pantry inventory including adding, removing ingredients, or updating an ingredient quantity.
+
+### Recipes
+
+* Accepts `GET` requests to `/recipes/`
+* Accepts a recipeId and optional regional filter and dietary filter. Returns corresponding recipes.
+
+### Meal Plans
+
+* Accepts `POST` requests to `/mealPlan`
+* Accepts a mealPlanName and userId and returns the corresponding MealPlanModel including a unique mealPlanId assigned by the Meal Plan Service.
+
+* Accepts `GET` requests to `/mealPlan/{mealPlanId}`
+* Accepts a userId and a mealPlanId and returns the corresponding MealPlanModel.
+
+* Accepts `PUT` requests to `/mealPlan/{mealPlanId}`
+* Accepts data to update a meal plan including an updated mealPlanName.
+
+* Accepts `GET` requests to `/mealPlan/{mealPlanId}/recipeSet`
+* Accepts a userId and a mealPlanId and returns the corresponding meal plan recipes.
+
+* Accepts `PUT` requests to `/mealPlan/{mealPlanId}/recipeSet`
+* Accepts data to update a mealPlan's recipes, including adding or removing.
+
+### User
 
 * Accepts `POST` requests to `/user`
-* Accepts data to create a new user with a provided name, a given user
-  ID, and an optional list of ingredients. Returns the new user, including a unique
-  User ID assigned by the User Service.
-* For security concerns, we will validate the provided user name does not
-  contain any invalid characters: `" ' \`
-    * If the user name contains any of the invalid characters, will throw an
-      `InvalidAttributeValueException`.
+* Accepts a displayName and unique userId and returns the corresponding UserModel.
 
-### 6.4. Update User Endpoint
+* Accepts `PUT` requests to `/user`
+* Accepts data to update a displayName.
 
-* Accepts `PUT` requests to `/user/:id`
-* Accepts data to update a user including a user ID, an updated user name, updated pantry inventory, and updated meal plan. 
-* Returns the updated user.
-    * If the user ID is not found, will throw a `UserNotFoundException`
-* For security concerns, we will validate the provided user name does not
-  contain invalid characters: `" ' \`
-    * If the user name contains invalid characters, will throw an
-      `InvalidAttributeValueException`
-
-### 6.5. Get Recipe Endpoint
-
-* Accepts `GET` requests to `/recipe/:id`
-* Accepts a recipe ID and returns the corresponding recipe.
-    * If the given recipe ID is not found, will throw a
-      `RecipeNotFoundException`
+* Accepts `GET` requests to `/user/{userId}`
+* Accepts a userId and returns corresponding user.
 
 # 7. Tables
 
