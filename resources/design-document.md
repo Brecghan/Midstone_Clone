@@ -19,13 +19,13 @@ This design document describes the service that will provide the digital pantry 
 
 ## 3. Use Cases
 
-U1. As a MCDP customer, I want to create a personal digital pantry when I join the service
+U1. As a MCDP customer, I want to create a personal digital pantry
 
 U2. As a MCDP customer, I want to be able to add inventory to my pantry
 
 U3. As a MCDP customer, I want to be able to view recipes in the recipe-book
 
-U4. As a MCDP customer, I want to be able to create my own meal plan
+U4. As a MCDP customer, I want to be able to create a meal plan
 
 U5. As a MCDP customer, I want to be able to select recipes and add it to my meal plan
 
@@ -45,6 +45,8 @@ U10. As a MCDP customer, I want to be able to take the items from my grocery lis
 U11. As a MCDP customer, I want to be able to use any measurement when adding ingredients
 
 U11. As a MCDP customer, I want to be able to add recipes to the recipe book
+
+U12. As a MCDP customer, I want to be able to have a display name separate from my UserId
 
 
 ## 4. Project Scope
