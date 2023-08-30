@@ -35,18 +35,22 @@ U7. As a MCDP customer, I want to be able to view my pantry inventory
 
 U8. As a MCDP customer, I want to be able to have the selected recipe populate my grocery list based off of what is missing from my pantry
 
+U9. As a MCDP customer, I want to be able to change the name of my pantry/pantries
+
+U10. As a MCDP customer, I want to be able to change the name of my meal plan/s
+
 
 Stretch goals
 
-U9. As a MCDP customer, I want to view my grocery list when I log into the grocery list page
+S1. As a MCDP customer, I want to view my grocery list when I log into the grocery list page
 
-U10. As a MCDP customer, I want to be able to take the items from my grocery list and have them added to the pantry when I purchase them
+S2. As a MCDP customer, I want to be able to take the items from my grocery list and have them added to the pantry when I purchase them
 
-U11. As a MCDP customer, I want to be able to use any measurement when adding ingredients
+S3. As a MCDP customer, I want to be able to use any measurement when adding ingredients
 
-U11. As a MCDP customer, I want to be able to add recipes to the recipe book
+S4. As a MCDP customer, I want to be able to add recipes to the recipe book
 
-U12. As a MCDP customer, I want to be able to have a display name separate from my UserId
+S5. As a MCDP customer, I want to be able to have a display name separate from my UserId
 
 
 ## 4. Project Scope
