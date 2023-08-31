@@ -124,7 +124,7 @@ String recipeId;
 String recipeName;
 Set<Ingredient> neededIngredients;
 String region;
-List<Strings> dietaryRestrictions;
+Set<Strings> dietaryRestrictions;
 ```
 
 ```
