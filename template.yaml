@@ -350,33 +350,64 @@ Resources:
   # DynamoDB Configuration
   #-----------------------------------------------------
   
-  PlaylistsTable:
+  PantryTable:
     Type: AWS::DynamoDB::Table
     Properties:
       AttributeDefinitions:
-        - AttributeName: "id"
+        - AttributeName: "pantryId"
+          AttributeType: "S"
+        - AttributeName: "pantryName"
           AttributeType: "S"
       KeySchema:
-        - AttributeName: "id"
+        - AttributeName: "pantryId"
           KeyType: "HASH"
-      BillingMode: "PAY_PER_REQUEST"
-      TableName: "playlists"
-
-  AlbumTracksTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      AttributeDefinitions:
-        - AttributeName: "asin"
-          AttributeType: "S"
-        - AttributeName: "track_number"
-          AttributeType: "N"
-      KeySchema:
-        - AttributeName: "asin"
-          KeyType: "HASH"
-        - AttributeName: "track_number"
+        - AttributeName: "pantryName"
           KeyType: "RANGE"
       BillingMode: "PAY_PER_REQUEST"
-      TableName: "album_tracks"
+      TableName: "pantries"
+
+  MealPlanTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "mealPlanId"
+          AttributeType: "S"
+        - AttributeName: "mealPlanName"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "mealPlanId"
+          KeyType: "HASH"
+        - AttributeName: "mealPlanName"
+          KeyType: "RANGE"
+      BillingMode: "PAY_PER_REQUEST"
+      TableName: "meal_plans"
+
+  RecipesTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "recipeId"
+          AttributeType: "S"
+        - AttributeName: "recipeName"
+          AttributeType: "S"
+        - AttributeName: "region"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "recipeId"
+          KeyType: "HASH"
+        - AttributeName: "recipeName"
+          KeyType: "RANGE"
+      BillingMode: "PAY_PER_REQUEST"
+      TableName: "recipes"
+      GlobalSecondaryIndexes:
+        - IndexName: "RecipeRegionIndex"
+          KeySchema:
+            - AttributeName: "region"
+              KeyType: "HASH"
+            - AttributeName: "regionName"
+              KeyType: "RANGE"
+          Projection:
+            ProjectionType: "ALL"
 
 #-----------------------------------------------------
 # The outputs defined below will be printed
