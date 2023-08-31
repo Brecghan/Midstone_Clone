@@ -68,17 +68,14 @@ U12. As a MCDP customer, I want to be able to have a display name separate from 
 # 5. Proposed Architecture Overview
 
 This initial iteration will provide the minimum lovable product (MLP) including
-creating, retrieving, and updating a pantry, as well as retrieving a recipe and adding it to a user's meal plan.
+creating, retrieving, and updating a pantry, as well as retrieving a recipe and adding it to a user's meal plan; and creating and updating a meal plan.
 
-We will use API Gateway and Lambda to create four endpoints (`GetUser`,
-`CreateUser`, `UpdateUser`, and `GetRecipes`)
+We will use API Gateway and Lambda to create 14 endpoints (defined in section 6.2 "Endpoints")
 that will handle the creation, update, and retrieval of Users and Recipes to satisfy our
 requirements.
 
-We will store recipes available for users in a table in DynamoDB. Users
-themselves will also be stored in DynamoDB. For simpler tracking, we
-will store the list of pantry items and chosen recipes for a given user directly in the users
-table.
+We will store recipes available for users in a table in DynamoDB. For simpler tracking, we
+will store the list of pantries and chosen recipes for a given user directly in their own individual tables.
 
 Mint Chip's Digital Pantry will also provide a web interface for users to manage
 their pantry and meal plan. A main page providing a list view of all of their pantry items
