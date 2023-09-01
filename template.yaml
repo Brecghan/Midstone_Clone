@@ -360,7 +360,7 @@ Resources:
         - AttributeName: "id"
           KeyType: "HASH"
       BillingMode: "PAY_PER_REQUEST"
-      TableName: "playlistz"
+      TableName: "playlists"
 
   AlbumTracksTable:
     Type: AWS::DynamoDB::Table
@@ -376,7 +376,7 @@ Resources:
         - AttributeName: "track_number"
           KeyType: "RANGE"
       BillingMode: "PAY_PER_REQUEST"
-      TableName: "album_trackz"
+      TableName: "album_tracks"
 
   DigitalPantriesTable:
     Type: AWS::DynamoDB::Table
@@ -392,7 +392,7 @@ Resources:
         - AttributeName: "pantryName"
           KeyType: "RANGE"
       BillingMode: "PAY_PER_REQUEST"
-      TableName: "Pantrees"
+      TableName: "Pantries"
 
   RecipesTable:
     Type: AWS::DynamoDB::Table
@@ -408,7 +408,7 @@ Resources:
         - AttributeName: "recipeName"
           KeyType: "RANGE"
       BillingMode: "PAY_PER_REQUEST"
-      TableName: "Recipees"
+      TableName: "Recipies"
 
   MealPlansTable:
     Type: AWS::DynamoDB::Table
@@ -424,7 +424,7 @@ Resources:
         - AttributeName: "mealPlanName"
           KeyType: "RANGE"
       BillingMode: "PAY_PER_REQUEST"
-      TableName: "MealPlanz"
+      TableName: "MealPlans"
       GlobalSecondaryIndexes:
         - IndexName: "RecipeRegionIndex"
           KeySchema:
