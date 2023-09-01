@@ -2,74 +2,237 @@
 
 ## Instructions
 
-_Replace italicized text (including this text!) with details of the design you are proposing for your team project. (Your replacement text shouldn't be in italics)._
-
-_You should take a look at the [example design document](example-design-document.md) in the same folder as this template for more guidance on the types of information to capture, and the level of detail to aim for._
-
-## _Project Title_ Design
+## Mint Chip's Digital Pantry Design
 
 ## 1. Problem Statement
 
-_Explain clearly what problem you are trying to solve._
+MCDP is a service designed to digitize a user's pantry. It allows them to keep an inventory of what is available in their household.
+
+This design document describes the service that will provide the digital pantry functionality to meet our customers' needs. It is designed to contain a pantry, a meal plan, a recipe book, as well as a grocery list function. It will be able to return current items in the pantry, recipes that are in the recipe book, and a grocery list of items needed to create chosen recipes.
 
 ## 2. Top Questions to Resolve in Review
 
-_List the most important questions you have about your design, or things that you are still debating internally that you might like help working through._
-
-1.
-2.
-3.
+1. Scope: How many features should we have? (Current thoughts: Pantry which holds inventory, meal plan which consists of selected recipes, recipe-book which consists of entered recipes, grocery list which is populated by checking meal plan's recipe requirements vs pantry's inventory)
+2. How many of the items should be POJOs vs just Strings?
+3. Do you know of any other teams out there who are working on related problems? Or might have the same concerns about how to best structure the data for use as well as database storage?
+4. Should the User's meal plan be a List of Recipes or just a List of Strings using Recipe Ids?
 
 ## 3. Use Cases
 
-_This is where we work backwards from the customer and define what our customers would like to do (and why). You may also include use cases for yourselves (as developers), or for the organization providing the product to customers._
+U1. As a MCDP customer, I want to create a personal digital pantry
 
-U1. _As a [product] customer, I want to `<result>` when I `<action>`_
+U2. As a MCDP customer, I want to be able to add inventory to my pantry
 
-U2. _As a [product] customer, I want to view my grocery list when I log into the grocery list page_
+U3. As a MCDP customer, I want to be able to view recipes in the recipe-book
 
-U3. ...
+U4. As a MCDP customer, I want to be able to create a meal plan
+
+U5. As a MCDP customer, I want to be able to select recipes and add it to my meal plan
+
+U6. As a MCDP customer, I want to be able to make a recipe and have it be removed from my meal plan and the ingredients removed from my pantry
+
+U7. As a MCDP customer, I want to be able to view my pantry inventory
+
+U8. As a MCDP customer, I want to be able to have the selected recipe populate my grocery list based off of what is missing from my pantry
+
+U9. As a MCDP customer, I want to be able to change the name of my pantry/pantries
+
+U10. As a MCDP customer, I want to be able to change the name of my meal plan/s
+
+
+Stretch goals
+
+S1. As a MCDP customer, I want to view my grocery list when I log into the grocery list page
+
+S2. As a MCDP customer, I want to be able to take the items from my grocery list and have them added to the pantry when I purchase them
+
+S3. As a MCDP customer, I want to be able to use any measurement when adding ingredients
+
+S4. As a MCDP customer, I want to be able to add recipes to the recipe book
+
+S5. As a MCDP customer, I want to be able to have a display name separate from my UserId
+
 
 ## 4. Project Scope
 
-_Clarify which parts of the problem you intend to solve. It helps reviewers know what questions to ask to make sure you are solving for what you say and stops discussions from getting sidetracked by aspects you do not intend to handle in your design._
-
 ### 4.1. In Scope
 
-_Which parts of the problem defined in Sections 1 and 2 will you solve with this design? This should include the base functionality of your product. What pieces are required for your product to work?_
-
-_The functionality described above should be what your design is focused on. You do not need to include the design for any out of scope features or expansions._
+* Creating, retrieving, and updating a pantry
+* Recipe list that can be searched by name, region and dietary restrictions
+* Recipes can be retrieved and individual recipes added to meal plan
+* A user's meal plan which consists of chosen recipes
 
 ### 4.2. Out of Scope
 
-_Based on your problem description in Sections 1 and 2, are there any aspects you are not planning to solve? Do potential expansions or related problems occur to you that you want to explicitly say you are not worrying about now? Feel free to put anything here that you think your team can't accomplish in the unit, but would love to do with more time._
-
-_The functionality here does not need to be accounted for in your design._
+* A grocery list that is created by comparing pantry inventory to meal plan requirements
+* A measurement converter
+* Ability to add recipes
+* Ability to see popular recipes (what is in the cache)
 
 # 5. Proposed Architecture Overview
 
-_Describe broadly how you are proposing to solve for the requirements you described in Section 2. This may include class diagram(s) showing what components you are planning to build. You should argue why this architecture (organization of components) is reasonable. That is, why it represents a good data flow and a good separation of concerns. Where applicable, argue why this architecture satisfies the stated requirements._
+This initial iteration will provide the minimum lovable product (MLP) including
+creating, retrieving, and updating a pantry, as well as retrieving a recipe and adding it to a user's meal plan; and creating and updating a meal plan.
+
+We will use API Gateway and Lambda to create 14 endpoints (defined in section 6.2 "Endpoints")
+that will handle the creation, update, and retrieval of Users and Recipes to satisfy our
+requirements.
+
+We will store recipes available for users in a table in DynamoDB. For simpler tracking, we
+will store the list of pantries and chosen recipes for a given user directly in their own individual tables.
+
+Mint Chip's Digital Pantry will also provide a web interface for users to manage
+their pantry and meal plan. A main page providing a list view of all of their pantry items
+will let them create new items and link off to pages containing recipes to view available recipes
+and add them to the user's meal plan.
 
 # 6. API
 
 ## 6.1. Public Models
 
-_Define the data models your service will expose in its responses via your *`-Model`* package. These will be equivalent to the *`PlaylistModel`* and *`SongModel`* from the Unit 3 project._
+```
+// UserModel
 
-## 6.2. _First Endpoint_
+String userId;
+String displayName;
+********List<String> mealPlans; //S = mealPlanId
+********List<String> userPantries; //S = pantryId
+```
 
-_Describe the behavior of the first endpoint you will build into your service API. This should include what data it requires, what data it returns, and how it will handle any known failure cases. You should also include a sequence diagram showing how a user interaction goes from user to website to service to database, and back. This first endpoint can serve as a template for subsequent endpoints. (If there is a significant difference on a subsequent endpoint, review that with your team before building it!)_
+```
+// PantryModel
 
-_(You should have a separate section for each of the endpoints you are expecting to build...)_
+String pantryId;
+String pantryName;
+String userId;
+Set<Ingredient> inventory;
 
-## 6.3 _Second Endpoint_
+```
 
-_(repeat, but you can use shorthand here, indicating what is different, likely primarily the data in/out and error conditions. If the sequence diagram is nearly identical, you can say in a few words how it is the same/different from the first endpoint)_
+```
+// MealPlanModel
+String mealPlanId;
+String mealPlanName;
+String userId;
+Set<String> recipeSet; //S = recipeId
+```
+
+```
+// RecipeModel
+
+String recipeId;
+String recipeName;
+Set<Ingredient> neededIngredients;
+String region;
+Set<Strings> dietaryRestrictions;
+```
+
+```
+// IngredientModel
+
+String ingredientName;
+Double quantity;
+Enum unitOfMeasure; (Possibly a stretch goal)
+```
+
+## 6.2. Endpoints
+
+### Digital Pantry
+
+* Accepts `POST` requests to `/digitalPantry`
+* Accepts a pantryName and userId and returns the corresponding PantryModel including a unique pantryId assigned by the Pantry Service.
+
+* Accepts `GET` requests to `/digitalPantry/{pantryId}`
+* Accepts a userId and a pantryId and returns the corresponding PantryModel.
+
+* Accepts `PUT` requests to `/digitalPantry/{pantryId}`
+* Accepts data to update a pantry including an updated pantryName.
+
+* Accepts `GET` requests to `/digitalPantry/{pantryId}/inventory`
+* Accepts a userId and a pantryId and returns the corresponding inventory of pantry.
+
+* Accepts `PUT` requests to `/digitalPantry/{pantryId}/inventory`
+* Accepts data to update a pantry inventory including adding, removing ingredients, or updating an ingredient quantity.
+
+### Recipes
+
+* Accepts `GET` requests to `/recipes/`
+* Accepts a recipeId and optional regional filter and dietary filter. Returns corresponding recipes.
+
+### Meal Plans
+
+* Accepts `POST` requests to `/mealPlan`
+* Accepts a mealPlanName and userId and returns the corresponding MealPlanModel including a unique mealPlanId assigned by the Meal Plan Service.
+
+* Accepts `GET` requests to `/mealPlan/{mealPlanId}`
+* Accepts a userId and a mealPlanId and returns the corresponding MealPlanModel.
+
+* Accepts `PUT` requests to `/mealPlan/{mealPlanId}`
+* Accepts data to update a meal plan including an updated mealPlanName.
+
+* Accepts `GET` requests to `/mealPlan/{mealPlanId}/recipeSet`
+* Accepts a userId and a mealPlanId and returns the corresponding meal plan recipes.
+
+* Accepts `PUT` requests to `/mealPlan/{mealPlanId}/recipeSet`
+* Accepts data to update a mealPlan's recipes, including adding or removing.
+
+### User
+
+* Accepts `POST` requests to `/user`
+* Accepts a displayName and unique userId and returns the corresponding UserModel.
+
+* Accepts `PUT` requests to `/user`
+* Accepts data to update a displayName.
+
+* Accepts `GET` requests to `/user/{userId}`
+* Accepts a userId and returns corresponding user.
 
 # 7. Tables
 
-_Define the DynamoDB tables you will need for the data your service will use. It may be helpful to first think of what objects your service will need, then translate that to a table structure, like with the *`Playlist` POJO* versus the `playlists` table in the Unit 3 project._
+### 7.1. `digitalPantry`
+
+```
+id // partition key, string
+pantryName // sort string, string
+inventory // map
+```
+
+### 7.2. `mealPlans`
+
+```
+id // partition key, string
+mealPlanName // sort string, string
+mealPlan // string set
+```
+
+### 7.3. `Recipes`
+
+```
+id // partition key, string
+name // string
+ingredientsList // map
+recipe_region // string  recipe_region-recipe-region-index partition key
+dietary_needs // string set dietary_needs-dietary-needs-index partition key
+```
+
+- `recipe-region-index` includes ALL attributes
+- `dietary-needs-index` includes ALL attributes
+
+### 7.4. `User` 
+
+```
+userId // partition key, string
+displayName // string
+```
 
 # 8. Pages
 
-_Include mock-ups of the web pages you expect to build. These can be as sophisticated as mockups/wireframes using drawing software, or as simple as hand-drawn pictures that represent the key customer-facing components of the pages. It should be clear what the interactions will be on the page, especially where customers enter and submit data. You may want to accompany the mockups with some description of behaviors of the page (e.g. “When customer submits the submit-dog-photo button, the customer is sent to the doggie detail page”)_
+![](images/MCDP 1.png)
+
+![](images/MCDP 2.png)
+
+![](images/MCDP 3.png)
+
+![](images/MCDP 4.png)
+
+![](images/MCDP 5.png)
