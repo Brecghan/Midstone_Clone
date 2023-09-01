@@ -29,17 +29,14 @@ public class CreatePantryActivityTest {
     }
 
     @Test
-    public void handleRequest_withTags_createsAndSavesPantryWithTags() {
+    public void handleRequest_withGoodData_createsAndSavesPantry() {
         // GIVEN
         String expectedName = "expectedName";
-        String expectedCustomerId = "expectedCustomerId";
-        int expectedSongCount = 0;
-        List<String> expectedTags = List.of("tag");
+        String expectedUserId = "expectedUserId";
 
         CreatePantryRequest request = CreatePantryRequest.builder()
-                                            .withName(expectedName)
-                                            .withCustomerId(expectedCustomerId)
-                                            .withTags(expectedTags)
+                                            .withPantryName(expectedName)
+                                            .withUserId(expectedUserId)
                                             .build();
 
         // WHEN
@@ -48,59 +45,9 @@ public class CreatePantryActivityTest {
         // THEN
         verify(pantryDao).savePantry(any(Pantry.class));
 
-        assertNotNull(result.getPantry().getId());
-        assertEquals(expectedName, result.getPantry().getName());
-        assertEquals(expectedCustomerId, result.getPantry().getCustomerId());
-        assertEquals(expectedSongCount, result.getPantry().getSongCount());
-        assertEquals(expectedTags, result.getPantry().getTags());
-    }
-
-    @Test
-    public void handleRequest_noTags_createsAndSavesPantryWithoutTags() {
-        // GIVEN
-        String expectedName = "expectedName";
-        String expectedCustomerId = "expectedCustomerId";
-        int expectedSongCount = 0;
-
-        CreatePantryRequest request = CreatePantryRequest.builder()
-                                            .withName(expectedName)
-                                            .withCustomerId(expectedCustomerId)
-                                            .build();
-
-        // WHEN
-        CreatePantryResult result = createPantryActivity.handleRequest(request);
-
-        // THEN
-        verify(pantryDao).savePantry(any(Pantry.class));
-
-        assertNotNull(result.getPantry().getId());
-        assertEquals(expectedName, result.getPantry().getName());
-        assertEquals(expectedCustomerId, result.getPantry().getCustomerId());
-        assertEquals(expectedSongCount, result.getPantry().getSongCount());
-        assertNull(result.getPantry().getTags());
-    }
-
-    @Test
-    public void handleRequest_invalidName_throwsInvalidAttributeValueException() {
-        // GIVEN
-        CreatePantryRequest request = CreatePantryRequest.builder()
-                                            .withName("I'm illegal")
-                                            .withCustomerId("customerId")
-                                            .build();
-
-        // WHEN + THEN
-        assertThrows(InvalidAttributeValueException.class, () -> createPantryActivity.handleRequest(request));
-    }
-
-    @Test
-    public void handleRequest_invalidCustomerId_throwsInvalidAttributeValueException() {
-        // GIVEN
-        CreatePantryRequest request = CreatePantryRequest.builder()
-                                            .withName("AllOK")
-                                            .withCustomerId("Jemma's \"illegal\" customer ID")
-                                            .build();
-
-        // WHEN + THEN
-        assertThrows(InvalidAttributeValueException.class, () -> createPantryActivity.handleRequest(request));
+        assertNotNull(result.getPantry().getPantryId());
+        assertEquals(expectedName, result.getPantry().getPantryName());
+        assertEquals(expectedUserId, result.getPantry().getUserId());
+        assertNotNull(result.getPantry().getInventory());
     }
 }
