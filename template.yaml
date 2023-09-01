@@ -350,37 +350,49 @@ Resources:
   # DynamoDB Configuration
   #-----------------------------------------------------
   
-  PantryTable:
+  PlaylistsTable:
     Type: AWS::DynamoDB::Table
     Properties:
       AttributeDefinitions:
-        - AttributeName: "pantryId"
-          AttributeType: "S"
-        - AttributeName: "pantryName"
+        - AttributeName: "id"
           AttributeType: "S"
       KeySchema:
-        - AttributeName: "pantryId"
+        - AttributeName: "id"
           KeyType: "HASH"
-        - AttributeName: "pantryName"
-          KeyType: "RANGE"
       BillingMode: "PAY_PER_REQUEST"
-      TableName: "pantries"
+      TableName: "playlistz"
 
-  MealPlanTable:
+  AlbumTracksTable:
     Type: AWS::DynamoDB::Table
     Properties:
       AttributeDefinitions:
-        - AttributeName: "mealPlanId"
+        - AttributeName: "asin"
           AttributeType: "S"
-        - AttributeName: "mealPlanName"
-          AttributeType: "S"
+        - AttributeName: "track_number"
+          AttributeType: "N"
       KeySchema:
-        - AttributeName: "mealPlanId"
+        - AttributeName: "asin"
           KeyType: "HASH"
-        - AttributeName: "mealPlanName"
+        - AttributeName: "track_number"
           KeyType: "RANGE"
       BillingMode: "PAY_PER_REQUEST"
-      TableName: "meal_plans"
+      TableName: "album_trackz"
+
+  DigitalPantriesTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "pantryId"
+          AttributeType: "S"
+        - AttributeName: "pantryName"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "pantryId"
+          KeyType: "HASH"
+        - AttributeName: "pantryName"
+          KeyType: "RANGE"
+      BillingMode: "PAY_PER_REQUEST"
+      TableName: "Pantrees"
 
   RecipesTable:
     Type: AWS::DynamoDB::Table
@@ -390,15 +402,29 @@ Resources:
           AttributeType: "S"
         - AttributeName: "recipeName"
           AttributeType: "S"
-        - AttributeName: "region"
-          AttributeType: "S"
       KeySchema:
         - AttributeName: "recipeId"
           KeyType: "HASH"
         - AttributeName: "recipeName"
           KeyType: "RANGE"
       BillingMode: "PAY_PER_REQUEST"
-      TableName: "recipes"
+      TableName: "Recipees"
+
+  MealPlansTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "mealPlanId"
+          AttributeType: "S"
+        - AttributeName: "mealPlanName"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "mealPlanId"
+          KeyType: "HASH"
+        - AttributeName: "mealPlanName"
+          KeyType: "RANGE"
+      BillingMode: "PAY_PER_REQUEST"
+      TableName: "MealPlanz"
       GlobalSecondaryIndexes:
         - IndexName: "RecipeRegionIndex"
           KeySchema:
