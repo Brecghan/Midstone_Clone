@@ -1,7 +1,7 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
-  Music Playlist Service
+  Digital Pantry Service
 
 Parameters:
 
@@ -200,13 +200,13 @@ Resources:
                 - logs:PutLogEvents
                 - cloudwatch:PutMetricData
               Resource: '*'
-        - PolicyName: 'AccessPlaylistsTable'
+        - PolicyName: 'AccessPantriesTable'
           PolicyDocument:
             Version: '2012-10-17'
             Statement:
             - Effect: Allow
               Action: dynamodb:*
-              Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/playlists"
+              Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/pantries"
                 
         - PolicyName: 'AccessAlbumTracksTable'
           PolicyDocument:
@@ -286,12 +286,12 @@ Resources:
             Auth:
               Authorizer: 'NONE'
 
-  CreatePlaylistLambda:
+  CreatePantryLambda:
     Type: AWS::Serverless::Function
     Properties:
       Role: !GetAtt AccessRole.Arn
-      CodeUri: MusicPlaylistServiceLambda
-      Handler: com.nashss.se.musicplaylistservice.lambda.CreatePlaylistLambda::handleRequest
+      CodeUri: DigitalPantryServiceLambda
+      Handler: com.nashss.se.musicplaylistservice.lambda.CreatePantryLambda::handleRequest
       Runtime: java11
       Architectures:
         - x86_64
@@ -303,7 +303,7 @@ Resources:
         MusicPlaylistService:
           Type: Api
           Properties:
-            Path: /playlists
+            Path: /pantries
             Method: post
 
   UpdatePlaylistLambda:
