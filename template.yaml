@@ -384,12 +384,12 @@ Resources:
       AttributeDefinitions:
         - AttributeName: "pantryId"
           AttributeType: "S"
-        - AttributeName: "pantryName"
+        - AttributeName: "userId"
           AttributeType: "S"
       KeySchema:
-        - AttributeName: "pantryId"
+        - AttributeName: "userId"
           KeyType: "HASH"
-        - AttributeName: "pantryName"
+        - AttributeName: "pantryId"
           KeyType: "RANGE"
       BillingMode: "PAY_PER_REQUEST"
       TableName: "Pantries"
@@ -409,22 +409,6 @@ Resources:
           KeyType: "RANGE"
       BillingMode: "PAY_PER_REQUEST"
       TableName: "Recipies"
-
-  MealPlansTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      AttributeDefinitions:
-        - AttributeName: "mealPlanId"
-          AttributeType: "S"
-        - AttributeName: "mealPlanName"
-          AttributeType: "S"
-      KeySchema:
-        - AttributeName: "mealPlanId"
-          KeyType: "HASH"
-        - AttributeName: "mealPlanName"
-          KeyType: "RANGE"
-      BillingMode: "PAY_PER_REQUEST"
-      TableName: "MealPlans"
       GlobalSecondaryIndexes:
         - IndexName: "RecipeRegionIndex"
           KeySchema:
@@ -434,6 +418,22 @@ Resources:
               KeyType: "RANGE"
           Projection:
             ProjectionType: "ALL"
+
+  MealPlansTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "mealPlanId"
+          AttributeType: "S"
+        - AttributeName: "userId"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "userId"
+          KeyType: "HASH"
+        - AttributeName: "mealPlanId"
+          KeyType: "RANGE"
+      BillingMode: "PAY_PER_REQUEST"
+      TableName: "MealPlans"
 
 #-----------------------------------------------------
 # The outputs defined below will be printed
