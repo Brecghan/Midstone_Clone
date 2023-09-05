@@ -54,9 +54,7 @@ public interface ServiceComponent {
 
     CreatePantryActivity provideCreatePantryActivity();
 
+    GetPantryInventoryActivity provideGetPantryInventoryActivity();
     UpdatePantryIngredientActivity provideUpdatePantryIngredientActivity();
     //UpdatePantryActivity provideUpdatePantryActivity();
-
-
-
 }
