@@ -13,47 +13,48 @@ import javax.inject.Singleton;
 @Component(modules = {DaoModule.class, MetricsModule.class})
 public interface ServiceComponent {
 
-    /**
-     * Provides the relevant activity.
-     * @return AddSongToPlaylistActivity
-     */
-    AddSongToPlaylistActivity provideAddSongToPlaylistActivity();
+//    /**
+//     * Provides the relevant activity.
+//     * @return AddSongToPlaylistActivity
+//     */
+//    AddSongToPlaylistActivity provideAddSongToPlaylistActivity();
 
-    /**
-     * Provides the relevant activity.
-     * @return CreatePlaylistActivity
-     */
+//    /**
+//     * Provides the relevant activity.
+//     * @return CreatePlaylistActivity
+//     */
+//
+//    CreatePlaylistActivity provideCreatePlaylistActivity();
 
-    CreatePlaylistActivity provideCreatePlaylistActivity();
+//    /**
+//     * Provides the relevant activity.
+//     * @return GetPlaylistActivity
+//     */
+//    //GetPlaylistActivity provideGetPlaylistActivity();
+//
+//    /**
+//     * Provides the relevant activity.
+//     * @return GetPlaylistActivity
+//     */
+//    SearchPlaylistsActivity provideSearchPlaylistsActivity();
 
-    /**
-     * Provides the relevant activity.
-     * @return GetPlaylistActivity
-     */
-    GetPlaylistActivity provideGetPlaylistActivity();
+//    /**
+//     * Provides the relevant activity.
+//     * @return GetPlaylistSongsActivity
+//     */
+//    GetPlaylistSongsActivity provideGetPlaylistSongsActivity();
 
-    /**
-     * Provides the relevant activity.
-     * @return GetPlaylistActivity
-     */
-    SearchPlaylistsActivity provideSearchPlaylistsActivity();
-
-    /**
-     * Provides the relevant activity.
-     * @return GetPlaylistSongsActivity
-     */
-    GetPlaylistSongsActivity provideGetPlaylistSongsActivity();
-
-    /**
-     * Provides the relevant activity.
-     * @return UpdatePlaylistActivity
-     */
-    UpdatePlaylistActivity provideUpdatePlaylistActivity();
+//    /**
+//     * Provides the relevant activity.
+//     * @return UpdatePlaylistActivity
+//     */
+//    UpdatePlaylistActivity provideUpdatePlaylistActivity();
 
     //--------------------------- DIGITAL PANTRY SERVICE COMPONENT
 
     CreatePantryActivity provideCreatePantryActivity();
 
     GetPantryInventoryActivity provideGetPantryInventoryActivity();
-
+    UpdatePantryIngredientActivity provideUpdatePantryIngredientActivity();
+    //UpdatePantryActivity provideUpdatePantryActivity();
 }
