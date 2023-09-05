@@ -6,35 +6,26 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-public class PantryModel {
-    private final String pantryId;
-    private final String pantryName;
-    private final String userId;
-    private final Set<Ingredient> inventory;
+public class IngredientModel {
+    private final String ingredientName;
+    private final Double quantity;
+    private final String unitOfMeasure;
 
-    private PantryModel(String pantryId, String pantryName, String userId,
-                        Set<Ingredient> inventory) {
-        this.pantryId = pantryId;
-        this.pantryName = pantryName;
-        this.userId = userId;
-        this.inventory = inventory;
+    private IngredientModel(String ingredientName, Double quantity, String unitOfMeasure) {
+        this.ingredientName = ingredientName;
+        this.quantity = quantity;
+        this.unitOfMeasure = unitOfMeasure;
     }
 
-    public String getPantryId() {
-        return pantryId;
+    public String getIngredientName() {
+        return ingredientName;
     }
 
-    public String getPantryName() {
-        return pantryName;
+    public Double getQuantity() {
+        return quantity;
     }
 
-    public String getUserId() {
-        return userId;
-    }
-
-    public Set<Ingredient> getInventory() {
-        return new HashSet<>(inventory);
-    }
+    public String getUnitOfMeasure() { return unitOfMeasure; }
 
     @Override
     public boolean equals(Object o) {
@@ -45,16 +36,14 @@ public class PantryModel {
             return false;
         }
 
-        PantryModel that = (PantryModel) o;
+        IngredientModel that = (IngredientModel) o;
 
-        return  Objects.equals(pantryId, that.pantryId) && Objects.equals(pantryName, that.pantryName) &&
-                Objects.equals(userId, that.userId) &&
-                Objects.equals(inventory, that.inventory);
+        return  Objects.equals(ingredientName, that.ingredientName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(pantryId, pantryName, userId, inventory);
+        return Objects.hash(ingredientName);
     }
 
     //CHECKSTYLE:OFF:Builder
@@ -63,33 +52,27 @@ public class PantryModel {
     }
 
     public static class Builder {
-        private String pantryId;
-        private String pantryName;
-        private String userId;
-        private Set<Ingredient> inventory;
+        private String ingredientName;
+        private Double quantity;
+        private String unitOfMeasure;
 
-        public Builder withPantryId(String pantryId) {
-            this.pantryId = pantryId;
+        public Builder withIngredientName(String ingredientName) {
+            this.ingredientName = ingredientName;
             return this;
         }
 
-        public Builder withPantryName(String pantryName) {
-            this.pantryName = pantryName;
+        public Builder withQuantity(Double quantity) {
+            this.quantity = quantity;
             return this;
         }
 
-        public Builder withUserId(String userId) {
-            this.userId = userId;
+        public Builder withUnitOfMeasure(String unitOfMeasure) {
+            this.unitOfMeasure = unitOfMeasure;
             return this;
         }
 
-        public Builder withInventory(Set<Ingredient> inventory) {
-            this.inventory = new HashSet<>(inventory);
-            return this;
-        }
-
-        public PantryModel build() {
-            return new PantryModel(pantryId, pantryName, userId, inventory);
+        public IngredientModel build() {
+            return new IngredientModel(ingredientName, quantity, unitOfMeasure);
         }
     }
 }

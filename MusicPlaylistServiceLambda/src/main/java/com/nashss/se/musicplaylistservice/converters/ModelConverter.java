@@ -2,6 +2,7 @@ package com.nashss.se.musicplaylistservice.converters;
 
 import com.nashss.se.musicplaylistservice.dynamodb.models.Ingredient;
 import com.nashss.se.musicplaylistservice.dynamodb.models.Pantry;
+import com.nashss.se.musicplaylistservice.models.IngredientModel;
 import com.nashss.se.musicplaylistservice.models.PantryModel;
 
 import java.util.HashSet;
@@ -28,6 +29,15 @@ public class ModelConverter {
                 .withPantryName(pantry.getPantryName())
                 .withUserId(pantry.getUserId())
                 .withInventory(inventory)
+                .build();
+    }
+
+    public IngredientModel toIngredientModel(Ingredient ingredient) {
+
+        return IngredientModel.builder()
+                .withIngredientName(ingredient.getIngredientName())
+                .withQuantity(ingredient.getQuantity())
+                .withUnitOfMeasure(ingredient.getUnitOfMeasure().name())
                 .build();
     }
 //

@@ -5,7 +5,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.nashss.se.musicplaylistservice.dynamodb.models.Pantry;
 import com.nashss.se.musicplaylistservice.dynamodb.models.Playlist;
-import com.nashss.se.musicplaylistservice.exceptions.PlaylistNotFoundException;
+import com.nashss.se.musicplaylistservice.exceptions.PantryNotFoundException;
 import com.nashss.se.musicplaylistservice.metrics.MetricsConstants;
 import com.nashss.se.musicplaylistservice.metrics.MetricsPublisher;
 
@@ -46,10 +46,10 @@ public class PantryDao {
         Pantry pantry = this.dynamoDbMapper.load(Pantry.class, userId, pantryId);
 
         if (pantry == null) {
-            metricsPublisher.addCount(MetricsConstants.GETPLAYLIST_PLAYLISTNOTFOUND_COUNT, 1);
-            throw new PlaylistNotFoundException("Could not find pantry with id " + pantryId);
+            metricsPublisher.addCount(MetricsConstants.GETPANTRY_PANTRYNOTFOUND_COUNT, 1);
+            throw new PantryNotFoundException("Could not find pantry with id " + pantryId);
         }
-        metricsPublisher.addCount(MetricsConstants.GETPLAYLIST_PLAYLISTNOTFOUND_COUNT, 0);
+        metricsPublisher.addCount(MetricsConstants.GETPANTRY_PANTRYNOTFOUND_COUNT, 0);
         return pantry;
     }
 

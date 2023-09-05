@@ -3,15 +3,15 @@ package com.nashss.se.musicplaylistservice.exceptions;
 /**
  * Exception to throw when a given playlist ID is not found in the database.
  */
-public class PantryNotFoundException extends RuntimeException {
+public class MealPlanNotFoundException extends RuntimeException {
 
 
-    private static final long serialVersionUID = -5177851288328863886L;
+    private static final long serialVersionUID = 2438635200574007920L;
 
     /**
      * Exception with no message or cause.
      */
-    public PantryNotFoundException() {
+    public MealPlanNotFoundException() {
         super();
     }
 
@@ -19,7 +19,7 @@ public class PantryNotFoundException extends RuntimeException {
      * Exception with a message, but no cause.
      * @param message A descriptive message for this exception.
      */
-    public PantryNotFoundException(String message) {
+    public MealPlanNotFoundException(String message) {
         super(message);
     }
 
@@ -27,7 +27,7 @@ public class PantryNotFoundException extends RuntimeException {
      * Exception with no message, but with a cause.
      * @param cause The original throwable resulting in this exception.
      */
-    public PantryNotFoundException(Throwable cause) {
+    public MealPlanNotFoundException(Throwable cause) {
         super(cause);
     }
 
@@ -36,7 +36,7 @@ public class PantryNotFoundException extends RuntimeException {
      * @param message A descriptive message for this exception.
      * @param cause The original throwable resulting in this exception.
      */
-    public PantryNotFoundException(String message, Throwable cause) {
+    public MealPlanNotFoundException(String message, Throwable cause) {
         super(message, cause);
     }
 }
