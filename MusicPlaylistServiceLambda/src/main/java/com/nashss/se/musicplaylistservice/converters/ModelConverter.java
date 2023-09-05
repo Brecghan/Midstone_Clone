@@ -4,7 +4,9 @@ import com.nashss.se.musicplaylistservice.dynamodb.models.Ingredient;
 import com.nashss.se.musicplaylistservice.dynamodb.models.Pantry;
 import com.nashss.se.musicplaylistservice.models.PantryModel;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -46,21 +48,21 @@ public class ModelConverter {
 //                .build();
 //    }
 //
-//    /**
-//     * Converts a list of AlbumTracks to a list of SongModels.
-//     *
-//     * @param albumTracks The AlbumTracks to convert to SongModels
-//     * @return The converted list of SongModels
-//     */
-//    public List<SongModel> toSongModelList(List<AlbumTrack> albumTracks) {
-//        List<SongModel> songModels = new ArrayList<>();
-//
-//        for (AlbumTrack albumTrack : albumTracks) {
-//            songModels.add(toSongModel(albumTrack));
-//        }
-//
-//        return songModels;
-//    }
+    /**
+     * Converts a list of Ingredients to a list of IngredientModels.
+     *
+     * @param ingredients The Ingredients to convert to IngredientModels
+     * @return The converted list of IngredientModels
+     */
+    public List<IngredientModel> toIngredientModelList(List<Ingredient> ingredients) {
+        List<IngredientModel> ingredientModels = new ArrayList<>();
+
+        for (Ingredient ingredient : ingredients) {
+            ingredientModels.add(toIngredientModel(ingredient));
+        }
+
+        return ingredientModels;
+    }
 //
 //    /**
 //     * Converts a list of Playlists to a list of PlaylistModels.
