@@ -1,6 +1,8 @@
 package com.nashss.se.musicplaylistservice.activity.results;
 
-import com.nashss.se.musicplaylistservice.dynamodb.models.IngredientModel;
+
+
+import com.nashss.se.musicplaylistservice.models.IngredientModel;
 
 import java.util.ArrayList;
 import java.util.List;
