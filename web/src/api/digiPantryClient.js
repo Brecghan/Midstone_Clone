@@ -15,7 +15,7 @@ export default class DigiPantryClient extends BindingClass {
     constructor(props = {}) {
         super();
 
-        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getPlaylist', 'getPlaylistSongs', 'createPlaylist'];
+        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getPlaylist', 'getPlaylistSongs', 'createPantry'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();;
@@ -102,24 +102,22 @@ export default class DigiPantryClient extends BindingClass {
     }
 
     /**
-     * Create a new playlist owned by the current user.
-     * @param name The name of the playlist to create.
-     * @param tags Metadata tags to associate with a playlist.
+     * Create a new pantry owned by the current user.
+     * @param name The name of the pantry to create.
      * @param errorCallback (Optional) A function to execute if the call fails.
-     * @returns The playlist that has been created.
+     * @returns The pantry that has been created.
      */
-    async createPlaylist(name, tags, errorCallback) {
+    async createPantry(pantryName, errorCallback) {
         try {
-            const token = await this.getTokenOrThrow("Only authenticated users can create playlists.");
-            const response = await this.axiosClient.post(`playlists`, {
-                name: name,
-                tags: tags
+            const token = await this.getTokenOrThrow("Only authenticated users can create pantries.");
+            const response = await this.axiosClient.post(`Pantries`, {
+                pantryName: pantryName
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             });
-            return response.data.playlist;
+            return response.data.pantry;
         } catch (error) {
             this.handleError(error, errorCallback)
         }
