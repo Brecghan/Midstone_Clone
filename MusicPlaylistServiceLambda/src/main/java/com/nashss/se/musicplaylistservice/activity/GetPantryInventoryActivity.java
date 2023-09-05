@@ -5,17 +5,12 @@ import com.nashss.se.musicplaylistservice.activity.results.GetPantryInventoryRes
 import com.nashss.se.musicplaylistservice.converters.ModelConverter;
 import com.nashss.se.musicplaylistservice.dynamodb.PantryDao;
 import com.nashss.se.musicplaylistservice.dynamodb.models.Pantry;
-import com.nashss.se.musicplaylistservice.dynamodb.models.Playlist;
-import com.nashss.se.musicplaylistservice.exceptions.InvalidAttributeValueException;
-import com.nashss.se.musicplaylistservice.models.SongModel;
-import com.nashss.se.musicplaylistservice.models.SongOrder;
+import com.nashss.se.musicplaylistservice.models.IngredientModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 /**
