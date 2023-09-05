@@ -400,6 +400,63 @@ Resources:
       BillingMode: "PAY_PER_REQUEST"
       TableName: "album_tracks"
 
+  DigitalPantriesTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "pantryId"
+          AttributeType: "S"
+        - AttributeName: "userId"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "userId"
+          KeyType: "HASH"
+        - AttributeName: "pantryId"
+          KeyType: "RANGE"
+      BillingMode: "PAY_PER_REQUEST"
+      TableName: "Pantries"
+
+  RecipesTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "recipeId"
+          AttributeType: "S"
+        - AttributeName: "recipeName"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "recipeId"
+          KeyType: "HASH"
+        - AttributeName: "recipeName"
+          KeyType: "RANGE"
+      BillingMode: "PAY_PER_REQUEST"
+      TableName: "Recipies"
+      GlobalSecondaryIndexes:
+        - IndexName: "RecipeRegionIndex"
+          KeySchema:
+            - AttributeName: "region"
+              KeyType: "HASH"
+            - AttributeName: "regionName"
+              KeyType: "RANGE"
+          Projection:
+            ProjectionType: "ALL"
+
+  MealPlansTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "mealPlanId"
+          AttributeType: "S"
+        - AttributeName: "userId"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "userId"
+          KeyType: "HASH"
+        - AttributeName: "mealPlanId"
+          KeyType: "RANGE"
+      BillingMode: "PAY_PER_REQUEST"
+      TableName: "MealPlans"
+
 #-----------------------------------------------------
 # The outputs defined below will be printed
 #  to the screen after a successful deploy
