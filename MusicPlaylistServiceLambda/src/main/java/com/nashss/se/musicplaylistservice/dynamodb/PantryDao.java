@@ -1,19 +1,15 @@
 package com.nashss.se.musicplaylistservice.dynamodb;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
-import com.amazonaws.services.dynamodbv2.model.AttributeValue;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
+import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedQueryList;
 import com.nashss.se.musicplaylistservice.dynamodb.models.Pantry;
-import com.nashss.se.musicplaylistservice.dynamodb.models.Playlist;
-import com.nashss.se.musicplaylistservice.exceptions.PlaylistNotFoundException;
 import com.nashss.se.musicplaylistservice.metrics.MetricsConstants;
 import com.nashss.se.musicplaylistservice.metrics.MetricsPublisher;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Accesses data for a pantry using {@link Pantry} to represent the model in DynamoDB.
@@ -47,7 +43,7 @@ public class PantryDao {
 
         if (pantry == null) {
             metricsPublisher.addCount(MetricsConstants.GETPLAYLIST_PLAYLISTNOTFOUND_COUNT, 1);
-            throw new PlaylistNotFoundException("Could not find pantry with id " + pantryId);
+//            throw new PlaylistNotFoundException("Could not find pantry with id " + pantryId);
         }
         metricsPublisher.addCount(MetricsConstants.GETPLAYLIST_PLAYLISTNOTFOUND_COUNT, 0);
         return pantry;
@@ -65,51 +61,20 @@ public class PantryDao {
     }
 
     /**
-     * Perform a search (via a "scan") of the playlist table for playlists matching the given criteria.
-     *
-     * Both "playlistName" and "tags" attributes are searched.
-     * The criteria are an array of Strings. Each element of the array is search individually.
-     * ALL elements of the criteria array must appear in the playlistName or the tags (or both).
-     * Searches are CASE SENSITIVE.
-     *
-     * @param criteria an array of String containing search criteria.
-     * @return a List of Playlist objects that match the search criteria.
+     * Perform a search (via a "scan") of the pantry table for pantries matching the given criteria.
+
+     * @param userId a String containing the UserId.
+     * @return a List of Pantry objects that were made by the User.
      */
-    public List<Playlist> searchPlaylists(String[] criteria) {
-        DynamoDBScanExpression dynamoDBScanExpression = new DynamoDBScanExpression();
+    public List<Pantry> getUserPantries(String userId) {
+        Pantry pantry = new Pantry();
+        pantry.setUserId(userId);
 
-        if (criteria.length > 0) {
-            Map<String, AttributeValue> valueMap = new HashMap<>();
-            String valueMapNamePrefix = ":c";
+        DynamoDBQueryExpression<Pantry> dynamoDBQueryExpression = new DynamoDBQueryExpression<Pantry>()
+                .withHashKeyValues(pantry);
+        DynamoDBMapper mapper = new DynamoDBMapper(DynamoDbClientProvider.getDynamoDBClient());
 
-            StringBuilder nameFilterExpression = new StringBuilder();
-            StringBuilder tagsFilterExpression = new StringBuilder();
-
-            for (int i = 0; i < criteria.length; i++) {
-                valueMap.put(valueMapNamePrefix + i,
-                        new AttributeValue().withS(criteria[i]));
-                nameFilterExpression.append(
-                        filterExpressionPart("playlistName", valueMapNamePrefix, i));
-                tagsFilterExpression.append(
-                        filterExpressionPart("tags", valueMapNamePrefix, i));
-            }
-
-            dynamoDBScanExpression.setExpressionAttributeValues(valueMap);
-            dynamoDBScanExpression.setFilterExpression(
-                    "(" + nameFilterExpression + ") or (" + tagsFilterExpression + ")");
-        }
-
-        return this.dynamoDbMapper.scan(Playlist.class, dynamoDBScanExpression);
-    }
-
-    private StringBuilder filterExpressionPart(String target, String valueMapNamePrefix, int position) {
-        String possiblyAnd = position == 0 ? "" : "and ";
-        return new StringBuilder()
-                .append(possiblyAnd)
-                .append("contains(")
-                .append(target)
-                .append(", ")
-                .append(valueMapNamePrefix).append(position)
-                .append(") ");
+        PaginatedQueryList<Pantry> pantryList = mapper.query(Pantry.class, dynamoDBQueryExpression);
+        return pantryList;
     }
 }
