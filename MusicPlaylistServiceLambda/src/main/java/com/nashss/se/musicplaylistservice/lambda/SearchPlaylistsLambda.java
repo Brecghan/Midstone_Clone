@@ -1,4 +1,4 @@
-//package com.nashss.se.musicplaylistservice.lambda;
+package com.nashss.se.musicplaylistservice.lambda;
 //
 //import com.nashss.se.musicplaylistservice.activity.requests.SearchPlaylistsRequest;
 //import com.nashss.se.musicplaylistservice.activity.results.SearchPlaylistsResult;

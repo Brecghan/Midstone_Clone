@@ -8,10 +8,18 @@ public final class DigitalPantryServiceUtils {
     private DigitalPantryServiceUtils() {
     }
 
+    /**
+     * Provides a generated pantry ID.
+     * @return String of a generated ID.
+     */
     public static String generatePantryId() {
         return RandomStringUtils.randomAlphanumeric(GENERATED_ID_LENGTH);
     }
 
+    /**
+     * Provides a generated MealPlan ID.
+     * @return String of a generated ID.
+     */
     public static String generateMealPlanId() {
         return RandomStringUtils.randomAlphanumeric(GENERATED_ID_LENGTH);
     }

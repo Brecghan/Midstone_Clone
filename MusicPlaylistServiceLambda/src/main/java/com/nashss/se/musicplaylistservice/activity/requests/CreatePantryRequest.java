@@ -3,10 +3,6 @@ package com.nashss.se.musicplaylistservice.activity.requests;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 
-import java.util.List;
-
-import static com.nashss.se.musicplaylistservice.utils.CollectionUtils.copyToList;
-
 @JsonDeserialize(builder = CreatePantryRequest.Builder.class)
 public class CreatePantryRequest {
     private final String pantryName;

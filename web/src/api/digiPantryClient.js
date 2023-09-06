@@ -110,7 +110,7 @@ export default class DigiPantryClient extends BindingClass {
     async createPantry(pantryName, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can create pantries.");
-            const response = await this.axiosClient.post(`Pantries`, {
+            const response = await this.axiosClient.post(`digitalPantry`, {
                 pantryName: pantryName
             }, {
                 headers: {

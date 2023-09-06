@@ -1,4 +1,4 @@
-//package com.nashss.se.musicplaylistservice.activity;
+package com.nashss.se.musicplaylistservice.activity;
 //
 //import com.nashss.se.musicplaylistservice.activity.requests.CreatePlaylistRequest;
 //import com.nashss.se.musicplaylistservice.activity.results.CreatePlaylistResult;
@@ -59,7 +59,7 @@
 //        }
 //
 //        if (!MusicPlaylistServiceUtils.isValidString(createPlaylistRequest.getCustomerId())) {
-//            throw new InvalidAttributeValueException("Playlist customer ID [" + createPlaylistRequest.getCustomerId() +
+//       throw new InvalidAttributeValueException("Playlist customer ID [" + createPlaylistRequest.getCustomerId() +
 //                    "] contains illegal characters");
 //        }
 //

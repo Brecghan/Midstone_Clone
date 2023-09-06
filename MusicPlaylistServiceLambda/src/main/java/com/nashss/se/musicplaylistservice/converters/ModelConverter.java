@@ -5,14 +5,6 @@ import com.nashss.se.musicplaylistservice.dynamodb.models.Pantry;
 import com.nashss.se.musicplaylistservice.models.IngredientModel;
 import com.nashss.se.musicplaylistservice.models.PantryModel;
 
-<<<<<<< HEAD
-=======
-import com.nashss.se.musicplaylistservice.dynamodb.models.AlbumTrack;
-import com.nashss.se.musicplaylistservice.dynamodb.models.Playlist;
-import com.nashss.se.musicplaylistservice.models.PlaylistModel;
-import com.nashss.se.musicplaylistservice.models.SongModel;
-
->>>>>>> main
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -41,7 +33,12 @@ public class ModelConverter {
                 .withInventory(inventory)
                 .build();
     }
-
+    /**
+     * Converts a provided {@link Ingredient} into a {@link IngredientModel} representation.
+     *
+     * @param ingredient the ingredient to convert
+     * @return the converted ingredient
+     */
     public IngredientModel toIngredientModel(Ingredient ingredient) {
 
         return IngredientModel.builder()
@@ -50,38 +47,6 @@ public class ModelConverter {
                 .withUnitOfMeasure(ingredient.getUnitOfMeasure().name())
                 .build();
     }
-//
-//    /**
-//     * Converts a provided AlbumTrack into a SongModel representation.
-//     *
-//     * @param albumTrack the AlbumTrack to convert to SongModel
-//     * @return the converted SongModel with fields mapped from albumTrack
-//     */
-//    public SongModel toSongModel(AlbumTrack albumTrack) {
-//        return SongModel.builder()
-//                .withAsin(albumTrack.getAsin())
-//                .withTrackNumber(albumTrack.getTrackNumber())
-//                .withAlbum(albumTrack.getAlbumName())
-//                .withTitle(albumTrack.getSongTitle())
-//                .build();
-//    }
-//
-<<<<<<< HEAD
-//    /**
-//     * Converts a list of AlbumTracks to a list of SongModels.
-//     *
-//     * @param albumTracks The AlbumTracks to convert to SongModels
-//     * @return The converted list of SongModels
-//     */
-//    public List<SongModel> toSongModelList(List<AlbumTrack> albumTracks) {
-//        List<SongModel> songModels = new ArrayList<>();
-//
-//        for (AlbumTrack albumTrack : albumTracks) {
-//            songModels.add(toSongModel(albumTrack));
-//        }
-//
-//        return songModels;
-//    }
 
     /**
      * Converts a list of Pantries to a list of PantryModels.
@@ -98,7 +63,6 @@ public class ModelConverter {
 
         return pantryModels;
     }
-=======
     /**
      * Converts a list of Ingredients to a list of IngredientModels.
      *
@@ -114,21 +78,4 @@ public class ModelConverter {
 
         return ingredientModels;
     }
-//
-//    /**
-//     * Converts a list of Playlists to a list of PlaylistModels.
-//     *
-//     * @param playlists The Playlists to convert to PlaylistModels
-//     * @return The converted list of PlaylistModels
-//     */
-//    public List<PlaylistModel> toPlaylistModelList(List<Playlist> playlists) {
-//        List<PlaylistModel> playlistModels = new ArrayList<>();
-//
-//        for (Playlist playlist : playlists) {
-//            playlistModels.add(toPlaylistModel(playlist));
-//        }
-//
-//        return playlistModels;
-//    }
->>>>>>> main
 }

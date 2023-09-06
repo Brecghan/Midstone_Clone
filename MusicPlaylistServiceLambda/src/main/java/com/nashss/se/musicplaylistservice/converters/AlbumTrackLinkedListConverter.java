@@ -1,15 +1,16 @@
 package com.nashss.se.musicplaylistservice.converters;
 
+import com.nashss.se.musicplaylistservice.dynamodb.models.Ingredient;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.nashss.se.musicplaylistservice.dynamodb.models.Ingredient;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.LinkedList;
 import java.util.List;
+
 
 /**
  * PARTICIPANTS: The class should NOT be touched when working on the project!
