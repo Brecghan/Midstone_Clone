@@ -27,6 +27,7 @@ module.exports = {
     viewPlaylist: path.resolve(__dirname, 'src', 'pages', 'viewPlaylist.js'),
     searchPlaylists: path.resolve(__dirname, 'src', 'pages', 'searchPlaylists.js'),
     test: path.resolve(__dirname, 'src', 'pages', 'test.js'),
+    digiPantryCreatePantry: path.resolve(__dirname, 'src', 'pages', 'digiPantryCreatePantry.js'),
   },
   output: {
     path: path.resolve(__dirname, 'build', 'assets'),
