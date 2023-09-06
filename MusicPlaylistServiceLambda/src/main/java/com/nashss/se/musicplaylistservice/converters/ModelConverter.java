@@ -2,8 +2,17 @@ package com.nashss.se.musicplaylistservice.converters;
 
 import com.nashss.se.musicplaylistservice.dynamodb.models.Ingredient;
 import com.nashss.se.musicplaylistservice.dynamodb.models.Pantry;
+import com.nashss.se.musicplaylistservice.models.IngredientModel;
 import com.nashss.se.musicplaylistservice.models.PantryModel;
 
+<<<<<<< HEAD
+=======
+import com.nashss.se.musicplaylistservice.dynamodb.models.AlbumTrack;
+import com.nashss.se.musicplaylistservice.dynamodb.models.Playlist;
+import com.nashss.se.musicplaylistservice.models.PlaylistModel;
+import com.nashss.se.musicplaylistservice.models.SongModel;
+
+>>>>>>> main
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -32,6 +41,15 @@ public class ModelConverter {
                 .withInventory(inventory)
                 .build();
     }
+
+    public IngredientModel toIngredientModel(Ingredient ingredient) {
+
+        return IngredientModel.builder()
+                .withIngredientName(ingredient.getIngredientName())
+                .withQuantity(ingredient.getQuantity())
+                .withUnitOfMeasure(ingredient.getUnitOfMeasure().name())
+                .build();
+    }
 //
 //    /**
 //     * Converts a provided AlbumTrack into a SongModel representation.
@@ -48,6 +66,7 @@ public class ModelConverter {
 //                .build();
 //    }
 //
+<<<<<<< HEAD
 //    /**
 //     * Converts a list of AlbumTracks to a list of SongModels.
 //     *
@@ -79,4 +98,37 @@ public class ModelConverter {
 
         return pantryModels;
     }
+=======
+    /**
+     * Converts a list of Ingredients to a list of IngredientModels.
+     *
+     * @param ingredients The Ingredients to convert to IngredientModels
+     * @return The converted list of IngredientModels
+     */
+    public List<IngredientModel> toIngredientModelList(List<Ingredient> ingredients) {
+        List<IngredientModel> ingredientModels = new ArrayList<>();
+
+        for (Ingredient ingredient : ingredients) {
+            ingredientModels.add(toIngredientModel(ingredient));
+        }
+
+        return ingredientModels;
+    }
+//
+//    /**
+//     * Converts a list of Playlists to a list of PlaylistModels.
+//     *
+//     * @param playlists The Playlists to convert to PlaylistModels
+//     * @return The converted list of PlaylistModels
+//     */
+//    public List<PlaylistModel> toPlaylistModelList(List<Playlist> playlists) {
+//        List<PlaylistModel> playlistModels = new ArrayList<>();
+//
+//        for (Playlist playlist : playlists) {
+//            playlistModels.add(toPlaylistModel(playlist));
+//        }
+//
+//        return playlistModels;
+//    }
+>>>>>>> main
 }
