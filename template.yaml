@@ -396,6 +396,8 @@ Resources:
           AttributeType: "S"
         - AttributeName: "recipeName"
           AttributeType: "S"
+        - AttributeName: "region"
+          AttributeType: "S"
       KeySchema:
         - AttributeName: "recipeId"
           KeyType: "HASH"
@@ -408,8 +410,6 @@ Resources:
           KeySchema:
             - AttributeName: "region"
               KeyType: "HASH"
-            - AttributeName: "regionName"
-              KeyType: "RANGE"
           Projection:
             ProjectionType: "ALL"
 
