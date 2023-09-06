@@ -23,7 +23,7 @@ class CreatePlaylist extends BindingClass {
 
         this.header.addHeaderToPage();
 
-        this.client = new MusicPlaylistClient();
+        this.client = new DigiPantryClient();
     }
 
     /**
@@ -43,13 +43,16 @@ class CreatePlaylist extends BindingClass {
 
         const pantryName = document.getElementById('pantry-name').value;
 
+/*
 
         let tags;
         if (tagsText.length < 1) {
             tags = null;
         } else {
-            tags = tagsText.split(/\s*,\s*/);
+            tags = tagsText.split(/\s*,\s*//*
+);
         }
+*/
 
         const pantry = await this.client.createPantry(pantryName, (error) => {
             createButton.innerText = origButtonText;
