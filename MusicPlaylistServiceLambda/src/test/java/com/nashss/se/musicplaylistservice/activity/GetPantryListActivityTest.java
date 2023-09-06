@@ -2,20 +2,23 @@ package com.nashss.se.musicplaylistservice.activity;
 
 import com.nashss.se.musicplaylistservice.activity.requests.GetPantryListRequest;
 import com.nashss.se.musicplaylistservice.activity.results.GetPantryListResult;
-//import com.nashss.se.musicplaylistservice.converters.ModelConverter;
 import com.nashss.se.musicplaylistservice.dynamodb.PantryDao;
+import com.nashss.se.musicplaylistservice.dynamodb.models.Ingredient;
 import com.nashss.se.musicplaylistservice.dynamodb.models.Pantry;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
-import static org.mockito.MockitoAnnotations.openMocks;
+import static org.mockito.MockitoAnnotations.initMocks;
 
+//CHECKSTYLE:OFF:Test
 public class GetPantryListActivityTest {
     @Mock
     private PantryDao pantryDao;
@@ -24,7 +27,7 @@ public class GetPantryListActivityTest {
 
     @BeforeEach
     void setup() {
-        openMocks(this);
+        initMocks(this);
         getPantryListActivity = new GetPantryListActivity(pantryDao);
     }
 
@@ -33,9 +36,12 @@ public class GetPantryListActivityTest {
         // GIVEN
         Pantry pantry = new Pantry();
         Pantry pantry2 = new Pantry();
+        Set<Ingredient> inventory = new HashSet<>();
         String userId = "ExpectedID";
         pantry.setUserId(userId);
         pantry2.setUserId(userId);
+        pantry.setInventory(inventory);
+        pantry2.setInventory(inventory);
         List<Pantry> pantryList = new ArrayList<>();
         pantryList.add(pantry);
         pantryList.add(pantry2);
@@ -45,7 +51,7 @@ public class GetPantryListActivityTest {
                                               .withUserId(userId)
                                               .build();
 
-        when(pantryDao.getUserPantries(userId)).thenReturn(pantryList);
+        when(pantryDao.getUserPantries(request.getUserId())).thenReturn(pantryList);
 
         // WHEN
         GetPantryListResult result = getPantryListActivity.handleRequest(request);

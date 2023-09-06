@@ -5,10 +5,6 @@ import com.nashss.se.musicplaylistservice.activity.results.UpdatePantryIngredien
 import com.nashss.se.musicplaylistservice.dynamodb.PantryDao;
 import com.nashss.se.musicplaylistservice.dynamodb.models.Ingredient;
 import com.nashss.se.musicplaylistservice.dynamodb.models.Pantry;
-import com.nashss.se.musicplaylistservice.dynamodb.models.Playlist;
-import com.nashss.se.musicplaylistservice.exceptions.InvalidAttributeValueException;
-import com.nashss.se.musicplaylistservice.exceptions.PlaylistNotFoundException;
-import com.nashss.se.musicplaylistservice.metrics.MetricsConstants;
 import com.nashss.se.musicplaylistservice.metrics.MetricsPublisher;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,7 +14,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.openMocks;
 

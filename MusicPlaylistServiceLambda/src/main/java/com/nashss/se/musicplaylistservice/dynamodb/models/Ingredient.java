@@ -1,6 +1,8 @@
 package com.nashss.se.musicplaylistservice.dynamodb.models;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.*;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBDocument;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConvertedEnum;
 
 import java.util.Objects;
 
@@ -12,7 +14,7 @@ public class Ingredient {
     private String ingredientName;
     private Double quantity;
     private UnitOfMeasure unitOfMeasure;
-    public static enum UnitOfMeasure { SHOT, CUP, LBS, EACH, HALF }
+    public enum UnitOfMeasure { SHOT, CUP, LBS, EACH, HALF }
 
     @DynamoDBAttribute(attributeName = "IngredientName")
     public String getIngredientName() {

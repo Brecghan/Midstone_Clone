@@ -9,11 +9,12 @@ import com.nashss.se.musicplaylistservice.dynamodb.models.Pantry;
 import com.nashss.se.musicplaylistservice.metrics.MetricsConstants;
 import com.nashss.se.musicplaylistservice.metrics.MetricsPublisher;
 import com.nashss.se.musicplaylistservice.models.PantryModel;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.inject.Inject;
 import java.util.Set;
+import javax.inject.Inject;
 
 /**
  * Implementation of the UpdatePantryActivity for the DigitalPantryService's UpdatePantry API.
@@ -47,19 +48,22 @@ public class UpdatePantryIngredientActivity {
      * If the pantry does not exist, this should throw a PantryNotFoundException.
      * <p>
      *
-     * @param updatePantryIngredientRequest request object containing the pantry ID, userId, ingredient name, ingredient
-     *                              quantity, and unit of measure associated with it
+     * @param updatePantryIngredientRequest request object containing the pantry ID,
+     * userId, ingredient name, ingredient quantity, and unit of measure associated with it
      * @return updatePantryResult result object containing the API defined {@link PantryModel}
      */
-    public UpdatePantryIngredientResult handleRequest(final UpdatePantryIngredientRequest updatePantryIngredientRequest) {
+    public UpdatePantryIngredientResult handleRequest(final
+                                                      UpdatePantryIngredientRequest updatePantryIngredientRequest) {
         log.info("Received UpdatePantryIngredientRequest {}", updatePantryIngredientRequest);
 
-        Pantry pantry = pantryDao.getPantry(updatePantryIngredientRequest.getUserId(), updatePantryIngredientRequest.getPantryId());
+        Pantry pantry = pantryDao.getPantry(updatePantryIngredientRequest.getUserId(),
+                updatePantryIngredientRequest.getPantryId());
 
         Ingredient ingredient = new Ingredient();
         ingredient.setIngredientName(updatePantryIngredientRequest.getIngredientName());
         ingredient.setQuantity(updatePantryIngredientRequest.getIngredientQuantity());
-        ingredient.setUnitOfMeasure(Ingredient.UnitOfMeasure.valueOf(updatePantryIngredientRequest.getUnitOfMeasure()));
+        ingredient.setUnitOfMeasure(Ingredient.UnitOfMeasure.valueOf(
+                updatePantryIngredientRequest.getUnitOfMeasure()));
         Set<Ingredient> ingredientSet = pantry.getInventory();
         ingredientSet.add(ingredient);
         pantry.setInventory(ingredientSet);

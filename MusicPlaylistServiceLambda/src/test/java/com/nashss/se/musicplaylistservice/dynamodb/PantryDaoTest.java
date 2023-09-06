@@ -2,16 +2,20 @@ package com.nashss.se.musicplaylistservice.dynamodb;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.nashss.se.musicplaylistservice.dynamodb.models.Pantry;
+import com.nashss.se.musicplaylistservice.exceptions.PantryNotFoundException;
 import com.nashss.se.musicplaylistservice.metrics.MetricsConstants;
 import com.nashss.se.musicplaylistservice.metrics.MetricsPublisher;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyDouble;
-import static org.mockito.Mockito.*;
-import static org.mockito.MockitoAnnotations.initMocks;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 
 public class PantryDaoTest {
     @Mock
@@ -24,7 +28,7 @@ public class PantryDaoTest {
 
     @BeforeEach
     public void setup() {
-        initMocks(this);
+        MockitoAnnotations.openMocks(this);
         pantryDao = new PantryDao(dynamoDBMapper, metricsPublisher);
     }
 
@@ -48,12 +52,12 @@ public class PantryDaoTest {
     @Test
     public void getPantry_pantryIdNotFound_throwsPantryNotFoundException() {
         // GIVEN
-        String nonexistentPlaylistId = "NotReal";
-        when(dynamoDBMapper.load(Pantry.class, nonexistentPlaylistId)).thenReturn(null);
+        String nonexistentPantryId = "NotReal";
+        when(dynamoDBMapper.load(Pantry.class, nonexistentPantryId, nonexistentPantryId)).thenReturn(null);
 
         // WHEN + THEN
-//        assertThrows(PlaylistNotFoundException.class, () -> pantryDao.getPlaylist(nonexistentPlaylistId));
-        verify(metricsPublisher).addCount(eq(MetricsConstants.GETPLAYLIST_PLAYLISTNOTFOUND_COUNT), anyDouble());
+        assertThrows(PantryNotFoundException.class, () -> pantryDao.getPantry(nonexistentPantryId, nonexistentPantryId));
+        verify(metricsPublisher).addCount(eq(MetricsConstants.GETPANTRY_PANTRYNOTFOUND_COUNT), anyDouble());
     }
 
     @Test

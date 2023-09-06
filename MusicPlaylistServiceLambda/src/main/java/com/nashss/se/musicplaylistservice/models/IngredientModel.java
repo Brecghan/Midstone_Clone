@@ -1,10 +1,6 @@
 package com.nashss.se.musicplaylistservice.models;
 
-import com.nashss.se.musicplaylistservice.dynamodb.models.Ingredient;
-
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 public class IngredientModel {
     private final String ingredientName;
@@ -25,7 +21,9 @@ public class IngredientModel {
         return quantity;
     }
 
-    public String getUnitOfMeasure() { return unitOfMeasure; }
+    public String getUnitOfMeasure() {
+        return unitOfMeasure;
+    }
 
     @Override
     public boolean equals(Object o) {

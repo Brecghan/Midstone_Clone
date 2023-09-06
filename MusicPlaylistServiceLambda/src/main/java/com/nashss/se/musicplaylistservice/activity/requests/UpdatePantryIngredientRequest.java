@@ -11,7 +11,8 @@ public class UpdatePantryIngredientRequest {
     private final Double ingredientQuantity;
     private final String unitOfMeasure;
 
-    private UpdatePantryIngredientRequest(String pantryId, String ingredientName, String userId, Double ingredientQuantity, String unitOfMeasure) {
+    private UpdatePantryIngredientRequest(String pantryId, String ingredientName,
+                                          String userId, Double ingredientQuantity, String unitOfMeasure) {
         this.pantryId = pantryId;
         this.ingredientName = ingredientName;
         this.userId = userId;

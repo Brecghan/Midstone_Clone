@@ -1,10 +1,9 @@
-<<<<<<< HEAD
-package com.nashss.se.musicplaylistservice.converters;
+//package com.nashss.se.musicplaylistservice.converters;
 
-=======
+
 //package com.nashss.se.musicplaylistservice.converters;
 //
->>>>>>> main
+
 //import com.nashss.se.musicplaylistservice.models.PlaylistModel;
 //import com.nashss.se.musicplaylistservice.models.SongModel;
 //import com.nashss.se.musicplaylistservice.dynamodb.models.AlbumTrack;
@@ -20,13 +19,11 @@ package com.nashss.se.musicplaylistservice.converters;
 //import static com.nashss.se.musicplaylistservice.utils.CollectionUtils.copyToSet;
 //import static org.junit.jupiter.api.Assertions.assertEquals;
 //import static org.junit.jupiter.api.Assertions.assertNull;
-<<<<<<< HEAD
 
-public class ModelConverterTest {
-=======
+
+//public class ModelConverterTest {
 //
 //public class ModelConverterTest {
->>>>>>> main
 //    private ModelConverter modelConverter = new ModelConverter();
 //
 //    @Test
@@ -97,8 +94,5 @@ public class ModelConverterTest {
 //        // THEN
 //        AlbumTrackTestHelper.assertAlbumTracksEqualSongModels(albumTracks, result);
 //    }
-<<<<<<< HEAD
-}
-=======
 //}
->>>>>>> main
+//}
