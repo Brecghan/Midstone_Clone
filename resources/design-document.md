@@ -211,7 +211,7 @@ mealPlan // string set
 id // partition key, string
 name // string
 ingredientsList // map
-recipe_region // string  recipe_region-recipe-region-index partition key
+region // string  recipe_region-recipe-region-index partition key
 dietary_needs // string set dietary_needs-dietary-needs-index partition key
 ```
 
