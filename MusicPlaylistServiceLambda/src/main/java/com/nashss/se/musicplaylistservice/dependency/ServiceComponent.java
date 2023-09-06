@@ -13,11 +13,18 @@ import javax.inject.Singleton;
 @Component(modules = {DaoModule.class, MetricsModule.class})
 public interface ServiceComponent {
 
+<<<<<<< HEAD
+    /**
+     * Provides the relevant activity.
+     * @return AddSongToPlaylistActivity
+     */
+=======
 //    /**
 //     * Provides the relevant activity.
 //     * @return AddSongToPlaylistActivity
 //     */
 //    AddSongToPlaylistActivity provideAddSongToPlaylistActivity();
+>>>>>>> main
 
 //    /**
 //     * Provides the relevant activity.
@@ -26,6 +33,29 @@ public interface ServiceComponent {
 //
 //    CreatePlaylistActivity provideCreatePlaylistActivity();
 
+<<<<<<< HEAD
+
+    /**
+     * Provides the relevant activity.
+     * @return GetPlaylistActivity
+     */
+
+    /**
+     * Provides the relevant activity.
+     * @return GetPlaylistActivity
+     */
+
+    /**
+     * Provides the relevant activity.
+     * @return GetPlaylistSongsActivity
+     */
+
+    /**
+     * Provides the relevant activity.
+     * @return UpdatePlaylistActivity
+     */
+
+=======
 //    /**
 //     * Provides the relevant activity.
 //     * @return GetPlaylistActivity
@@ -49,12 +79,18 @@ public interface ServiceComponent {
 //     * @return UpdatePlaylistActivity
 //     */
 //    UpdatePlaylistActivity provideUpdatePlaylistActivity();
+>>>>>>> main
 
     //--------------------------- DIGITAL PANTRY SERVICE COMPONENT
 
     CreatePantryActivity provideCreatePantryActivity();
 
+<<<<<<< HEAD
+    GetPantryListActivity provideGetPantryListActivity();
+
+=======
     GetPantryInventoryActivity provideGetPantryInventoryActivity();
     UpdatePantryIngredientActivity provideUpdatePantryIngredientActivity();
     //UpdatePantryActivity provideUpdatePantryActivity();
+>>>>>>> main
 }

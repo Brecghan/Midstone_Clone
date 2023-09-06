@@ -5,17 +5,13 @@ import com.nashss.se.musicplaylistservice.activity.results.CreatePantryResult;
 import com.nashss.se.musicplaylistservice.converters.ModelConverter;
 import com.nashss.se.musicplaylistservice.dynamodb.PantryDao;
 import com.nashss.se.musicplaylistservice.dynamodb.models.Pantry;
-import com.nashss.se.musicplaylistservice.exceptions.InvalidAttributeValueException;
 import com.nashss.se.musicplaylistservice.models.PantryModel;
 import com.nashss.se.musicplaylistservice.utils.DigitalPantryServiceUtils;
-import com.nashss.se.projectresources.music.playlist.servic.util.MusicPlaylistServiceUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Implementation of the CreatePantryActivity for the DigitalPantryService's CreatePantry API.
