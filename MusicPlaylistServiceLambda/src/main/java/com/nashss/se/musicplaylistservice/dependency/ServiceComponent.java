@@ -16,6 +16,7 @@ import javax.inject.Singleton;
 @Component(modules = {DaoModule.class, MetricsModule.class})
 public interface ServiceComponent {
 
+
 //    /**
 //     * Provides the relevant activity.
 //     * @return AddSongToPlaylistActivity
@@ -28,6 +29,7 @@ public interface ServiceComponent {
 //     */
 //
 //    CreatePlaylistActivity provideCreatePlaylistActivity();
+
 
 //    /**
 //     * Provides the relevant activity.
@@ -57,7 +59,10 @@ public interface ServiceComponent {
 
     CreatePantryActivity provideCreatePantryActivity();
 
+    GetPantryListActivity provideGetPantryListActivity();
+
     GetPantryInventoryActivity provideGetPantryInventoryActivity();
     UpdatePantryIngredientActivity provideUpdatePantryIngredientActivity();
     UpdatePantryActivity provideUpdatePantryActivity();
+
 }
