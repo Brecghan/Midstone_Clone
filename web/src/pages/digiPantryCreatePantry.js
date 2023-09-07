@@ -6,12 +6,12 @@ import DataStore from '../util/DataStore';
 /**
  * Logic needed for the create playlist page of the website.
  */
-class CreatePlaylist extends BindingClass {
+class CreatePantry extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['mount', 'submit', 'redirectToViewPlaylist'], this);
+        this.bindClassMethods(['mount', 'submit', 'redirectToViewInventory'], this);
         this.dataStore = new DataStore();
-        this.dataStore.addChangeListener(this.redirectToViewPlaylist);
+        this.dataStore.addChangeListener(this.redirectToViewInventory);
         this.header = new Header(this.dataStore);
     }
 
@@ -65,10 +65,10 @@ class CreatePlaylist extends BindingClass {
     /**
      * When the playlist is updated in the datastore, redirect to the view playlist page.
      */
-    redirectToViewPlaylist() {
-        const playlist = this.dataStore.get('playlist');
-        if (playlist != null) {
-            window.location.href = `/playlist.html?id=${playlist.id}`;
+    redirectToViewInventory() {
+        const pantry = this.dataStore.get('pantry');
+        if (pantry != null) {
+            window.location.href = `/digiPantryInventory.html?id=${pantry.pantryId}`;
         }
     }
 }
@@ -77,8 +77,8 @@ class CreatePlaylist extends BindingClass {
  * Main method to run when the page contents have loaded.
  */
 const main = async () => {
-    const createPlaylist = new CreatePlaylist();
-    createPlaylist.mount();
+    const createPantry = new CreatePantry();
+    createPantry.mount();
 };
 
 window.addEventListener('DOMContentLoaded', main);
