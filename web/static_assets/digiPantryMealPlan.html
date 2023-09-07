@@ -1,10 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <script type="text/javascript" src="assets/digiPantryCreatePantry.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/digiPantryStyle.css">
 </head>
-<body>
+<body class="background">
+<header class="header" id="header"></header>
+<div class="card">
+    <h2>Meal Plans</h2>
+    <h3 style="text-align:center;"> On this page we will display all meal plans belonging to this user. <br>
+    The user will be able to select which meal plan they would like to view the chosen recipes for. <br>
+    The user will also be able to create a new meal plan, which will then open the blank meal plan. <br> </h3>
+    <form class="card-content" id="create-meal-plan-form">
+        <p class="hidden error" id="error-message"> </p>
+        <p class="form-field">
+            <label><h3>New Meal Plan Creation</h3></label>
+            <input type="text" required class="validated-field" id="mealPlan-name" placeholder="Enter Meal Plan Name"
+                   autofocus>
+        </p>
+
+        <p>
+            <a href="#" class="button" id="create">Create New Meal Plan</a>
+        </p><br><br>
+    </form>
+        <form action="#">
+            <label for="lang"><h3>Your Meal Plans</h3></label>
+            <select name="languages" id="lang" size="4">
+                <option value="mealPlan1">Meal Plan 1</option>
+                <option value="mealPlan2">Meal Plan 2</option>
+                <option value="mealPlan3">Meal Plan 3</option>
+                <option value="mealPlan4">Meal Plan 4</option>
+            </select><br><br>
+            <input type="submit" class="button" value="View Meal Plan Recipes" />
+        </form>
+</div>
 
 </body>
 </html>
