@@ -43,16 +43,6 @@ class CreatePantry extends BindingClass {
 
         const pantryName = document.getElementById('pantry-name').value;
 
-/*
-
-        let tags;
-        if (tagsText.length < 1) {
-            tags = null;
-        } else {
-            tags = tagsText.split(/\s*,\s*//*
-);
-        }
-*/
 
         const pantry = await this.client.createPantry(pantryName, (error) => {
             createButton.innerText = origButtonText;
