@@ -1,9 +1,12 @@
 package com.nashss.se.musicplaylistservice.dynamodb.models;
 
+import com.nashss.se.musicplaylistservice.converters.IngredientLinkedListConverter;
+
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBRangeKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverted;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -49,8 +52,9 @@ public class Pantry {
     /**
      * Returns the set of Ingredients associated with this Pantry, null if there are none.
      *
-     * @return Set of Ingredients for this Pantry
+     * @return List of Ingredients for this Pantry
      */
+    @DynamoDBTypeConverted(converter = IngredientLinkedListConverter.class)
     @DynamoDBAttribute(attributeName = "inventory")
     public Set<Ingredient> getInventory() {
         // normally, we would prefer to return an empty Set if there is no
@@ -75,8 +79,6 @@ public class Pantry {
         } else {
             this.inventory = new HashSet<>(inventory);
         }
-
-        this.inventory = inventory;
     }
     @Override
     public boolean equals(Object o) {

@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+
 public class PantryModel {
     private final String pantryId;
     private final String pantryName;
@@ -84,7 +85,12 @@ public class PantryModel {
         }
 
         public Builder withInventory(Set<Ingredient> inventory) {
-            this.inventory = new HashSet<>(inventory);
+//            this.inventory = new HashSet<>(inventory);
+            if (null == inventory) {
+                this.inventory = null;
+            } else {
+                this.inventory = new HashSet<>(inventory);
+            }
             return this;
         }
 

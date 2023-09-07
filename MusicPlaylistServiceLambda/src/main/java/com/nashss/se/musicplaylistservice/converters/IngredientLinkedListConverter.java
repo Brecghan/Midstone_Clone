@@ -9,7 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.LinkedList;
-import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -17,18 +17,18 @@ import java.util.List;
  * DynamoDBMapper converts lists to {@link java.util.ArrayList}s by default, but for our project,
  * we want to convert to a {@link LinkedList}
  */
-public class AlbumTrackLinkedListConverter implements DynamoDBTypeConverter<String, List> {
+public class IngredientLinkedListConverter implements DynamoDBTypeConverter<String, Set<Ingredient>> {
     private static final Gson GSON = new Gson();
     private final Logger log = LogManager.getLogger();
 
     @Override
-    public String convert(List listToBeConverted) {
-        return GSON.toJson(listToBeConverted);
+    public String convert(Set setToBeConverted) {
+        return GSON.toJson(setToBeConverted);
     }
 
     @Override
-    public List unconvert(String dynamoDbRepresentation) {
+    public Set<Ingredient> unconvert(String dynamoDbRepresentation) {
         // need to provide the type parameter of the list to convert correctly
-        return GSON.fromJson(dynamoDbRepresentation, new TypeToken<LinkedList<Ingredient>>() { } .getType());
+        return GSON.fromJson(dynamoDbRepresentation, new TypeToken<Set<Ingredient>>() { } .getType());
     }
 }
