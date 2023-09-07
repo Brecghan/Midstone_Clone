@@ -67,8 +67,8 @@ class CreatePantry extends BindingClass {
      */
     redirectToViewInventory() {
         const pantry = this.dataStore.get('pantry');
-        if (inventory != null) {
-            window.location.href = `/digiPantryIntentory.html?id=${pantry.id}`;
+        if (pantry != null) {
+            window.location.href = `/digiPantryInventory.html?id=${pantry.pantryId}`;
         }
     }
 }
