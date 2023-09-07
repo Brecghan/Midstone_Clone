@@ -11,8 +11,8 @@ import com.nashss.se.musicplaylistservice.utils.DigitalPantryServiceUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.HashSet;
 import javax.inject.Inject;
+import java.util.HashSet;
 
 /**
  * Implementation of the CreatePantryActivity for the DigitalPantryService's CreatePantry API.

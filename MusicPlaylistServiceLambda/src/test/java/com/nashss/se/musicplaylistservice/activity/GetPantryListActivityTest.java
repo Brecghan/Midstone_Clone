@@ -1,5 +1,6 @@
 package com.nashss.se.musicplaylistservice.activity;
 
+//CHECKSTYLE:OFF:Test
 import com.nashss.se.musicplaylistservice.activity.requests.GetPantryListRequest;
 import com.nashss.se.musicplaylistservice.activity.results.GetPantryListResult;
 import com.nashss.se.musicplaylistservice.dynamodb.PantryDao;
@@ -8,6 +9,7 @@ import com.nashss.se.musicplaylistservice.dynamodb.models.Pantry;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -16,9 +18,7 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
-import static org.mockito.MockitoAnnotations.initMocks;
 
-//CHECKSTYLE:OFF:Test
 public class GetPantryListActivityTest {
     @Mock
     private PantryDao pantryDao;
@@ -27,7 +27,7 @@ public class GetPantryListActivityTest {
 
     @BeforeEach
     void setup() {
-        initMocks(this);
+        MockitoAnnotations.openMocks(this);
         getPantryListActivity = new GetPantryListActivity(pantryDao);
     }
 

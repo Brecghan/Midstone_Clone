@@ -6,7 +6,6 @@ import com.nashss.se.musicplaylistservice.converters.ModelConverter;
 import com.nashss.se.musicplaylistservice.dynamodb.PantryDao;
 import com.nashss.se.musicplaylistservice.dynamodb.models.Ingredient;
 import com.nashss.se.musicplaylistservice.dynamodb.models.Pantry;
-import com.nashss.se.musicplaylistservice.metrics.MetricsConstants;
 import com.nashss.se.musicplaylistservice.metrics.MetricsPublisher;
 import com.nashss.se.musicplaylistservice.models.PantryModel;
 
@@ -65,27 +64,14 @@ public class UpdatePantryIngredientActivity {
         ingredient.setUnitOfMeasure(Ingredient.UnitOfMeasure.valueOf(
                 updatePantryIngredientRequest.getUnitOfMeasure()));
         Set<Ingredient> ingredientSet = pantry.getInventory();
+        ingredientSet.remove(ingredient);
         ingredientSet.add(ingredient);
         pantry.setInventory(ingredientSet);
 
         pantry = pantryDao.savePantry(pantry);
 
-        publishExceptionMetrics(false, false);
         return UpdatePantryIngredientResult.builder()
                 .withPantry(new ModelConverter().toPantryModel(pantry))
                 .build();
-    }
-
-    /**
-     * Helper method to publish exception metrics.
-     * @param isInvalidAttributeValue indicates whether InvalidAttributeValueException is thrown
-     * @param isInvalidAttributeChange indicates whether InvalidAttributeChangeException is thrown
-     */
-    private void publishExceptionMetrics(final boolean isInvalidAttributeValue,
-                                         final boolean isInvalidAttributeChange) {
-        metricsPublisher.addCount(MetricsConstants.UPDATEPLAYLIST_INVALIDATTRIBUTEVALUE_COUNT,
-            isInvalidAttributeValue ? 1 : 0);
-        metricsPublisher.addCount(MetricsConstants.UPDATEPLAYLIST_INVALIDATTRIBUTECHANGE_COUNT,
-            isInvalidAttributeChange ? 1 : 0);
     }
 }

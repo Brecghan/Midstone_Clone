@@ -69,7 +69,7 @@ public class ModelConverter {
      * @param ingredients The Ingredients to convert to IngredientModels
      * @return The converted list of IngredientModels
      */
-    public List<IngredientModel> toIngredientModelList(List<Ingredient> ingredients) {
+    public List<IngredientModel> toIngredientModelList(Set<Ingredient> ingredients) {
         List<IngredientModel> ingredientModels = new ArrayList<>();
 
         for (Ingredient ingredient : ingredients) {

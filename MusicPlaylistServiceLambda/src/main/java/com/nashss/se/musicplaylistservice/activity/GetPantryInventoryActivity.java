@@ -10,7 +10,7 @@ import com.nashss.se.musicplaylistservice.models.IngredientModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import javax.inject.Inject;
 
@@ -51,7 +51,7 @@ public class GetPantryInventoryActivity {
         Pantry pantry = pantryDao.getPantry(getPantryInventoryRequest.getUserId(),
                 getPantryInventoryRequest.getPantryId());
         List<IngredientModel> ingredientModels =
-                new ModelConverter().toIngredientModelList(new ArrayList<>(pantry.getInventory()));
+                new ModelConverter().toIngredientModelList(new HashSet<>(pantry.getInventory()));
 
         return GetPantryInventoryResult.builder()
                 .withInventory(ingredientModels)
