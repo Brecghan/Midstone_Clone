@@ -25,17 +25,17 @@ const EMPTY_DATASTORE_STATE = {
 /**
  * Logic needed for the search playlist page of the website.
  */
-class SearchPlaylists extends BindingClass {
+class DigiPantryHome extends BindingClass {
     constructor() {
         super();
 
-        this.bindClassMethods(['mount', 'search', 'displaySearchResults', 'getHTMLForSearchResults'], this);
+        this.bindClassMethods(['mount', 'displaySearchResults', 'getHTMLForSearchResults'], this);
 
         // Create a enw datastore with an initial "empty" state.
         this.dataStore = new DataStore(EMPTY_DATASTORE_STATE);
         this.header = new Header(this.dataStore);
         this.dataStore.addChangeListener(this.displaySearchResults);
-        console.log("searchPlaylists constructor");
+        console.log("digiPantryHome constructor");
     }
 
     /**
@@ -59,7 +59,7 @@ class SearchPlaylists extends BindingClass {
      * then updates the datastore with the criteria and results.
      * @param evt The "event" object representing the user-initiated event that triggered this method.
      */
-    async search(evt) {
+    /*async search(evt) {
         // Prevent submitting the form from reloading the page.
         evt.preventDefault();
 
@@ -81,7 +81,7 @@ class SearchPlaylists extends BindingClass {
         } else {
             this.dataStore.setState(EMPTY_DATASTORE_STATE);
         }
-    }
+    }*/
 
     /**
      * Pulls search results from the datastore and displays them on the html page.
@@ -137,8 +137,8 @@ class SearchPlaylists extends BindingClass {
  * Main method to run when the page contents have loaded.
  */
 const main = async () => {
-    const searchPlaylists = new SearchPlaylists();
-    searchPlaylists.mount();
+    const digiPantryHome = new DigiPantryHome();
+    digiPantryHome.mount();
 };
 
 window.addEventListener('DOMContentLoaded', main);
