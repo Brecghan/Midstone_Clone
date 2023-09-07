@@ -3,8 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="css/digiPantryStyle.css">
 </head>
-<body>
+<body class="background">
+<header class="header" id="header"></header>
+<div class="card">
+    <h2>Recipes</h2>
+    <form class="card-content" id="get-recipes-form">
+        <p class="hidden error" id="error-message"> </p>
+        <p> This page lets you search for a recipe by region and returns the recipe.</p>
+
+        <p class="form-field">
+            <label>Recipe Id</label>
+            <input type="text" required class="validated-field" id="pantry-name" placeholder="recipeId"
+                   autofocus>
+        </p>
+
+        <p>
+            <a href="#" class="button" id="create">Search Recipes</a>
+        </p>
+
+        <p class="form-field">
+            <label>Region</label>
+            <input type="text" required class="validated-field" id="pantry-name" placeholder="region"
+                   autofocus>
+        </p>
+
+        <p>
+            <a href="#" class="button" id="create">Search Regions</a>
+        </p>
+
+
+
+
+
+    </form>
+
+
+</div>
 
 </body>
 </html>
