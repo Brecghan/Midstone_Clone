@@ -10,30 +10,26 @@
 <body class="background">
 <header class="header" id="header"></header>
 <div class="card">
-    <h2>Pantry Inventory</h2>
-    <p>This page will be what the 'Create Pantry' and 'View Pantry' button links to :)
-    We will also be able to add inventory to the selected pantry on this page.
-    </p>
-
-<div class=inventory-form-fields">
-    <form> <!-- action="Where to send the form data">-->
+    <h2 id="pantry-name"></h2>
+    <h3>Created by: <span id="user-id"></span></h3>
+</div>
+<div class="card">
+    <form class="inventory-fields" id="inventory-fields-form"> <!-- action="Where to send the form data">-->
         <label for="iname">Ingredient Name</label><br>
         <input type="text" id="iname" name="iname"><br>
         <label for="inum">Ingredient Quantity</label><br>
-        <input type="text" id="inum" name="inum"><br>
+        <input type="number" id="inum" name="inum"><br>
         <label for="measurments">Choose A Measurement:</label><br>
         <select name="measurments" id="measurments">
             <option value="CUP">Cup</option>
             <option value="LBS">LBS</option>
         </select>
         <br><br>
-        <p class="button-group">
         <input href="#" type="button" id="add-inventory-btn" value="Add Inventory">
-        </p>
     </form>
 </div>
 
-<div class="inventory-list">
+<div class="card">
     <ul>
         <li>This</li>
         <li>Will</li>
@@ -43,9 +39,6 @@
         <li>List</li>
     </ul>
 </div>
-<!--    <p class="button-group">-->
-<!--        <a href="#" class="button" id="add-inventory-btn">Add Inventory</a>-->
-<!--    </p>-->
-<!--</div>-->
+
 </body>
 </html>
