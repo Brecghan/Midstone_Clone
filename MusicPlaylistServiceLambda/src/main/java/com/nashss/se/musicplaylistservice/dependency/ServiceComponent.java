@@ -3,6 +3,7 @@ package com.nashss.se.musicplaylistservice.dependency;
 import com.nashss.se.musicplaylistservice.activity.CreateMealPlanActivity;
 import com.nashss.se.musicplaylistservice.activity.CreatePantryActivity;
 import com.nashss.se.musicplaylistservice.activity.GetMealPlanListActivity;
+import com.nashss.se.musicplaylistservice.activity.GetMealPlanRecipeSetActivity;
 import com.nashss.se.musicplaylistservice.activity.GetPantryInventoryActivity;
 import com.nashss.se.musicplaylistservice.activity.GetPantryListActivity;
 import com.nashss.se.musicplaylistservice.activity.UpdateMealPlanActivity;
@@ -66,5 +67,11 @@ public interface ServiceComponent {
      * @return UpdateMealPlanActivity
      */
     UpdateMealPlanActivity provideUpdateMealPlanActivity();
+
+    /**
+     * Provides the relevant activity.
+     * @return GetMealPlanRecipeSetActivity
+     */
+    GetMealPlanRecipeSetActivity provideGetMealPlanRecipeSetActivity();
 
 }

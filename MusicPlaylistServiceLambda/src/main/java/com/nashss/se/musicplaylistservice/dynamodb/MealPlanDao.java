@@ -44,7 +44,7 @@ public class MealPlanDao {
 
         if (mealPlan == null) {
             metricsPublisher.addCount(MetricsConstants.GETMEALPLAN_MEALPLANNOTFOUND_COUNT, 1);
-            throw new MealPlanNotFoundException("Could not find pantry with id " + mealPlanId);
+            throw new MealPlanNotFoundException("Could not find Meal Plan with id " + mealPlanId);
 
         }
         metricsPublisher.addCount(MetricsConstants.GETMEALPLAN_MEALPLANNOTFOUND_COUNT, 0);
