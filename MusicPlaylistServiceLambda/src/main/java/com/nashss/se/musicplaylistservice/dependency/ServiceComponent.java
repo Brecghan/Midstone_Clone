@@ -1,11 +1,12 @@
 package com.nashss.se.musicplaylistservice.dependency;
 
+import com.nashss.se.musicplaylistservice.activity.CreateMealPlanActivity;
 import com.nashss.se.musicplaylistservice.activity.CreatePantryActivity;
+import com.nashss.se.musicplaylistservice.activity.GetMealPlanListActivity;
 import com.nashss.se.musicplaylistservice.activity.GetPantryInventoryActivity;
 import com.nashss.se.musicplaylistservice.activity.GetPantryListActivity;
 import com.nashss.se.musicplaylistservice.activity.UpdatePantryActivity;
 import com.nashss.se.musicplaylistservice.activity.UpdatePantryIngredientActivity;
-
 import dagger.Component;
 
 import javax.inject.Singleton;
@@ -47,4 +48,15 @@ public interface ServiceComponent {
      */
     UpdatePantryActivity provideUpdatePantryActivity();
 
+    /**
+     * Provides the relevant activity.
+     * @return CreateMealPlanActivity
+     */
+    CreateMealPlanActivity provideCreateMealPlanActivity();
+
+    /**
+     * Provides the relevant activity.
+     * @return CreateMealPlanActivity
+     */
+    GetMealPlanListActivity provideGetMealPlanListActivity();
 }

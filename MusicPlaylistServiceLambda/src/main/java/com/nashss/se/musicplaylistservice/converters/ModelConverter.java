@@ -1,8 +1,10 @@
 package com.nashss.se.musicplaylistservice.converters;
 
 import com.nashss.se.musicplaylistservice.dynamodb.models.Ingredient;
+import com.nashss.se.musicplaylistservice.dynamodb.models.MealPlan;
 import com.nashss.se.musicplaylistservice.dynamodb.models.Pantry;
 import com.nashss.se.musicplaylistservice.models.IngredientModel;
+import com.nashss.se.musicplaylistservice.models.MealPlanModel;
 import com.nashss.se.musicplaylistservice.models.PantryModel;
 
 import java.util.ArrayList;
@@ -77,5 +79,41 @@ public class ModelConverter {
         }
 
         return ingredientModels;
+    }
+
+    /**
+     * Converts a provided {@link MealPlan} into a {@link MealPlanModel} representation.
+     *
+     * @param mealPlan the mealPlan to convert
+     * @return the converted mealPlan
+     */
+    public MealPlanModel toMealPlanModel(MealPlan mealPlan) {
+        Set<String> recipeSet = null;
+        if (mealPlan.getRecipeSet() != null) {
+            recipeSet = new HashSet<>(mealPlan.getRecipeSet());
+        }
+
+        return MealPlanModel.builder()
+                .withMealPlanId(mealPlan.getMealPlanId())
+                .withMealPlanName(mealPlan.getMealPlanName())
+                .withUserId(mealPlan.getUserId())
+                .withRecipeSet(recipeSet)
+                .build();
+    }
+
+    /**
+     * Converts a list of Meal Plans to a list of MealPlanModels.
+     *
+     * @param mealPlans The Meal Plans to convert to MealPlanModels
+     * @return The converted list of MealPlanModels
+     */
+    public List<MealPlanModel> toMealPlanModelList(List<MealPlan> mealPlans) {
+        List<MealPlanModel> mealPlanModels = new ArrayList<>();
+
+        for (MealPlan mealPlan : mealPlans) {
+            mealPlanModels.add(toMealPlanModel(mealPlan));
+        }
+
+        return mealPlanModels;
     }
 }
