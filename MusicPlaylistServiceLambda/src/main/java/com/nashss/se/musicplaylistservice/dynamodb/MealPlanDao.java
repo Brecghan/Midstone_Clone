@@ -4,7 +4,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
 import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedQueryList;
 import com.nashss.se.musicplaylistservice.dynamodb.models.MealPlan;
-import com.nashss.se.musicplaylistservice.exceptions.PantryNotFoundException;
+import com.nashss.se.musicplaylistservice.exceptions.MealPlanNotFoundException;
 import com.nashss.se.musicplaylistservice.metrics.MetricsConstants;
 import com.nashss.se.musicplaylistservice.metrics.MetricsPublisher;
 
@@ -43,11 +43,11 @@ public class MealPlanDao {
         MealPlan mealPlan = this.dynamoDbMapper.load(MealPlan.class, userId, mealPlanId);
 
         if (mealPlan == null) {
-            metricsPublisher.addCount(MetricsConstants.GETPANTRY_PANTRYNOTFOUND_COUNT, 1);
-            throw new PantryNotFoundException("Could not find pantry with id " + mealPlanId);
+            metricsPublisher.addCount(MetricsConstants.GETMEALPLAN_MEALPLANNOTFOUND_COUNT, 1);
+            throw new MealPlanNotFoundException("Could not find pantry with id " + mealPlanId);
 
         }
-        metricsPublisher.addCount(MetricsConstants.GETPANTRY_PANTRYNOTFOUND_COUNT, 0);
+        metricsPublisher.addCount(MetricsConstants.GETMEALPLAN_MEALPLANNOTFOUND_COUNT, 0);
         return mealPlan;
     }
 

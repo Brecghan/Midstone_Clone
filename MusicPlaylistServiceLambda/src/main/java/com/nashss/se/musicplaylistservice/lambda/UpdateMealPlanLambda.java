@@ -2,26 +2,26 @@ package com.nashss.se.musicplaylistservice.lambda;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
-import com.nashss.se.musicplaylistservice.activity.requests.UpdatePantryRequest;
-import com.nashss.se.musicplaylistservice.activity.results.UpdatePantryResult;
+import com.nashss.se.musicplaylistservice.activity.requests.UpdateMealPlanRequest;
+import com.nashss.se.musicplaylistservice.activity.results.UpdateMealPlanResult;
 
 public class UpdateMealPlanLambda
-        extends LambdaActivityRunner<UpdatePantryRequest, UpdatePantryResult>
-        implements RequestHandler<AuthenticatedLambdaRequest<UpdatePantryRequest>, LambdaResponse> {
+        extends LambdaActivityRunner<UpdateMealPlanRequest, UpdateMealPlanResult>
+        implements RequestHandler<AuthenticatedLambdaRequest<UpdateMealPlanRequest>, LambdaResponse> {
     @Override
-    public LambdaResponse handleRequest(AuthenticatedLambdaRequest<UpdatePantryRequest> input, Context context) {
+    public LambdaResponse handleRequest(AuthenticatedLambdaRequest<UpdateMealPlanRequest> input, Context context) {
         return super.runActivity(
             () -> {
-                UpdatePantryRequest unauthenticatedRequest = input.fromBody(UpdatePantryRequest.class);
+                UpdateMealPlanRequest unauthenticatedRequest = input.fromBody(UpdateMealPlanRequest.class);
                 return input.fromUserClaims(claims ->
-                        UpdatePantryRequest.builder()
-                                .withPantryId(unauthenticatedRequest.getPantryId())
-                                .withPantryName(unauthenticatedRequest.getPantryName())
+                        UpdateMealPlanRequest.builder()
+                                .withMealPlanId(unauthenticatedRequest.getMealPlanId())
+                                .withMealPlanName(unauthenticatedRequest.getMealPlanName())
                                 .withUserId(claims.get("email"))
                                 .build());
             },
             (request, serviceComponent) ->
-                    serviceComponent.provideUpdatePantryActivity().handleRequest(request)
+                    serviceComponent.provideUpdateMealPlanActivity().handleRequest(request)
         );
     }
 }

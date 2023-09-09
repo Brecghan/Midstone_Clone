@@ -6,33 +6,33 @@ import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 @JsonDeserialize(builder = UpdateMealPlanRequest.Builder.class)
 public class UpdateMealPlanRequest {
     private final String userId;
-    private final String pantryName;
-    private final String pantryId;
+    private final String mealPlanName;
+    private final String mealPlanId;
 
-    private UpdateMealPlanRequest(String userId, String pantryName, String pantryId) {
+    private UpdateMealPlanRequest(String userId, String mealPlanName, String mealPlanId) {
         this.userId = userId;
-        this.pantryName = pantryName;
-        this.pantryId = pantryId;
+        this.mealPlanName = mealPlanName;
+        this.mealPlanId = mealPlanId;
     }
 
     public String getUserId() {
         return userId;
     }
 
-    public String getPantryName() {
-        return pantryName;
+    public String getMealPlanName() {
+        return mealPlanName;
     }
 
-    public String getPantryId() {
-        return pantryId;
+    public String getMealPlanId() {
+        return mealPlanId;
     }
 
     @Override
     public String toString() {
-        return "UpdatePantryRequest{" +
+        return "UpdateMealPlanRequest{" +
                 "userId='" + userId + '\'' +
-                ", pantryName='" + pantryName + '\'' +
-                ", pantryId='" + pantryId + '\'' +
+                ", mealPlanName='" + mealPlanName + '\'' +
+                ", mealPlanId='" + mealPlanId + '\'' +
                 '}';
     }
 
@@ -44,26 +44,26 @@ public class UpdateMealPlanRequest {
     @JsonPOJOBuilder
     public static class Builder {
         private String userId;
-        private String pantryName;
-        private String pantryId;
+        private String mealPlanName;
+        private String mealPlanId;
 
         public Builder withUserId(String userId) {
             this.userId = userId;
             return this;
         }
 
-        public Builder withPantryName(String pantryName) {
-            this.pantryName = pantryName;
+        public Builder withMealPlanName(String mealPlanName) {
+            this.mealPlanName = mealPlanName;
             return this;
         }
 
-        public Builder withPantryId(String pantryId) {
-            this.pantryId = pantryId;
+        public Builder withMealPlanId(String mealPlanId) {
+            this.mealPlanId = mealPlanId;
             return this;
         }
 
         public UpdateMealPlanRequest build() {
-            return new UpdateMealPlanRequest(userId, pantryName, pantryId);
+            return new UpdateMealPlanRequest(userId, mealPlanName, mealPlanId);
         }
     }
 }

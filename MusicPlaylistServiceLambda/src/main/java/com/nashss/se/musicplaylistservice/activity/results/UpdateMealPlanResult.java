@@ -1,22 +1,22 @@
 package com.nashss.se.musicplaylistservice.activity.results;
 
-import com.nashss.se.musicplaylistservice.models.PantryModel;
+import com.nashss.se.musicplaylistservice.models.MealPlanModel;
 
 public class UpdateMealPlanResult {
-    private final PantryModel pantry;
+    private final MealPlanModel mealPlan;
 
-    private UpdateMealPlanResult(PantryModel pantry) {
-        this.pantry = pantry;
+    private UpdateMealPlanResult(MealPlanModel mealPlan) {
+        this.mealPlan = mealPlan;
     }
 
-    public PantryModel getPantry() {
-        return pantry;
+    public MealPlanModel getMealPlan() {
+        return mealPlan;
     }
 
     @Override
     public String toString() {
         return "UpdatePantryResult{" +
-                "pantry=" + pantry +
+                "mealPlan=" + mealPlan +
                 '}';
     }
 
@@ -26,15 +26,15 @@ public class UpdateMealPlanResult {
     }
 
     public static class Builder {
-        private PantryModel pantry;
+        private MealPlanModel mealPlan;
 
-        public Builder withPantry(PantryModel pantry) {
-            this.pantry = pantry;
+        public Builder withMealPlan(MealPlanModel mealPlan) {
+            this.mealPlan = mealPlan;
             return this;
         }
 
         public UpdateMealPlanResult build() {
-            return new UpdateMealPlanResult(pantry);
+            return new UpdateMealPlanResult(mealPlan);
         }
     }
 }
