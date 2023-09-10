@@ -9,6 +9,7 @@ import com.nashss.se.musicplaylistservice.activity.GetPantryListActivity;
 import com.nashss.se.musicplaylistservice.activity.UpdateMealPlanActivity;
 import com.nashss.se.musicplaylistservice.activity.UpdatePantryActivity;
 import com.nashss.se.musicplaylistservice.activity.UpdatePantryIngredientActivity;
+import com.nashss.se.musicplaylistservice.activity.UpdateMealPlanRecipeSetActivity;
 import dagger.Component;
 
 import javax.inject.Singleton;
@@ -73,5 +74,11 @@ public interface ServiceComponent {
      * @return GetMealPlanRecipeSetActivity
      */
     GetMealPlanRecipeSetActivity provideGetMealPlanRecipeSetActivity();
+
+    /**
+     * Provides the relevant activity.
+     * @return UpdateMealPlanRecipeSetActivity
+     */
+    UpdateMealPlanRecipeSetActivity provideUpdateMealPlanRecipeSetActivity();
 
 }
