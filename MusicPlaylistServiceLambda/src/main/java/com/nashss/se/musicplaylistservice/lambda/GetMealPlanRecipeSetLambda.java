@@ -1,16 +1,18 @@
 package com.nashss.se.musicplaylistservice.lambda;
 
-import com.amazonaws.services.lambda.runtime.Context;
-import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.nashss.se.musicplaylistservice.activity.requests.GetMealPlanRecipeSetRequest;
 import com.nashss.se.musicplaylistservice.activity.results.GetMealPlanRecipeSetResult;
+
+import com.amazonaws.services.lambda.runtime.Context;
+import com.amazonaws.services.lambda.runtime.RequestHandler;
 
 public class GetMealPlanRecipeSetLambda
         extends LambdaActivityRunner<GetMealPlanRecipeSetRequest, GetMealPlanRecipeSetResult>
         implements RequestHandler<AuthenticatedLambdaRequest<GetMealPlanRecipeSetRequest>, LambdaResponse> {
 
     @Override
-    public LambdaResponse handleRequest(AuthenticatedLambdaRequest<GetMealPlanRecipeSetRequest> input, Context context) {
+    public LambdaResponse handleRequest(AuthenticatedLambdaRequest<GetMealPlanRecipeSetRequest> input,
+                                        Context context) {
         return super.runActivity(
             () -> {
                 GetMealPlanRecipeSetRequest unauthenticatedRequest = input.fromBody(GetMealPlanRecipeSetRequest.class);

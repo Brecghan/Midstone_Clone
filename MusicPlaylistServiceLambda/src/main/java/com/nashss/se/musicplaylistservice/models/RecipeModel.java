@@ -34,17 +34,15 @@ public class RecipeModel {
         return recipeName;
     }
 
-    public String geRecipeDescription() {
-        return recipeDescription;
-    }
+    public String getRecipeDescription() {
+        return recipeDescription; }
 
     public Set<Ingredient> getNeededIngredients() {
         return new HashSet<>(neededIngredients);
     }
 
-    public String geRegion() {
-        return region;
-    }
+    public String getRegion() {
+        return region; }
 
     public Set<String> getDietaryRestrictions() {
         return new HashSet<>(dietaryRestrictions);

@@ -7,11 +7,12 @@ import com.nashss.se.musicplaylistservice.dynamodb.MealPlanDao;
 import com.nashss.se.musicplaylistservice.dynamodb.models.MealPlan;
 import com.nashss.se.musicplaylistservice.models.MealPlanModel;
 import com.nashss.se.musicplaylistservice.utils.DigitalPantryServiceUtils;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.inject.Inject;
 import java.util.HashSet;
+import javax.inject.Inject;
 
 /**
  * Implementation of the CreateMealPlanActivity for the DigitalPantryService's CreateMealPlan API.

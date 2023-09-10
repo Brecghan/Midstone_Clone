@@ -1,9 +1,10 @@
 package com.nashss.se.musicplaylistservice.lambda;
 
-import com.amazonaws.services.lambda.runtime.Context;
-import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.nashss.se.musicplaylistservice.activity.requests.GetRecipeDetailsRequest;
 import com.nashss.se.musicplaylistservice.activity.results.GetRecipeDetailsResult;
+
+import com.amazonaws.services.lambda.runtime.Context;
+import com.amazonaws.services.lambda.runtime.RequestHandler;
 
 public class GetRecipeDetailsLambda
         extends LambdaActivityRunner<GetRecipeDetailsRequest, GetRecipeDetailsResult>

@@ -6,12 +6,13 @@ import com.nashss.se.musicplaylistservice.activity.GetMealPlanListActivity;
 import com.nashss.se.musicplaylistservice.activity.GetMealPlanRecipeSetActivity;
 import com.nashss.se.musicplaylistservice.activity.GetPantryInventoryActivity;
 import com.nashss.se.musicplaylistservice.activity.GetPantryListActivity;
-import com.nashss.se.musicplaylistservice.activity.GetRecipesActivity;
 import com.nashss.se.musicplaylistservice.activity.GetRecipeDetailsActivity;
+import com.nashss.se.musicplaylistservice.activity.GetRecipesActivity;
 import com.nashss.se.musicplaylistservice.activity.UpdateMealPlanActivity;
+import com.nashss.se.musicplaylistservice.activity.UpdateMealPlanRecipeSetActivity;
 import com.nashss.se.musicplaylistservice.activity.UpdatePantryActivity;
 import com.nashss.se.musicplaylistservice.activity.UpdatePantryIngredientActivity;
-import com.nashss.se.musicplaylistservice.activity.UpdateMealPlanRecipeSetActivity;
+
 import dagger.Component;
 
 import javax.inject.Singleton;

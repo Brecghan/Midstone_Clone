@@ -1,7 +1,5 @@
 package com.nashss.se.musicplaylistservice.models;
 
-import com.nashss.se.musicplaylistservice.dynamodb.models.Ingredient;
-
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;

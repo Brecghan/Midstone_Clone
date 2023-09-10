@@ -6,11 +6,12 @@ import com.nashss.se.musicplaylistservice.converters.ModelConverter;
 import com.nashss.se.musicplaylistservice.dynamodb.MealPlanDao;
 import com.nashss.se.musicplaylistservice.dynamodb.models.MealPlan;
 import com.nashss.se.musicplaylistservice.models.MealPlanModel;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.inject.Inject;
 import java.util.List;
+import javax.inject.Inject;
 
 /**
  * Implementation of the GetMealPlanListActivity for the DigitalPantryService's GetMealPlan API.

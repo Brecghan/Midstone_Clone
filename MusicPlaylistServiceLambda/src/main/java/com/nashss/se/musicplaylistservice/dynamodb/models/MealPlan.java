@@ -51,7 +51,6 @@ public class MealPlan {
      *
      * @return Set of RecipeId Strings for this Pantry
      */
-//    @DynamoDBTypeConverted(converter = IngredientLinkedListConverter.class)
     @DynamoDBAttribute(attributeName = "recipeSet")
     public Set<String> getRecipeSet() {
         // normally, we would prefer to return an empty Set if there is no

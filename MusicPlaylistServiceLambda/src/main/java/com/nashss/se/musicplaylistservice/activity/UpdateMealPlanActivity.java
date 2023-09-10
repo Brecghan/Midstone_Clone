@@ -7,6 +7,7 @@ import com.nashss.se.musicplaylistservice.dynamodb.MealPlanDao;
 import com.nashss.se.musicplaylistservice.dynamodb.models.MealPlan;
 import com.nashss.se.musicplaylistservice.metrics.MetricsPublisher;
 import com.nashss.se.musicplaylistservice.models.PantryModel;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -51,7 +52,8 @@ public class UpdateMealPlanActivity {
         log.info("Received UpdateMealPlanRequest {}", updatePantryRequest);
 
 
-        MealPlan mealPlan = mealPlanDao.getMealPlan(updatePantryRequest.getUserId(), updatePantryRequest.getMealPlanId());
+        MealPlan mealPlan = mealPlanDao.getMealPlan(updatePantryRequest.getUserId(),
+                updatePantryRequest.getMealPlanId());
 
         mealPlan.setMealPlanName(updatePantryRequest.getMealPlanName());
         mealPlan = mealPlanDao.saveMealPlan(mealPlan);

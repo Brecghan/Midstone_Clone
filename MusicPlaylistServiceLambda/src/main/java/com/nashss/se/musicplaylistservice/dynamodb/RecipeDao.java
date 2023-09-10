@@ -1,19 +1,20 @@
 package com.nashss.se.musicplaylistservice.dynamodb;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
-import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.nashss.se.musicplaylistservice.dynamodb.models.Recipe;
 import com.nashss.se.musicplaylistservice.exceptions.RecipeNotFoundException;
 import com.nashss.se.musicplaylistservice.metrics.MetricsConstants;
 import com.nashss.se.musicplaylistservice.metrics.MetricsPublisher;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
+import com.amazonaws.services.dynamodbv2.model.AttributeValue;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
 /**
  * Accesses data for a Recipe using {@link Recipe} to represent the model in DynamoDB.
@@ -53,16 +54,16 @@ public class RecipeDao {
         return recipe;
     }
 
-//    /**
-//     * Saves (creates or updates) the given Recipe.
-//     *
-//     * @param recipe The recipe to save
-//     * @return The Recipe object that was saved
-//     */
-//    public Recipe saveRecipe(Recipe recipe) {
-//        this.dynamoDbMapper.save(recipe);
-//        return recipe;
-//    }
+    /**
+     * Saves (creates or updates) the given Recipe.
+     *
+     * @param recipe The recipe to save
+     * @return The Recipe object that was saved
+     */
+    public Recipe saveRecipe(Recipe recipe) {
+        this.dynamoDbMapper.save(recipe);
+        return recipe;
+    }
     /**
      * Perform a search (via a "scan") of the Recipe table for recipes matching the given criteria.
      * <p>

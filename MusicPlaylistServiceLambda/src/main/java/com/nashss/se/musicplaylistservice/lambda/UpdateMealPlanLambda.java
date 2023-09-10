@@ -1,9 +1,10 @@
 package com.nashss.se.musicplaylistservice.lambda;
 
-import com.amazonaws.services.lambda.runtime.Context;
-import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.nashss.se.musicplaylistservice.activity.requests.UpdateMealPlanRequest;
 import com.nashss.se.musicplaylistservice.activity.results.UpdateMealPlanResult;
+
+import com.amazonaws.services.lambda.runtime.Context;
+import com.amazonaws.services.lambda.runtime.RequestHandler;
 
 public class UpdateMealPlanLambda
         extends LambdaActivityRunner<UpdateMealPlanRequest, UpdateMealPlanResult>

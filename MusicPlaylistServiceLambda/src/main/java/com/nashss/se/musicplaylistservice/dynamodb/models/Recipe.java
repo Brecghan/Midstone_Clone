@@ -99,7 +99,6 @@ public class Recipe {
      *
      * @return Set of dietary restriction Strings for this Recipe
      */
-//    @DynamoDBTypeConverted(converter = IngredientLinkedListConverter.class)
     @DynamoDBAttribute(attributeName = "dietaryRestrictions")
     public Set<String> getDietaryRestrictions() {
         // normally, we would prefer to return an empty Set if there is no
