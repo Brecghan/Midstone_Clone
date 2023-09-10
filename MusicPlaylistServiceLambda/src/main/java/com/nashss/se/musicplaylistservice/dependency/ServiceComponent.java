@@ -6,6 +6,7 @@ import com.nashss.se.musicplaylistservice.activity.GetMealPlanListActivity;
 import com.nashss.se.musicplaylistservice.activity.GetMealPlanRecipeSetActivity;
 import com.nashss.se.musicplaylistservice.activity.GetPantryInventoryActivity;
 import com.nashss.se.musicplaylistservice.activity.GetPantryListActivity;
+import com.nashss.se.musicplaylistservice.activity.GetRecipesActivity;
 import com.nashss.se.musicplaylistservice.activity.UpdateMealPlanActivity;
 import com.nashss.se.musicplaylistservice.activity.UpdatePantryActivity;
 import com.nashss.se.musicplaylistservice.activity.UpdatePantryIngredientActivity;
@@ -80,5 +81,11 @@ public interface ServiceComponent {
      * @return UpdateMealPlanRecipeSetActivity
      */
     UpdateMealPlanRecipeSetActivity provideUpdateMealPlanRecipeSetActivity();
+
+    /**
+     * Provides the relevant activity.
+     * @return UpdateMealPlanRecipeSetActivity
+     */
+    GetRecipesActivity provideGetRecipesActivity();
 
 }

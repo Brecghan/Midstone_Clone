@@ -2,7 +2,8 @@ package com.nashss.se.musicplaylistservice.dynamodb;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
-import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedQueryList;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
+import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.nashss.se.musicplaylistservice.dynamodb.models.Recipe;
 import com.nashss.se.musicplaylistservice.exceptions.RecipeNotFoundException;
 import com.nashss.se.musicplaylistservice.metrics.MetricsConstants;
@@ -10,7 +11,9 @@ import com.nashss.se.musicplaylistservice.metrics.MetricsPublisher;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Accesses data for a Recipe using {@link Recipe} to represent the model in DynamoDB.
@@ -51,31 +54,38 @@ public class RecipeDao {
     }
 
 //    /**
-//     * Saves (creates or updates) the given pantry.
+//     * Saves (creates or updates) the given Recipe.
 //     *
-//     * @param pantry The pantry to save
-//     * @return The Pantry object that was saved
+//     * @param recipe The recipe to save
+//     * @return The Recipe object that was saved
 //     */
-//    public Pantry savePantry(Pantry pantry) {
-//        this.dynamoDbMapper.save(pantry);
-//        return pantry;
+//    public Recipe saveRecipe(Recipe recipe) {
+//        this.dynamoDbMapper.save(recipe);
+//        return recipe;
 //    }
-//
-//    /**
-//     * Perform a search (via a "scan") of the pantry table for pantries matching the given criteria.
-//
-//     * @param userId a String containing the UserId.
-//     * @return a List of Pantry objects that were made by the User.
-//     */
-//    public List<Pantry> getUserPantries(String userId) {
-//        Pantry pantry = new Pantry();
-//        pantry.setUserId(userId);
-//
-//        DynamoDBQueryExpression<Pantry> dynamoDBQueryExpression = new DynamoDBQueryExpression<Pantry>()
-//                .withHashKeyValues(pantry);
-//        DynamoDBMapper mapper = new DynamoDBMapper(DynamoDbClientProvider.getDynamoDBClient());
-//
-//        PaginatedQueryList<Pantry> pantryList = mapper.query(Pantry.class, dynamoDBQueryExpression);
-//        return pantryList;
-//    }
+    /**
+     * Perform a search (via a "scan") of the Recipe table for recipes matching the given criteria.
+     * <p>
+     * The only criteria is if a recipe region is specified, in which only recipes from that region will
+     * be returned. If no region is specified, all recipes will be returned
+     *
+     * @param region a String containing the recipe region requested or null.
+     * @return a List of Recipe objects that match the search criteria.
+     */
+    public List<Recipe> getRecipeList(String region) {
+        if (region == null) {
+            DynamoDBScanExpression dynamoDBScanExpression = new DynamoDBScanExpression();
+            return this.dynamoDbMapper.scan(Recipe.class, dynamoDBScanExpression);
+        } else {
+            Map<String, AttributeValue> valueMap = new HashMap<>();
+            valueMap.put(":region", new AttributeValue().withS(region));
+            DynamoDBQueryExpression<Recipe> queryExpression = new DynamoDBQueryExpression<Recipe>()
+                    .withIndexName(Recipe.RECIPE_REGION_INDEX)
+                    .withConsistentRead(false)
+                    .withKeyConditionExpression("region = :region")
+                    .withExpressionAttributeValues(valueMap);
+
+            return dynamoDbMapper.query(Recipe.class, queryExpression);
+        }
+    }
 }
