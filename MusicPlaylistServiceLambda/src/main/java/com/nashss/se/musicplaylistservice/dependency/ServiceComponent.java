@@ -1,5 +1,6 @@
 package com.nashss.se.musicplaylistservice.dependency;
 
+import com.nashss.se.musicplaylistservice.activity.CompareRecipeAndInventoryActivity;
 import com.nashss.se.musicplaylistservice.activity.CreateMealPlanActivity;
 import com.nashss.se.musicplaylistservice.activity.CreatePantryActivity;
 import com.nashss.se.musicplaylistservice.activity.GetMealPlanListActivity;
@@ -96,4 +97,9 @@ public interface ServiceComponent {
      */
     GetRecipeDetailsActivity provideGetRecipeDetailsActivity();
 
+    /**
+     * Provides the relevant activity.
+     * @return CompareRecipeAndInventoryActivity
+     */
+    CompareRecipeAndInventoryActivity provideCompareRecipeAndInventoryActivity();
 }
