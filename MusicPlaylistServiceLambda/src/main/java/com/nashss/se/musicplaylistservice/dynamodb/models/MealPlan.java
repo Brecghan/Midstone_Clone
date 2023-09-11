@@ -96,4 +96,13 @@ public class MealPlan {
         return Objects.hash(mealPlanId, mealPlanName, userId, recipeSet);
     }
 
+    @Override
+    public String toString() {
+        return "MealPlan{" +
+                "mealPlanId='" + mealPlanId + '\'' +
+                ", mealPlanName='" + mealPlanName + '\'' +
+                ", userId='" + userId + '\'' +
+                ", recipeSet=" + recipeSet +
+                '}';
+    }
 }

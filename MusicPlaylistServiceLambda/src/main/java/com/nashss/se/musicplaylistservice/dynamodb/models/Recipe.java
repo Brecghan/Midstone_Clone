@@ -146,4 +146,15 @@ public class Recipe {
         return Objects.hash(recipeId, recipeName, recipeDescription, neededIngredients, region, dietaryRestrictions);
     }
 
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "recipeId='" + recipeId + '\'' +
+                ", recipeName='" + recipeName + '\'' +
+                ", recipeDescription='" + recipeDescription + '\'' +
+                ", neededIngredients=" + neededIngredients +
+                ", region='" + region + '\'' +
+                ", dietaryRestrictions=" + dietaryRestrictions +
+                '}';
+    }
 }

@@ -100,4 +100,13 @@ public class Pantry {
         return Objects.hash(pantryId, pantryName, userId, inventory);
     }
 
+    @Override
+    public String toString() {
+        return "Pantry{" +
+                "pantryId='" + pantryId + '\'' +
+                ", pantryName='" + pantryName + '\'' +
+                ", userId='" + userId + '\'' +
+                ", inventory=" + inventory +
+                '}';
+    }
 }
