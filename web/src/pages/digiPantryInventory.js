@@ -6,7 +6,7 @@ import DataStore from "../util/DataStore";
 /**
  * Logic needed for the view playlist page of the website.
  */
-class DigiPantryViewInventory extends BindingClass {
+class DigiPantryInventory extends BindingClass {
     constructor() {
         super();
         this.bindClassMethods(['clientLoaded', 'mount', 'addPantryToPage', 'addIngredientsToPage', 'addIngredient'], this);
@@ -121,7 +121,7 @@ class DigiPantryViewInventory extends BindingClass {
  * Main method to run when the page contents have loaded.
  */
 const main = async () => {
-    const viewPantry = new DigiPantryViewInventory();
+    const viewPantry = new DigiPantryInventory();
     viewPantry.mount();
 };
 

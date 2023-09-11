@@ -117,7 +117,8 @@ export default class DigiPantryClient extends BindingClass {
                     Authorization: `Bearer ${token}`
                 }
             });
-            return response.data.digitalPantry;
+
+            return response.data.pantry;
         } catch (error) {
             this.handleError(error, errorCallback)
         }

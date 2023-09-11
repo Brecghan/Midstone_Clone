@@ -42,6 +42,7 @@ class CreatePantry extends BindingClass {
         createButton.innerText = 'Loading...';
 
         const pantryName = document.getElementById('pantry-name').value;
+        console.log(pantryName);
 
 
         const pantry = await this.client.createPantry(pantryName, (error) => {
@@ -49,7 +50,10 @@ class CreatePantry extends BindingClass {
             errorMessageDisplay.innerText = `Error: ${error.message}`;
             errorMessageDisplay.classList.remove('hidden');
         });
+
         this.dataStore.set('pantry', pantry);
+
+
     }
 
     /**
@@ -57,6 +61,7 @@ class CreatePantry extends BindingClass {
      */
     redirectToViewInventory() {
         const pantry = this.dataStore.get('pantry');
+
         if (pantry != null) {
             window.location.href = `/digiPantryInventory.html?id=${pantry.pantryId}`;
         }
