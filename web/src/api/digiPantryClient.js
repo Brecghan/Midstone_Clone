@@ -15,7 +15,7 @@ export default class DigiPantryClient extends BindingClass {
     constructor(props = {}) {
         super();
 
-        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getPlaylist', 'getPlaylistSongs', 'createPantry'];
+        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getPantry', 'getPantryIngredients', 'createPantry'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();;
@@ -77,10 +77,10 @@ export default class DigiPantryClient extends BindingClass {
      * @param errorCallback (Optional) A function to execute if the call fails.
      * @returns The playlist's metadata.
      */
-    async getPlaylist(id, errorCallback) {
+    async getPantry(id, errorCallback) {
         try {
-            const response = await this.axiosClient.get(`playlists/${id}`);
-            return response.data.playlist;
+            const response = await this.axiosClient.get(`digitalPantry/${id}`);
+            return response.data.digitalPantry;
         } catch (error) {
             this.handleError(error, errorCallback)
         }
@@ -92,10 +92,10 @@ export default class DigiPantryClient extends BindingClass {
      * @param errorCallback (Optional) A function to execute if the call fails.
      * @returns The list of songs on a playlist.
      */
-    async getPlaylistSongs(id, errorCallback) {
+    async getPantryIngredients(id, errorCallback) {
         try {
-            const response = await this.axiosClient.get(`playlists/${id}/songs`);
-            return response.data.songList;
+            const response = await this.axiosClient.get(`digitalPantry/${id}/inventory`);
+            return response.data.inventory;
         } catch (error) {
             this.handleError(error, errorCallback)
         }
@@ -117,7 +117,7 @@ export default class DigiPantryClient extends BindingClass {
                     Authorization: `Bearer ${token}`
                 }
             });
-            return response.data.pantry;
+            return response.data.digitalPantry;
         } catch (error) {
             this.handleError(error, errorCallback)
         }
@@ -130,19 +130,19 @@ export default class DigiPantryClient extends BindingClass {
      * @param trackNumber The track number of the song on the album.
      * @returns The list of songs on a playlist.
      */
-    async addSongToPlaylist(id, asin, trackNumber, errorCallback) {
+    async addIngredientToPantry(ingredientName, unitOfMeasure, quantity, errorCallback) {
         try {
-            const token = await this.getTokenOrThrow("Only authenticated users can add a song to a playlist.");
-            const response = await this.axiosClient.post(`playlists/${id}/songs`, {
-                id: id,
-                asin: asin,
-                trackNumber: trackNumber
+            const token = await this.getTokenOrThrow("Only authenticated users can add an ingredient to a pantry");
+            const response = await this.axiosClient.post(`digitalPantry/${id}/inventory`, {
+                ingredientName: ingredientName,
+                unitOfMeasure: unitOfMeasure,
+                quantity: quantity
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             });
-            return response.data.songList;
+            return response.data.inventory;
         } catch (error) {
             this.handleError(error, errorCallback)
         }
@@ -158,9 +158,9 @@ export default class DigiPantryClient extends BindingClass {
             const queryParams = new URLSearchParams({ q: criteria })
             const queryString = queryParams.toString();
 
-            const response = await this.axiosClient.get(`playlists/search?${queryString}`);
+            const response = await this.axiosClient.get(`digitalPantry/search?${queryString}`);
 
-            return response.data.playlists;
+            return response.data.digitalPantry;
         } catch (error) {
             this.handleError(error, errorCallback)
         }
