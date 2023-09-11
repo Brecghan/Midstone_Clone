@@ -80,7 +80,7 @@ export default class DigiPantryClient extends BindingClass {
     async getPantry(id, errorCallback) {
         try {
             const response = await this.axiosClient.get(`digitalPantry/${id}`);
-            return response.data.digitalPantry;
+            return response.data.pantry;
         } catch (error) {
             this.handleError(error, errorCallback)
         }
@@ -117,7 +117,8 @@ export default class DigiPantryClient extends BindingClass {
                     Authorization: `Bearer ${token}`
                 }
             });
-            return response.data.digitalPantry;
+
+            return response.data.pantry;
         } catch (error) {
             this.handleError(error, errorCallback)
         }

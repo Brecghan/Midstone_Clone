@@ -6,10 +6,10 @@ import DataStore from "../util/DataStore";
 /**
  * Logic needed for the view playlist page of the website.
  */
-class digiPantryViewInventory extends BindingClass {
+class DigiPantryInventory extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['clientLoaded', 'mount', 'addPantryToPage', 'add"IngredientsToPage', 'addIngredient'], this);
+        this.bindClassMethods(['clientLoaded', 'mount', 'addPantryToPage', 'addIngredientsToPage', 'addIngredient'], this);
         this.dataStore = new DataStore();
         this.dataStore.addChangeListener(this.addPantryToPage);
         this.dataStore.addChangeListener(this.addIngredientsToPage);
@@ -27,7 +27,7 @@ class digiPantryViewInventory extends BindingClass {
         const pantry = await this.client.getPantry(pantryId);
         this.dataStore.set('pantry', pantry);
         document.getElementById('ingredients').innerText = "(loading inventory...)";
-        const ingredients = await this.client.getPantryItems(pantryId);
+        const ingredients = await this.client.getPantryIngredients(pantryId);
         this.dataStore.set('ingredients', ingredients);
     }
 
@@ -35,7 +35,7 @@ class digiPantryViewInventory extends BindingClass {
      * Add the header to the page and load the MusicPlaylistClient.
      */
     mount() {
-        document.getElementById('add-ingredient').addEventListener('click', this.addIngredient);
+        document.getElementById('add-inventory-btn').addEventListener('click', this.addIngredient);
 
         this.header.addHeaderToPage();
 
@@ -121,7 +121,7 @@ class digiPantryViewInventory extends BindingClass {
  * Main method to run when the page contents have loaded.
  */
 const main = async () => {
-    const viewPantry = new DigiPantryViewPantry();
+    const viewPantry = new DigiPantryInventory();
     viewPantry.mount();
 };
 
