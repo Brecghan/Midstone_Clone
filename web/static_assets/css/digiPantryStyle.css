@@ -52,6 +52,7 @@
     background-color: var(--secondary-color);
     margin: 20px;
     padding: 10px 20px;
+    text-align: center;
 }
 
 .error {
@@ -69,11 +70,15 @@
 
 .card-content {
     max-width: 500px;
+    text-align: center;
 }
 
 .card-content .form-field {
     display: flex;
     flex-direction: column;
+    margin: 0 auto;
+    width:250px;
+    text-align: center;
 }
 
 .tags {

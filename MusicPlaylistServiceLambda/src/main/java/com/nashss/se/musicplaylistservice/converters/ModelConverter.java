@@ -1,9 +1,13 @@
 package com.nashss.se.musicplaylistservice.converters;
 
 import com.nashss.se.musicplaylistservice.dynamodb.models.Ingredient;
+import com.nashss.se.musicplaylistservice.dynamodb.models.MealPlan;
 import com.nashss.se.musicplaylistservice.dynamodb.models.Pantry;
+import com.nashss.se.musicplaylistservice.dynamodb.models.Recipe;
 import com.nashss.se.musicplaylistservice.models.IngredientModel;
+import com.nashss.se.musicplaylistservice.models.MealPlanModel;
 import com.nashss.se.musicplaylistservice.models.PantryModel;
+import com.nashss.se.musicplaylistservice.models.RecipeModel;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -32,6 +36,45 @@ public class ModelConverter {
                 .withUserId(pantry.getUserId())
                 .withInventory(inventory)
                 .build();
+    }
+    /**
+     * Converts a provided {@link Recipe} into a {@link RecipeModel} representation.
+     *
+     * @param recipe the recipe to convert
+     * @return the converted recipe
+     */
+    public RecipeModel toRecipeModel(Recipe recipe) {
+        Set<Ingredient> neededIngredients = null;
+        if (recipe.getNeededIngredients() != null) {
+            neededIngredients = new HashSet<>(recipe.getNeededIngredients());
+        }
+        Set<String> dietaryRestrictions = null;
+        if (recipe.getDietaryRestrictions() != null) {
+            dietaryRestrictions = new HashSet<>(recipe.getDietaryRestrictions());
+        }
+
+        return RecipeModel.builder()
+                .withRecipeId(recipe.getRecipeId())
+                .withRecipeName(recipe.getRecipeName())
+                .withRecipeDescription(recipe.getRecipeDescription())
+                .withNeededIngredients(neededIngredients)
+                .withRegion(recipe.getRegion())
+                .withDietaryRestrictions(dietaryRestrictions)
+                .build();
+    }
+    /**
+     * Converts a list of Recipes to a list of RecipeModels.
+     *
+     * @param recipes The recipes to convert to RecipeModels
+     * @return The converted list of RecipeModels
+     */
+    public List<RecipeModel> toRecipeModelList(List<Recipe> recipes) {
+        List<RecipeModel> recipeModels = new ArrayList<>();
+
+        for (Recipe recipe : recipes) {
+            recipeModels.add(toRecipeModel(recipe));
+        }
+        return recipeModels;
     }
     /**
      * Converts a provided {@link Ingredient} into a {@link IngredientModel} representation.
@@ -77,5 +120,41 @@ public class ModelConverter {
         }
 
         return ingredientModels;
+    }
+
+    /**
+     * Converts a provided {@link MealPlan} into a {@link MealPlanModel} representation.
+     *
+     * @param mealPlan the mealPlan to convert
+     * @return the converted mealPlan
+     */
+    public MealPlanModel toMealPlanModel(MealPlan mealPlan) {
+        Set<String> recipeSet = null;
+        if (mealPlan.getRecipeSet() != null) {
+            recipeSet = new HashSet<>(mealPlan.getRecipeSet());
+        }
+
+        return MealPlanModel.builder()
+                .withMealPlanId(mealPlan.getMealPlanId())
+                .withMealPlanName(mealPlan.getMealPlanName())
+                .withUserId(mealPlan.getUserId())
+                .withRecipeSet(recipeSet)
+                .build();
+    }
+
+    /**
+     * Converts a list of Meal Plans to a list of MealPlanModels.
+     *
+     * @param mealPlans The Meal Plans to convert to MealPlanModels
+     * @return The converted list of MealPlanModels
+     */
+    public List<MealPlanModel> toMealPlanModelList(List<MealPlan> mealPlans) {
+        List<MealPlanModel> mealPlanModels = new ArrayList<>();
+
+        for (MealPlan mealPlan : mealPlans) {
+            mealPlanModels.add(toMealPlanModel(mealPlan));
+        }
+
+        return mealPlanModels;
     }
 }
