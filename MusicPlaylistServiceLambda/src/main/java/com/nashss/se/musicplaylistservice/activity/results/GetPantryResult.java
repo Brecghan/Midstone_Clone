@@ -2,9 +2,6 @@ package com.nashss.se.musicplaylistservice.activity.results;
 
 import com.nashss.se.musicplaylistservice.models.PantryModel;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class GetPantryResult {
     private final PantryModel pantry;
 
