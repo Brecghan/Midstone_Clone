@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script type="text/javascript" src="assets/digiPantryInventory.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/digiPantryStyle.css">
+<!--    <title>Pantry Inventory</title>-->
+</head>
+
+<body class="background">
+<header class="header" id="header"></header>
+<div class="card">
+    <h2 id="pantry-name"></h2>
+    <h3>Created by: <span id="user-id"></span></h3>
+</div>
+<div class="card">
+    <form class="inventory-fields" id="inventory-fields-form"> <!-- action="Where to send the form data">-->
+        <label for="iname">Ingredient Name</label><br>
+        <input type="text" id="iname" name="iname"><br>
+        <label for="inum">Ingredient Quantity</label><br>
+        <input type="number" id="inum" name="inum"><br>
+        <label for="measurments">Choose A Measurement:</label><br>
+        <select name="measurments" id="measurments">
+            <option value="CUP">Cup</option>
+            <option value="LBS">LBS</option>
+        </select>
+        <br><br>
+        <input href="#" type="button" id="add-inventory-btn" value="Add Inventory">
+    </form>
+</div>
+
+<div class="card">
+    <ul>
+        <li>This</li>
+        <li>Will</li>
+        <li>Be</li>
+        <li>An</li>
+        <li>Inventory</li>
+        <li>List</li>
+    </ul>
+</div>
+
+</body>
+</html>
