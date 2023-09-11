@@ -63,7 +63,7 @@ public class Ingredient {
 
     @Override
     public String toString() {
-        return "AlbumTrack{" +
+        return "Ingredient{" +
                "IngredientName='" + ingredientName + '\'' +
                ", Quantity=" + quantity +
                ", UnitOfMeasure='" + unitOfMeasure + '\'' +

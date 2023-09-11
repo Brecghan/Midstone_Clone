@@ -5,6 +5,7 @@ import com.nashss.se.musicplaylistservice.activity.CreateMealPlanActivity;
 import com.nashss.se.musicplaylistservice.activity.CreatePantryActivity;
 import com.nashss.se.musicplaylistservice.activity.GetMealPlanListActivity;
 import com.nashss.se.musicplaylistservice.activity.GetMealPlanRecipeSetActivity;
+import com.nashss.se.musicplaylistservice.activity.GetPantryActivity;
 import com.nashss.se.musicplaylistservice.activity.GetPantryInventoryActivity;
 import com.nashss.se.musicplaylistservice.activity.GetPantryListActivity;
 import com.nashss.se.musicplaylistservice.activity.GetRecipeDetailsActivity;
@@ -102,4 +103,10 @@ public interface ServiceComponent {
      * @return CompareRecipeAndInventoryActivity
      */
     CompareRecipeAndInventoryActivity provideCompareRecipeAndInventoryActivity();
+
+    /**
+     * Provides the relevant activity.
+     * @return CompareRecipeAndInventoryActivity
+     */
+    GetPantryActivity provideGetPantryActivity();
 }
