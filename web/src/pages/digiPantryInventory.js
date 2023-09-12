@@ -22,7 +22,7 @@ class DigiPantryInventory extends BindingClass {
      */
     async clientLoaded() {
         const urlParams = new URLSearchParams(window.location.search);
-        const pantryId = urlParams.get('pantryId');
+        const pantryId = urlParams.get('id');
         document.getElementById('pantry-name').innerText = "Loading Pantry ...";
         const pantry = await this.client.getPantry(pantryId);
         this.dataStore.set('pantry', pantry);
@@ -53,7 +53,7 @@ class DigiPantryInventory extends BindingClass {
             return;
         }
 
-        document.getElementById('pantry-name').innerText = pantry.name;
+        document.getElementById('pantry-name').innerText = pantry.pantryName;
         document.getElementById('user-id').innerText = pantry.userId;
 
         /*let tagHtml = '';

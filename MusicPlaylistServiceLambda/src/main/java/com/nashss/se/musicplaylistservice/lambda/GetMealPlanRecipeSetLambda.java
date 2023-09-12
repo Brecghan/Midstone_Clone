@@ -1,6 +1,7 @@
 package com.nashss.se.musicplaylistservice.lambda;
 
 import com.nashss.se.musicplaylistservice.activity.requests.GetMealPlanRecipeSetRequest;
+import com.nashss.se.musicplaylistservice.activity.requests.GetPantryRequest;
 import com.nashss.se.musicplaylistservice.activity.results.GetMealPlanRecipeSetResult;
 
 import com.amazonaws.services.lambda.runtime.Context;
@@ -15,7 +16,10 @@ public class GetMealPlanRecipeSetLambda
                                         Context context) {
         return super.runActivity(
             () -> {
-                GetMealPlanRecipeSetRequest unauthenticatedRequest = input.fromBody(GetMealPlanRecipeSetRequest.class);
+                GetMealPlanRecipeSetRequest unauthenticatedRequest = input.fromPath(path ->
+                        GetMealPlanRecipeSetRequest.builder()
+                                .withMealPlanId(path.get("mealPlanId"))
+                                .build());
                 return input.fromUserClaims(claims ->
                         GetMealPlanRecipeSetRequest.builder()
                                 .withMealPlanId(unauthenticatedRequest.getMealPlanId())
