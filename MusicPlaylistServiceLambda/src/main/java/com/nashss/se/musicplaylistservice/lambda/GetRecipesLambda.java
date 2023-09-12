@@ -19,10 +19,9 @@ public class GetRecipesLambda
         log.info("handleRequest");
         return super.runActivity(
             () -> {
-                GetRecipesRequest unauthenticatedRequest = input.fromBody(GetRecipesRequest.class);
-                return input.fromUserClaims(claims ->
+                return input.fromPath(path ->
                         GetRecipesRequest.builder()
-                                .withRecipeRegion(unauthenticatedRequest.getRecipeRegion())
+                                .withRecipeRegion(path.get("recipeRegion"))
                                 .build());
             },
             (request, serviceComponent) ->
