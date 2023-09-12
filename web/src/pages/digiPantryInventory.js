@@ -84,7 +84,7 @@ class DigiPantryInventory extends BindingClass {
                 </li>
             `;
         }
-        document.getElementById('ingredients').innerHTML = itemHtml;
+        document.getElementById('ingredients').innerHTML = ingredientHtml;
     }
 
     /**
