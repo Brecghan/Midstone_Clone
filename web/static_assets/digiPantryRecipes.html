@@ -1,43 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <script type="text/javascript" src="assets/digiPantryRecipes.js"></script>
     <link rel="stylesheet" type="text/css" href="css/digiPantryStyle.css">
 </head>
+
 <body class="background">
 <header class="header" id="header"></header>
 <div class="card">
     <h2>Recipes</h2>
-    <form class="card-content" id="get-recipes-form">
-        <p class="hidden error" id="error-message"> </p>
-        <p> This page lets you search for a recipe by region and returns the recipe.</p>
 
-        <p class="form-field">
-            <label>Recipe Id</label>
-            <input type="text" required class="validated-field" id="pantry-name" placeholder="recipeId"
-                   autofocus>
-        </p>
-
-        <p>
-            <a href="#" class="button" id="create">Search Recipes</a>
-        </p>
-
-        <p class="form-field">
-            <label>Region</label>
-            <input type="text" required class="validated-field" id="pantry-name" placeholder="region"
-                   autofocus>
-        </p>
-
-        <p>
-            <a href="#" class="button" id="create">Search Regions</a>
-        </p>
+    <p> This page allows you select a recipe by region.</p>
 
 
 
-
-
+    <form action="#">
+        <label for="recipes"><h3>Recipes</h3></label>
+        <select name="recipes" id="recipes" size="4">
+            <option value="recipe1">Recipe 1</option>
+            <option value="recipe2">Recipe 2</option>
+            <option value="recipe3">Recipe 3</option>
+            <option value="recipe4">Recipe 4</option>
+        </select><br><br>
+        <input type="submit" class="button" id="view-recipe-btn" value="View Recipe" />
     </form>
+
+
+
+
+
+
+    <form action="#">
+        <label for="regions"><h3>Regions</h3></label>
+        <select name="regions" id="regions" size="4">
+            <option value="region1">Region 1</option>
+            <option value="region2">Region 2</option>
+            <option value="region3">Region 3</option>
+            <option value="region4">Region 4</option>
+        </select><br><br>
+        <input type="submit" class="button" id="view-region-btn" value="View Region" />
+    </form>
+
 
 
 </div>
