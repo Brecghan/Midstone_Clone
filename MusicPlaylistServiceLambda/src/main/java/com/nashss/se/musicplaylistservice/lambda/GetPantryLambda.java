@@ -19,7 +19,10 @@ public class GetPantryLambda
         log.info("handleRequest");
         return super.runActivity(
             () -> {
-                GetPantryRequest unauthenticatedRequest = input.fromBody(GetPantryRequest.class);
+                GetPantryRequest unauthenticatedRequest = input.fromPath(path ->
+                        GetPantryRequest.builder()
+                                .withPantryId(path.get("pantryId"))
+                                .build());
                 return input.fromUserClaims(claims ->
                         GetPantryRequest.builder()
                                 .withPantryId(unauthenticatedRequest.getPantryId())

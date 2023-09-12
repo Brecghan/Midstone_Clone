@@ -14,10 +14,9 @@ public class GetRecipeDetailsLambda
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<GetRecipeDetailsRequest> input, Context context) {
         return super.runActivity(
             () -> {
-                GetRecipeDetailsRequest unauthenticatedRequest = input.fromBody(GetRecipeDetailsRequest.class);
-                return input.fromUserClaims(claims ->
+                return input.fromPath(path ->
                         GetRecipeDetailsRequest.builder()
-                                .withRecipeId(unauthenticatedRequest.getRecipeId())
+                                .withRecipeId(path.get("recipeId"))
                                 .build());
             },
             (request, serviceComponent) ->

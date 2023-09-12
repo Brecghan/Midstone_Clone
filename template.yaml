@@ -289,8 +289,6 @@ Resources:
           Properties:
             Path: /digitalPantry
             Method: get
-            Auth:
-              Authorizer: 'NONE'
 
   GetPantryLambda:
     Type: AWS::Serverless::Function
@@ -311,8 +309,6 @@ Resources:
           Properties:
             Path: /digitalPantry/{pantryId}
             Method: get
-            Auth:
-              Authorizer: 'NONE'
 
   GetMealPlanListLambda:
     Type: AWS::Serverless::Function
@@ -333,8 +329,6 @@ Resources:
           Properties:
             Path: /mealPlan
             Method: get
-            Auth:
-              Authorizer: 'NONE'
 
   GetRecipesLambda:
     Type: AWS::Serverless::Function
@@ -355,8 +349,6 @@ Resources:
           Properties:
             Path: /recipes
             Method: get
-            Auth:
-              Authorizer: 'NONE'
 
   GetRecipeDetailsLambda:
     Type: AWS::Serverless::Function
@@ -377,8 +369,6 @@ Resources:
           Properties:
             Path: /recipes/{recipeId}
             Method: get
-            Auth:
-              Authorizer: 'NONE'
 
   CompareRecipeAndInventoryLambda:
     Type: AWS::Serverless::Function
@@ -399,8 +389,7 @@ Resources:
           Properties:
             Path: /compare
             Method: get
-            Auth:
-              Authorizer: 'NONE'
+
 
 #  GetPlaylistSongsLambda:
 #    Type: AWS::Serverless::Function
