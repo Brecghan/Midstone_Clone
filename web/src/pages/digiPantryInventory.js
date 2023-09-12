@@ -43,6 +43,7 @@ class DigiPantryInventory extends BindingClass {
         this.clientLoaded();
     }
 
+
     /**
      * When the playlist is updated in the datastore, update the playlist metadata on the page.
      */
