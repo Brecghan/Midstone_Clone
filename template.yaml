@@ -347,7 +347,7 @@ Resources:
         MusicPlaylistService:
           Type: Api
           Properties:
-            Path: /recipes
+            Path: /recipes/{recipeRegion}
             Method: get
 
   GetRecipeDetailsLambda:

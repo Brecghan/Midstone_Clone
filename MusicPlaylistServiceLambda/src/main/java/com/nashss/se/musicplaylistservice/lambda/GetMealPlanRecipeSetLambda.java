@@ -1,7 +1,6 @@
 package com.nashss.se.musicplaylistservice.lambda;
 
 import com.nashss.se.musicplaylistservice.activity.requests.GetMealPlanRecipeSetRequest;
-import com.nashss.se.musicplaylistservice.activity.requests.GetPantryRequest;
 import com.nashss.se.musicplaylistservice.activity.results.GetMealPlanRecipeSetResult;
 
 import com.amazonaws.services.lambda.runtime.Context;
