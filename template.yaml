@@ -367,7 +367,7 @@ Resources:
         MusicPlaylistService:
           Type: Api
           Properties:
-            Path: /recipes/{recipeId}
+            Path: /recipe/{recipeId}
             Method: get
 
   CompareRecipeAndInventoryLambda:
