@@ -47,7 +47,7 @@ class DigiPantryHome extends BindingClass {
         document.getElementById('create-btn').addEventListener('click', this.search);
         document.getElementById('recipes-btn').addEventListener('click', this.search);
         document.getElementById('meal-plan-btn').addEventListener('click', this.search);
-        document.getElementById('inventory-btn').addEventListener('click', this.search);
+
 
         this.header.addHeaderToPage();
 
