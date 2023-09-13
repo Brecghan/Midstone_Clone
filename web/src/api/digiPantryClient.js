@@ -15,7 +15,8 @@ export default class DigiPantryClient extends BindingClass {
     constructor(props = {}) {
         super();
 
-        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getPantry', 'getPantryIngredients', 'createPantry', 'getPantryList', 'getUserName'];
+        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getPantry', 'getPantryIngredients',
+            'createPantry', 'getPantryList', 'getUserName', 'getRecipes', 'getRecipeRegions'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();;
@@ -100,12 +101,33 @@ export default class DigiPantryClient extends BindingClass {
                   headers: {
                       Authorization: `Bearer ${token}`
                   }
-              });
+            });
             return response.data.pantry;
         } catch (error) {
             this.handleError(error, errorCallback)
         }
     }
+
+    async getRecipes(region) {
+        try {
+            const token = await this.getTokenOrThrow("Only authenticated users can get pantries.");
+            const response = await this.axiosClient.get(`recipes/${region}`, {
+                 headers: {
+                     Authorization: `Bearer ${token}`
+                 }
+            });
+            return response.data.recipes;
+        } catch (error) {
+            this.handleError(error)
+        }
+    }
+
+    async getRecipeRegions(recipes) {
+                const regions = new Set();
+                recipes.forEach(recipes =>
+                    regions.add(recipes.region));
+                return regions;
+        }
 
         /**
          * Gets the playlist for the given ID.

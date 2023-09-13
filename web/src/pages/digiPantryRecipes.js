@@ -9,7 +9,8 @@ import DataStore from "../util/DataStore";
  class DigiPantryRecipes extends BindingClass {
      constructor() {
          super();
-         this.bindClassMethods(['clientLoaded', 'mount', 'addRecipesToPage', 'redirectToRecipeViewer', 'selectRecipeRegion', 'updateRecipeView'], this);
+         this.bindClassMethods(['clientLoaded', 'mount', 'addRecipesToPage', 'redirectToRecipeViewer',
+            'selectRecipeRegion', 'updateRecipeView'], this);
          this.dataStore = new DataStore();
          this.dataStore.addChangeListener(this.addRecipesToPage);
          this.dataStore.addChangeListener(this.redirectToRecipeViewer);
@@ -30,16 +31,16 @@ import DataStore from "../util/DataStore";
         const recipes = await this.client.getRecipes(null);
         this.dataStore.set('recipes', recipes);
         document.getElementById('region').innerText = "(loading region...)";
-//        const songs = await this.client.getPlaylistSongs(recipeId);
-//        this.dataStore.set('songs', songs);
+        const regions = await this.client.getRecipeRegions(recipes);
+        this.dataStore.set('regions', regions);
 
-//    }
+}
 
 /**
  * Add the header to the page and load the DigiPantryClient.
      */
     mount() {
-        document.getElementById('recipeRegions').addEventListener('click', this.submit);
+        document.getElementById('regionsSelect').addEventListener('click', this.submit);
         document.getElementById('recipesSelect').addEventListener('click', this.submit);
 
         this.header.addHeaderToPage();
@@ -112,7 +113,7 @@ import DataStore from "../util/DataStore";
                      ));
         }
 
-   updateRecipeView() {
+   async updateRecipeView() {
            const region = this.dataStore.get('region');
                    console.log("are the regions here? " + regions);
            const recipes = await this.client.getRecipes(region);
@@ -152,6 +153,7 @@ async submit(evt) {
          this.dataStore.set('region', region);
         }
     }
+}
 
 /**
  * Main method to run when the page contents have loaded.
