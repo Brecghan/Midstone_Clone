@@ -1,0 +1,40 @@
+{
+  "Recipes": [
+    {
+      "PutRequest": {
+        "Item": {
+          "recipeId": { "S": "0001" },
+          "recipeName": { "S": "Long Island Iced Tea" },
+          "recipeDescription": { "S": "The drunken uncle of regular iced tea" },
+          "neededIngredients": { "S": "[{\"ingredientName\":\"Vodka\",\"quantity\":1.0,\"unitOfMeasure\":\"SHOT\"},{\"ingredientName\":\"Rum\",\"quantity\":1.0,\"unitOfMeasure\":\"SHOT\"},{\"ingredientName\":\"Gin\",\"quantity\":1.0,\"unitOfMeasure\":\"SHOT\"},{\"ingredientName\":\"Tequila\",\"quantity\":1.0,\"unitOfMeasure\":\"SHOT\"},{\"ingredientName\":\"Triple Sec\",\"quantity\":1.0,\"unitOfMeasure\":\"SHOT\"},{\"ingredientName\":\"Sweet & Sour Mix\",\"quantity\":2.0,\"unitOfMeasure\":\"SHOT\"},{\"ingredientName\":\"Cola\",\"quantity\":2.0,\"unitOfMeasure\":\"SHOT\"}]" },
+          "region": { "S": "Bar" },
+          "dietaryRestrictions": { "SS": [ "Gluten-Free", "Vegetarian", "Vegan" ] }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "recipeId": { "S": "0002" },
+          "recipeName": { "S": "Manhattan" },
+          "recipeDescription": { "S": "How the people living in its namesake deal with their day-to-day" },
+          "neededIngredients": { "S": "[{\"ingredientName\":\"Sweet Vermouth\",\"quantity\":1.0,\"unitOfMeasure\":\"SHOT\"},{\"ingredientName\":\"Whiskey\",\"quantity\":4.0,\"unitOfMeasure\":\"SHOT\"},{\"ingredientName\":\"Marashino Cherry\",\"quantity\":1.0,\"unitOfMeasure\":\"EACH\"},{\"ingredientName\":\"Bitters\",\"quantity\":0.1,\"unitOfMeasure\":\"SHOT\"}]" },
+          "region": { "S": "Bar" },
+          "dietaryRestrictions": { "SS": [ "Gluten-Free", "Vegetarian", "Vegan" ] }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "recipeId": { "S": "0003" },
+          "recipeName": { "S": "Velveeta Chip Dip" },
+          "recipeDescription": { "S": "Classic chip dip, " },
+          "neededIngredients": { "S": "[{\"ingredientName\":\"Velveeta Cheese\",\"quantity\":2.0,\"unitOfMeasure\":\"LBS\"},{\"ingredientName\":\"Beef\",\"quantity\":1.0,\"unitOfMeasure\":\"LBS\"},{\"ingredientName\":\"Rotel (Strained)\",\"quantity\":1.5,\"unitOfMeasure\":\"CUP\"},{\"ingredientName\":\"Sour Cream\",\"quantity\":1.0,\"unitOfMeasure\":\"CUP\"}]" },
+          "region": { "S": "TexMex" },
+          "dietaryRestrictions": { "SS": [ "Gluten-Free" ] }
+        }
+      }
+    }
+  ]
+}
