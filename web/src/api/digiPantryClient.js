@@ -186,7 +186,7 @@ export default class DigiPantryClient extends BindingClass {
             const response = await this.axiosClient.put(`digitalPantry/${pantryId}/inventory`, {
                 pantryId: pantryId,
                 ingredientName: ingredientName,
-                ingredientQuantity: ingredientQuantity.toFixed,
+                ingredientQuantity: ingredientQuantity,
                 unitOfMeasure: unitOfMeasure
             }, {
                 headers: {

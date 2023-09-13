@@ -80,6 +80,7 @@ class DigiPantryInventory extends BindingClass {
             ingredientHtml += `
                 <li class="ingredient">
                     <span class="ingredientName">${ingredient.ingredientName}</span>
+                    <span class="ingredientQuantity">${ingredient.quantity}</span>
                     <span class="unitOfMeasure">${ingredient.unitOfMeasure}</span>
                 </li>
             `;
@@ -105,8 +106,6 @@ class DigiPantryInventory extends BindingClass {
         document.getElementById('add-inventory-btn').innerText = 'Adding...';
         const ingredientName = document.getElementById('iname').value;
         const ingredientMeasurement = document.getElementById('measurements').value;
-//        /*const e = document.getElementById("measurements");
-//        const ingredientMeasurement = e.options[e.selectedIndex].text;*/
         const ingredientNumber = document.getElementById('inum').value;
         const pantryId = pantry.pantryId;
 
