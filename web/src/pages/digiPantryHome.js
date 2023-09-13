@@ -29,7 +29,7 @@ class DigiPantryHome extends BindingClass {
     constructor() {
         super();
 
-        this.bindClassMethods(['mount', 'displaySearchResults', 'getHTMLForSearchResults'], this);
+        this.bindClassMethods(['mount', 'clientLoaded', 'displaySearchResults', 'getHTMLForSearchResults'], this);
 
         // Create a enw datastore with an initial "empty" state.
         this.dataStore = new DataStore(EMPTY_DATASTORE_STATE);
@@ -44,44 +44,28 @@ class DigiPantryHome extends BindingClass {
     mount() {
         // Wire up the form's 'submit' event and the button's 'click' event to the search method.
         // document.getElementById('create-digital-pantry-form').addEventListener('submit', this.search);
+
         document.getElementById('create-btn').addEventListener('click', this.search);
         document.getElementById('recipes-btn').addEventListener('click', this.search);
         document.getElementById('meal-plan-btn').addEventListener('click', this.search);
         document.getElementById('inventory-btn').addEventListener('click', this.search);
 
         this.header.addHeaderToPage();
-
         this.client = new DigiPantryClient();
+
+        this.clientLoaded();
     }
 
-    /**
-     * Uses the client to perform the search,
-     * then updates the datastore with the criteria and results.
-     * @param evt The "event" object representing the user-initiated event that triggered this method.
-     */
-    /*async search(evt) {
-        // Prevent submitting the form from reloading the page.
-        evt.preventDefault();
+    async clientLoaded() {
+        const userName = await this.client.getUserName();
 
-        const searchCriteria = document.getElementById('search-criteria').value;
-        const previousSearchCriteria = this.dataStore.get(SEARCH_CRITERIA_KEY);
-
-        // If the user didn't change the search criteria, do nothing
-        if (previousSearchCriteria === searchCriteria) {
-            return;
-        }
-
-        if (searchCriteria) {
-            const results = await this.client.search(searchCriteria);
-
-            this.dataStore.setState({
-                [SEARCH_CRITERIA_KEY]: searchCriteria,
-                [SEARCH_RESULTS_KEY]: results,
-            });
+        if (userName == undefined){
+            document.getElementById("home-page").innerText = 'Welcome! Please sign in before continuing.';
         } else {
-            this.dataStore.setState(EMPTY_DATASTORE_STATE);
+            document.getElementById("home-page").innerText = 'Welcome, ' + userName + '!';
         }
-    }*/
+
+    }
 
     /**
      * Pulls search results from the datastore and displays them on the html page.
@@ -103,6 +87,8 @@ class DigiPantryHome extends BindingClass {
             searchCriteriaDisplay.innerHTML = `"${searchCriteria}"`;
             searchResultsDisplay.innerHTML = this.getHTMLForSearchResults(searchResults);
         }
+
+
     }
 
     /**
