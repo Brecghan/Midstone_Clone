@@ -15,7 +15,7 @@ export default class DigiPantryClient extends BindingClass {
     constructor(props = {}) {
         super();
 
-        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getPantry', 'getPantryIngredients', 'createPantry', 'getPantryList', 'getUserName', 'addIngredientToPantry'];
+        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getPantry', 'getPantryIngredients', 'createPantry', 'getPantryList', 'getUserName', 'addIngredientToPantry', 'changePantryName'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();;
@@ -171,6 +171,24 @@ export default class DigiPantryClient extends BindingClass {
         }
     }
 
+    async changePantryName(pantryId, newPantryName, errorCallback) {
+        try {
+            const token = await this.getTokenOrThrow("Only authenticated users can change pantry names.");
+            const response = await this.axiosClient.put(`digitalPantry/${pantryId}`, {
+                pantryName: newPantryName,
+                pantryId: pantryId
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+
+            return response.data.pantry;
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+    }
+
     /**
      * Add a song to a playlist.
      * @param id The id of the playlist to add a song to.
@@ -186,7 +204,7 @@ export default class DigiPantryClient extends BindingClass {
             const response = await this.axiosClient.put(`digitalPantry/${pantryId}/inventory`, {
                 pantryId: pantryId,
                 ingredientName: ingredientName,
-                ingredientQuantity: ingredientQuantity.toFixed,
+                ingredientQuantity: ingredientQuantity,
                 unitOfMeasure: unitOfMeasure
             }, {
                 headers: {

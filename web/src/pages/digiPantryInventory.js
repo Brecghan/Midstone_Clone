@@ -9,7 +9,7 @@ import DataStore from "../util/DataStore";
 class DigiPantryInventory extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['clientLoaded', 'mount', 'addPantryToPage', 'addIngredientsToPage', 'addIngredient'], this);
+        this.bindClassMethods(['clientLoaded', 'mount', 'addPantryToPage', 'addIngredientsToPage', 'addIngredient', 'changePantryName'], this);
         this.dataStore = new DataStore();
         this.dataStore.addChangeListener(this.addPantryToPage);
         this.dataStore.addChangeListener(this.addIngredientsToPage);
@@ -29,6 +29,8 @@ class DigiPantryInventory extends BindingClass {
         document.getElementById('ingredients').innerText = "(loading inventory...)";
         const ingredients = await this.client.getPantryIngredients(pantryId);
         this.dataStore.set('ingredients', ingredients);
+        const userName = await this.client.getUserName();
+        document.getElementById('user-id').innerText = "Created By: " + userName;
     }
 
     /**
@@ -36,9 +38,8 @@ class DigiPantryInventory extends BindingClass {
      */
     mount() {
         document.getElementById('add-inventory-btn').addEventListener('click', this.addIngredient);
-
+        document.getElementById('new-name-button').addEventListener('click', this.changePantryName);
         this.header.addHeaderToPage();
-
         this.client = new DigiPantryClient();
         this.clientLoaded();
     }
@@ -52,16 +53,7 @@ class DigiPantryInventory extends BindingClass {
         if (pantry == null) {
             return;
         }
-
         document.getElementById('pantry-name').innerText = pantry.pantryName;
-        document.getElementById('user-id').innerText = pantry.userId;
-
-        /*let tagHtml = '';
-        let tag;
-        for (tag of playlist.tags) {
-            tagHtml += '<div class="tag">' + tag + '</div>';
-        }
-        document.getElementById('tags').innerHTML = tagHtml;*/
     }
 
     /**
@@ -69,22 +61,49 @@ class DigiPantryInventory extends BindingClass {
      */
     addIngredientsToPage() {
         const ingredients = this.dataStore.get('ingredients')
-
         if (ingredients == null) {
             return;
         }
-
         let ingredientHtml = '';
         let ingredient;
         for (ingredient of ingredients) {
             ingredientHtml += `
                 <li class="ingredient">
                     <span class="ingredientName">${ingredient.ingredientName}</span>
+                    <span class="ingredientQuantity">${ingredient.quantity}</span>
                     <span class="unitOfMeasure">${ingredient.unitOfMeasure}</span>
                 </li>
             `;
         }
         document.getElementById('ingredients').innerHTML = ingredientHtml;
+    }
+
+    async changePantryName() {
+
+        const pantry = this.dataStore.get('pantry');
+        if (pantry == null) {
+            return;
+        }
+
+        const pantryId = pantry.pantryId;
+        const newPantryName = document.getElementById('new-pantry-name').value;
+
+        const errorMessageDisplay = document.getElementById('error-message');
+        errorMessageDisplay.innerText = ``;
+        errorMessageDisplay.classList.add('hidden');
+
+
+        const ingredientList = await this.client.changePantryName(pantryId, newPantryName, (error) => {
+            errorMessageDisplay.innerText = `Error: ${error.message}`;
+            errorMessageDisplay.classList.remove('hidden');
+        });
+
+        document.getElementById('new-name-button').innerText = 'Submit';
+        document.getElementById("pantryName-field-form").reset();
+        location.reload();
+
+
+
     }
 
     /**
@@ -105,8 +124,6 @@ class DigiPantryInventory extends BindingClass {
         document.getElementById('add-inventory-btn').innerText = 'Adding...';
         const ingredientName = document.getElementById('iname').value;
         const ingredientMeasurement = document.getElementById('measurements').value;
-//        /*const e = document.getElementById("measurements");
-//        const ingredientMeasurement = e.options[e.selectedIndex].text;*/
         const ingredientNumber = document.getElementById('inum').value;
         const pantryId = pantry.pantryId;
 
@@ -119,6 +136,7 @@ class DigiPantryInventory extends BindingClass {
 
         document.getElementById('add-inventory-btn').innerText = 'Add Ingredient';
         document.getElementById("inventory-fields-form").reset();
+        location.reload();
     }
 }
 
