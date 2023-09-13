@@ -15,13 +15,14 @@
 </div>
 <div class="card">
     <form class="inventory-fields" id="inventory-fields-form"> <!-- action="Where to send the form data">-->
+        <p class="hidden error" id="error-message"> </p>
         <label for="iname">Ingredient Name</label><br>
         <input type="text" id="iname" name="iname"><br>
         <label for="inum">Ingredient Quantity</label><br>
         <input type="number" id="inum" name="inum"><br>
-        <label for="measurments">Choose A Measurement:</label><br>
-        <select name="measurments" id="measurments">
-            <option value="CUP">Cup</option>
+        <label for="measurements">Choose A Measurement:</label><br>
+        <select name="measurements" id="measurements">
+            <option value="CUP" selected="selected">CUP</option>
             <option value="LBS">LBS</option>
         </select>
         <br><br>
