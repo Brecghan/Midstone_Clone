@@ -15,7 +15,7 @@ export default class DigiPantryClient extends BindingClass {
     constructor(props = {}) {
         super();
 
-        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getPantry', 'getPantryIngredients', 'createPantry'];
+        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getPantry', 'getPantryIngredients', 'createPantry', 'getPantryList', 'getUserName'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();;
@@ -49,6 +49,22 @@ export default class DigiPantryClient extends BindingClass {
             }
 
             return await this.authenticator.getCurrentUserInfo();
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+    }
+
+    async getUserName(errorCallback) {
+        try {
+            const isLoggedIn = await this.authenticator.isUserLoggedIn();
+
+            if (!isLoggedIn) {
+                return undefined;
+            }
+
+            const userName = await this.authenticator.getCurrentUserName();
+            console.log(userName);
+            return userName;
         } catch (error) {
             this.handleError(error, errorCallback)
         }
@@ -90,6 +106,27 @@ export default class DigiPantryClient extends BindingClass {
             this.handleError(error, errorCallback)
         }
     }
+
+        /**
+         * Gets the playlist for the given ID.
+         * @param id Unique identifier for a playlist
+         * @param errorCallback (Optional) A function to execute if the call fails.
+         * @returns The playlist's metadata.
+         */
+        async getPantryList() {
+            try {
+                const token = await this.getTokenOrThrow("Only authenticated users can get pantries.");
+                console.log("token loaded");
+                const response = await this.axiosClient.get(`digitalPantry`, {
+                      headers: {
+                          Authorization: `Bearer ${token}`
+                      }
+                  });
+                return response.data.pantries;
+            } catch (error) {
+                this.handleError(error, errorCallback)
+            }
+        }
 
     /**
      * Get the songs on a given playlist by the playlist's identifier.
