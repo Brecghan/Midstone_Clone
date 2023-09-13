@@ -13,9 +13,9 @@ import DataStore from "../util/DataStore";
             'selectRecipeRegion', 'updateRecipeView'], this);
          this.dataStore = new DataStore();
          this.dataStore.addChangeListener(this.addRecipesToPage);
-         this.dataStore.addChangeListener(this.redirectToRecipeViewer);
+//         this.dataStore.addChangeListener(this.redirectToRecipeViewer);
          this.dataStore.addChangeListener(this.selectRecipeRegion);
-         this.dataStore.addChangeListener(this.updateRecipeView);
+//         this.dataStore.addChangeListener(this.updateRecipeView);
          this.header = new Header(this.dataStore);
          console.log("viewRecipes constructor");
      }
@@ -28,20 +28,23 @@ import DataStore from "../util/DataStore";
 //        const urlParams = new URLSearchParams(window.location.search);
 //        const recipeId = urlParams.get('recipeId');
         document.getElementById('recipesSelect').innerText = "Loading Recipe ...";
-        const recipes = await this.client.getRecipes(null);
-        this.dataStore.set('recipes', recipes);
-        document.getElementById('region').innerText = "(loading region...)";
+        const recipes = await this.client.getRecipes("ALL");
         const regions = await this.client.getRecipeRegions(recipes);
         this.dataStore.set('regions', regions);
-
+        for (const region of regions) {
+        console.log(region);
+        }
+        console.log("Show me the regions" + regions)
+        this.dataStore.set('recipes', recipes);
+        document.getElementById('regionsSelect').innerText = "(loading region...)";
 }
 
 /**
  * Add the header to the page and load the DigiPantryClient.
      */
     mount() {
-        document.getElementById('regionsSelect').addEventListener('click', this.submit);
-        document.getElementById('recipesSelect').addEventListener('click', this.submit);
+        document.getElementById('regionsSelect').addEventListener('click', this.updateRecipeView);
+        document.getElementById('recipesSelect').addEventListener('click', this.redirectToRecipeViewer);
 
         this.header.addHeaderToPage();
 
@@ -59,7 +62,7 @@ import DataStore from "../util/DataStore";
                }
 
                document.getElementById("recipesSelect").size = recipes.length;
-               let optionList = document.getElementById('pantriesSelect').options;
+               let optionList = document.getElementById('recipesSelect').options;
                let options = [
                  {
                    text: 'Option 1',
@@ -84,12 +87,12 @@ import DataStore from "../util/DataStore";
 
     selectRecipeRegion() {
            const regions = this.dataStore.get('regions');
-                   console.log("are the regions here? " + regions);
+                   console.log("Regions in selectRecipeRegion" + regions);
                    if (regions == null) {
                        return;
                    }
 
-                   document.getElementById("regionsSelect").size = regions.length;
+//                   document.getElementById("regionsSelect").size = regions.size;
                    let optionList = document.getElementById('regionsSelect').options;
                    let options = [
                      {
@@ -107,15 +110,18 @@ import DataStore from "../util/DataStore";
                      }
                    ];
 
-                   regions.forEach(region =>
-                     optionList.add(
-                       new Option(region, region)
-                     ));
+                   for (const region of regions) {
+                   optionList.add(new Option (new String(region), new String(region)))
+                   };
+//                   regions.forEach(regions =>
+//                     optionList.add(
+//                       new Option(new String(regions), regions)
+//                     ));
         }
 
    async updateRecipeView() {
-           const region = this.dataStore.get('region');
-                   console.log("are the regions here? " + regions);
+           const region = document.getElementById('regionsSelect').value;
+           console.log("Region in updateReviewView: " + region);
            const recipes = await this.client.getRecipes(region);
            this.dataStore.set('recipes', recipes);
 
@@ -126,7 +132,7 @@ import DataStore from "../util/DataStore";
      * When the recipe is updated in the datastore, redirect to the view recipe page.
      */
     redirectToRecipeViewer() {
-        const recipeId = this.dataStore.get('recipeId');
+        const recipeId = document.getElementById('recipesSelect').value;
 
         if (recipeId != null) {
             window.location.href = `/digiPantryRecipeViewer.html?id=${recipeId}`;
@@ -142,16 +148,16 @@ async submit(evt) {
         errorMessageDisplay.innerText = ``;
         errorMessageDisplay.classList.add('hidden');
 
-        const region = document.getElementById('regionsSelect').value;
-        console.log("selected region: " + region);
+//        const region = document.getElementById('regionsSelect').value;
+//        console.log("selected region: " + region);
         const recipeId = document.getElementById('recipesSelect').value;
-        console.log("selected recipe: " + recipeId);
+        console.log("selected recipeID: " + recipeId);
 
-        if (recipeId != null) {
+//        if (recipeId != null) {
             this.dataStore.set('recipeId', recipeId);
-        } else {
-         this.dataStore.set('region', region);
-        }
+//        } else {
+//         this.dataStore.set('region', region);
+//        }
     }
 }
 

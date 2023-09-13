@@ -125,8 +125,9 @@ export default class DigiPantryClient extends BindingClass {
 
     async getRecipeRegions(recipes) {
                 const regions = new Set();
-                recipes.forEach(recipes =>
-                    regions.add(recipes.region));
+                for (const recipe of recipes){
+                regions.add(recipe.region);
+                }
                 return regions;
         }
 

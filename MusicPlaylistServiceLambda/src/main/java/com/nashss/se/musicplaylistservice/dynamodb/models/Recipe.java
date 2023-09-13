@@ -53,7 +53,7 @@ public class Recipe {
         this.recipeDescription = recipeDescription;
     }
 
-    @DynamoDBIndexHashKey(globalSecondaryIndexNames = RECIPE_REGION_INDEX, attributeName = "region")
+    @DynamoDBIndexHashKey(globalSecondaryIndexNames = RECIPE_REGION_INDEX, attributeName = "recipeRegion")
     public String getRegion() {
         return region;
     }
