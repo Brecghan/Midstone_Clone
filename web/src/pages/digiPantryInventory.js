@@ -98,23 +98,27 @@ class DigiPantryInventory extends BindingClass {
         errorMessageDisplay.classList.add('hidden');
 
         const pantry = this.dataStore.get('pantry');
-        if (playlist == null) {
+        if (pantry == null) {
             return;
         }
 
-        document.getElementById('add-ingredient').innerText = 'Adding...';
-        const ingredientNumber = document.getElementById('ingredient-number').value;
+        document.getElementById('add-inventory-btn').innerText = 'Adding...';
+        const ingredientName = document.getElementById('iname').value;
+        const ingredientMeasurement = document.getElementById('measurements').value;
+//        /*const e = document.getElementById("measurements");
+//        const ingredientMeasurement = e.options[e.selectedIndex].text;*/
+        const ingredientNumber = document.getElementById('inum').value;
         const pantryId = pantry.pantryId;
 
-        const ingredientList = await this.client.addItemToPantry(pantryId, ingredientNumber, (error) => {
+        const ingredientList = await this.client.addIngredientToPantry(pantryId, ingredientName, ingredientNumber, ingredientMeasurement, (error) => {
             errorMessageDisplay.innerText = `Error: ${error.message}`;
             errorMessageDisplay.classList.remove('hidden');
         });
 
         this.dataStore.set('ingredients', ingredientList);
 
-        document.getElementById('add-ingredient').innerText = 'Add Ingredient';
-        document.getElementById("add-ingredient-form").reset();
+        document.getElementById('add-inventory-btn').innerText = 'Add Ingredient';
+        document.getElementById("inventory-fields-form").reset();
     }
 }
 

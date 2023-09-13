@@ -15,7 +15,7 @@ export default class DigiPantryClient extends BindingClass {
     constructor(props = {}) {
         super();
 
-        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getPantry', 'getPantryIngredients', 'createPantry', 'getPantryList', 'getUserName'];
+        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getPantry', 'getPantryIngredients', 'createPantry', 'getPantryList', 'getUserName', 'addIngredientToPantry'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();;
@@ -178,18 +178,22 @@ export default class DigiPantryClient extends BindingClass {
      * @param trackNumber The track number of the song on the album.
      * @returns The list of songs on a playlist.
      */
-    async addIngredientToPantry(ingredientName, unitOfMeasure, quantity, errorCallback) {
+    async addIngredientToPantry(pantryId, ingredientName, ingredientQuantity, unitOfMeasure, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can add an ingredient to a pantry");
-            const response = await this.axiosClient.post(`digitalPantry/${id}/inventory`, {
+            console.log(unitOfMeasure);
+            console.log(ingredientQuantity);
+            const response = await this.axiosClient.put(`digitalPantry/${pantryId}/inventory`, {
+                pantryId: pantryId,
                 ingredientName: ingredientName,
-                unitOfMeasure: unitOfMeasure,
-                quantity: quantity
+                ingredientQuantity: ingredientQuantity.toFixed,
+                unitOfMeasure: unitOfMeasure
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             });
+            console.log(response);
             return response.data.inventory;
         } catch (error) {
             this.handleError(error, errorCallback)
