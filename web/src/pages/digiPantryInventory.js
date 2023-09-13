@@ -29,6 +29,8 @@ class DigiPantryInventory extends BindingClass {
         document.getElementById('ingredients').innerText = "(loading inventory...)";
         const ingredients = await this.client.getPantryIngredients(pantryId);
         this.dataStore.set('ingredients', ingredients);
+        const userName = await this.client.getUserName();
+        document.getElementById('user-id').innerText = "Created By: " + userName;
     }
 
     /**
@@ -36,9 +38,7 @@ class DigiPantryInventory extends BindingClass {
      */
     mount() {
         document.getElementById('add-inventory-btn').addEventListener('click', this.addIngredient);
-
         this.header.addHeaderToPage();
-
         this.client = new DigiPantryClient();
         this.clientLoaded();
     }
@@ -52,16 +52,7 @@ class DigiPantryInventory extends BindingClass {
         if (pantry == null) {
             return;
         }
-
         document.getElementById('pantry-name').innerText = pantry.pantryName;
-        document.getElementById('user-id').innerText = pantry.userId;
-
-        /*let tagHtml = '';
-        let tag;
-        for (tag of playlist.tags) {
-            tagHtml += '<div class="tag">' + tag + '</div>';
-        }
-        document.getElementById('tags').innerHTML = tagHtml;*/
     }
 
     /**
@@ -69,11 +60,9 @@ class DigiPantryInventory extends BindingClass {
      */
     addIngredientsToPage() {
         const ingredients = this.dataStore.get('ingredients')
-
         if (ingredients == null) {
             return;
         }
-
         let ingredientHtml = '';
         let ingredient;
         for (ingredient of ingredients) {
