@@ -24,6 +24,9 @@
         <select name="measurements" id="measurements">
             <option value="CUP" selected="selected">CUP</option>
             <option value="LBS">LBS</option>
+            <option value="SHOT">SHOT</option>
+            <option value="EACH">EACH</option>
+            <option value="HALF">HALF</option>
         </select>
         <br><br>
         <input href="#" type="button" id="add-inventory-btn" value="Add Inventory">
@@ -32,6 +35,14 @@
 
 <div class="card">
     <ol id="ingredients"></ol>
+</div>
+<div class="card">
+    <form class="pantryName-field" id="pantryName-field-form"> <!-- action="Where to send the form data">-->
+<!--        <p class="hidden error" id="error-message"> </p>-->
+    <label for="new-pantry-name">New Pantry Name</label>
+    <input type="text" id="new-pantry-name" name="newName"><br>
+    <br>
+    <input href="#" type="button" id="new-name-button" value="Submit">
 </div>
 </body>
 </html>

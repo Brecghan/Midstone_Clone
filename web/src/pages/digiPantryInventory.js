@@ -9,7 +9,7 @@ import DataStore from "../util/DataStore";
 class DigiPantryInventory extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['clientLoaded', 'mount', 'addPantryToPage', 'addIngredientsToPage', 'addIngredient'], this);
+        this.bindClassMethods(['clientLoaded', 'mount', 'addPantryToPage', 'addIngredientsToPage', 'addIngredient', 'changePantryName'], this);
         this.dataStore = new DataStore();
         this.dataStore.addChangeListener(this.addPantryToPage);
         this.dataStore.addChangeListener(this.addIngredientsToPage);
@@ -38,6 +38,7 @@ class DigiPantryInventory extends BindingClass {
      */
     mount() {
         document.getElementById('add-inventory-btn').addEventListener('click', this.addIngredient);
+        document.getElementById('new-name-button').addEventListener('click', this.changePantryName);
         this.header.addHeaderToPage();
         this.client = new DigiPantryClient();
         this.clientLoaded();
@@ -77,6 +78,34 @@ class DigiPantryInventory extends BindingClass {
         document.getElementById('ingredients').innerHTML = ingredientHtml;
     }
 
+    async changePantryName() {
+
+        const pantry = this.dataStore.get('pantry');
+        if (pantry == null) {
+            return;
+        }
+
+        const pantryId = pantry.pantryId;
+        const newPantryName = document.getElementById('new-pantry-name').value;
+
+        const errorMessageDisplay = document.getElementById('error-message');
+        errorMessageDisplay.innerText = ``;
+        errorMessageDisplay.classList.add('hidden');
+
+
+        const ingredientList = await this.client.changePantryName(pantryId, newPantryName, (error) => {
+            errorMessageDisplay.innerText = `Error: ${error.message}`;
+            errorMessageDisplay.classList.remove('hidden');
+        });
+
+        document.getElementById('new-name-button').innerText = 'Submit';
+        document.getElementById("pantryName-field-form").reset();
+        location.reload();
+
+
+
+    }
+
     /**
      * Method to run when the add song playlist submit button is pressed. Call the MusicPlaylistService to add a song to the
      * playlist.
@@ -107,6 +136,7 @@ class DigiPantryInventory extends BindingClass {
 
         document.getElementById('add-inventory-btn').innerText = 'Add Ingredient';
         document.getElementById("inventory-fields-form").reset();
+        location.reload();
     }
 }
 
