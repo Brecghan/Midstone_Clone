@@ -1,50 +1,33 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <script type="text/javascript" src="assets/digiPantryRecipes.js"></script>
     <link rel="stylesheet" type="text/css" href="css/digiPantryStyle.css">
 </head>
-
 <body class="background">
 <header class="header" id="header"></header>
 <div class="card">
-    <h2>Recipes</h2>
+    <h2>View Recipes</h2>
 
-    <p> This page allows you select a recipe by region.</p>
-
-
-
-    <form action="#">
-        <label for="recipes"><h3>Recipes</h3></label>
-        <select name="recipes" id="recipes" size="4">
-            <option value="recipe1">Recipe 1</option>
-            <option value="recipe2">Recipe 2</option>
-            <option value="recipe3">Recipe 3</option>
-            <option value="recipe4">Recipe 4</option>
+    <form action="#" style="text-align:center;">
+        <p class="hidden error" id="error-message"> </p>
+        <label for="regionsSelect"><h1>Recipe Regions</h1>
+            <h4>Select a region to filter recipes</h4>
+        </label>
+        <select name="recipeRegion" id="regionsSelect" style="text-align:center;">
         </select><br><br>
-        <input type="submit" class="button" id="view-recipe-btn" value="View Recipe" />
+        <input type="submit" class="button" value="filter" />
     </form>
 
-
-
-
-
-
-    <form action="#">
-        <label for="regions"><h3>Regions</h3></label>
-        <select name="regions" id="regions" size="4">
-            <option value="region1">Region 1</option>
-            <option value="region2">Region 2</option>
-            <option value="region3">Region 3</option>
-            <option value="region4">Region 4</option>
+    <form action="#" style="text-align:center;">
+        <p class="hidden error" id="error-message2"> </p>
+        <label for="recipesSelect"><h1>Recipes</h1>
+            <h4>Click a recipe to view its details</h4>
+        </label>
+        <select name="recipes" id="recipesSelect" style="text-align:center;">
         </select><br><br>
-        <input type="submit" class="button" id="view-region-btn" value="View Region" />
     </form>
-
-
 
 </div>
-
 </body>
 </html>
