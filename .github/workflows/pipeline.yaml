@@ -9,10 +9,10 @@ on:
 env:
 
   # STUDENTS: Set these environment variables 
-  API_BASE_URL: https://jrvls0zjkb.execute-api.us-east-2.amazonaws.com/Prod/
+  API_BASE_URL: https://p4xo9nosta.execute-api.us-east-2.amazonaws.com/Prod/
   COGNITO_DOMAIN: project-digitalpantry-mint-chip
-  COGNITO_REDIRECT_SIGNIN: https://d2uljhyfi8ma49.cloudfront.net
-  COGNITO_REDIRECT_SIGNOUT: https://d2uljhyfi8ma49.cloudfront.net
+  COGNITO_REDIRECT_SIGNIN: https://dgm9qf0ynthcg.cloudfront.net
+  COGNITO_REDIRECT_SIGNOUT: https://dgm9qf0ynthcg.cloudfront.net
 
   COGNITO_USER_POOL_ID: ${{ secrets.COGNITO_USER_POOL_ID }}
   COGNITO_USER_POOL_CLIENT_ID: ${{ secrets.COGNITO_USER_POOL_CLIENT_ID }}
@@ -24,7 +24,7 @@ env:
   PIPELINE_USER_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   SAM_TEMPLATE: template.yaml
 
-  STACK_NAME: music-playlist-service2
+  STACK_NAME: music-playlist-service
   PIPELINE_EXECUTION_ROLE: arn:aws:iam::741485703855:role/aws-sam-cli-managed-ServiceS-PipelineExecutionRole-1I5V86J6WBFSU
   CLOUDFORMATION_EXECUTION_ROLE: arn:aws:iam::741485703855:role/aws-sam-cli-managed-Servi-CloudFormationExecutionR-CFXLLR6MD4BJ
   ARTIFACTS_BUCKET: aws-sam-cli-managed-servicestage-artifactsbucket-1xneugepyp6ft
