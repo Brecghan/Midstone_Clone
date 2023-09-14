@@ -154,7 +154,7 @@ export default class DigiPantryClient extends BindingClass {
                           Authorization: `Bearer ${token}`
                       }
                   });
-                return response.data.pantries;
+                return response.data.mealPlans;
             } catch (error) {
                 this.handleError(error, errorCallback)
             }
@@ -213,7 +213,7 @@ export default class DigiPantryClient extends BindingClass {
                 }
             });
 
-            return response.data.pantry;
+            return response.data.mealPlan;
         } catch (error) {
             this.handleError(error, errorCallback)
         }

@@ -45,7 +45,7 @@ class CreateMealPlan extends BindingClass {
         console.log(mealPlanName);
 
 
-        const mealPlan = await this.client.createMealPLan(mealPlanName, (error) => {
+        const mealPlan = await this.client.createMealPlan(mealPlanName, (error) => {
             createButton.innerText = origButtonText;
             errorMessageDisplay.innerText = `Error: ${error.message}`;
             errorMessageDisplay.classList.remove('hidden');
@@ -61,7 +61,7 @@ class CreateMealPlan extends BindingClass {
      */
     redirectToViewMealPlan() {
         const mealPlan = this.dataStore.get('mealPlan');
-
+        console.log("LOOK AT ME!!!" + mealPlan)
         if (mealPlan != null) {
             window.location.href = `/digiPantryMealPlan.html?id=${mealPlan.mealPlanId}`;
         }
