@@ -35,7 +35,7 @@ public class Recipe {
         this.recipeId = recipeId;
     }
 
-    @DynamoDBRangeKey(attributeName = "recipeName")
+    @DynamoDBAttribute(attributeName = "recipeName")
     public String getRecipeName() {
         return recipeName;
     }
