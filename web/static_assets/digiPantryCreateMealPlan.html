@@ -2,21 +2,23 @@
 <html>
 
 <head>
-    <script type="text/javascript" src="assets/digiPantryCreatePantry.js"></script>
+    <script type="text/javascript" src="assets/digiPantryCreateMealPlan.js"></script>
     <link rel="stylesheet" type="text/css" href="css/digiPantryStyle.css">
 </head>
 
-<body class="background">
+body class="background">
 <header class="header" id="header"></header>
 <div class="card">
-    <h2 style="text-align:center;">Create Meal Plan</h2>
-    <form class="card-content" id="create-digital-pantry-form" style="text-align:center;">
-        <p class="hidden error" id="error-message" style="text-align:center;"> </p>
-        <h3 style="text-align:center;"> a.	Buttons: <br>
-            i.	Create Meal Plan – connects to digiPantryMealPlan.htm for new Meal Plan <br>
-            b.	Forms:<br>
-            i.	Text Field for entering new Meal Plan Name<br>
-        </h3>
+    <h2> Choose a Name for Your </h2>
+    <h2> New Meal Plan </h2>
+</div>
+
+<div class="card">
+    <form class="create-meal-plan-fields" id="create-meal-plan-fields-form">
+        <p class="hidden error" id="error-message"> </p>
+        <input type="text" id="new-meal-plan-name" placeholder="Input New Meal Plan's name">
+        <br><br>
+        <input href="#" class="button" id="create" value="Create Meal Plan">
     </form>
 </div>
 </body>

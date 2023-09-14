@@ -17,7 +17,7 @@ export default class DigiPantryClient extends BindingClass {
 
         const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getPantry', 'getPantryIngredients',
             'createPantry', 'getPantryList', 'getUserName', 'getRecipes', 'addIngredientToPantry', 'changePantryName',
-            'getMealPlanList'];
+            'getMealPlanList', 'createMealPlan'];
 
         this.bindClassMethods(methodsToBind, this);
 
@@ -190,6 +190,23 @@ export default class DigiPantryClient extends BindingClass {
             const token = await this.getTokenOrThrow("Only authenticated users can create pantries.");
             const response = await this.axiosClient.post(`digitalPantry`, {
                 pantryName: pantryName
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+
+            return response.data.pantry;
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+    }
+
+    async createMealPlan(mealPlanName, errorCallback) {
+        try {
+            const token = await this.getTokenOrThrow("Only authenticated users can create meal plans.");
+            const response = await this.axiosClient.post(`mealPlan`, {
+                mealPlanName: mealPlanName
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`
