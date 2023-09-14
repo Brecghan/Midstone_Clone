@@ -17,7 +17,7 @@ export default class DigiPantryClient extends BindingClass {
 
         const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getPantry', 'getPantryIngredients',
             'createPantry', 'getPantryList', 'getUserName', 'getRecipes', 'addIngredientToPantry', 'changePantryName',
-            'getMealPlanList', 'createMealPlan'];
+            'getMealPlanList', 'createMealPlan', 'changeMealPlanName', 'getMealPlanRecipeSet'];
 
         this.bindClassMethods(methodsToBind, this);
 
@@ -121,6 +121,20 @@ export default class DigiPantryClient extends BindingClass {
             return response.data.recipes;
         } catch (error) {
             this.handleError(error)
+        }
+    }
+
+    async getMealPlanRecipeSet(id, errorCallback) {
+        try {
+            const token = await this.getTokenOrThrow("Only authenticated users can get meal plans.");
+            const response = await this.axiosClient.get(`mealPlan/${id}/recipeSet`, {
+                  headers: {
+                      Authorization: `Bearer ${token}`
+                  }
+            });
+            return response.data.recipeSet;
+        } catch (error) {
+            this.handleError(error, errorCallback)
         }
     }
 
@@ -232,6 +246,24 @@ export default class DigiPantryClient extends BindingClass {
             });
 
             return response.data.pantry;
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+    }
+
+    async changeMealPlanName(mealPlanId, newMealPlanName, errorCallback) {
+        try {
+            const token = await this.getTokenOrThrow("Only authenticated users can change Meal Plan names.");
+            const response = await this.axiosClient.put(`mealPlan/${mealPlanId}`, {
+                mealPlanName: newMealPlanName,
+                mealPlanId: mealPlanId
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+
+            return response.data.mealPlan;
         } catch (error) {
             this.handleError(error, errorCallback)
         }
