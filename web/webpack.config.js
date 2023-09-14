@@ -32,6 +32,8 @@ module.exports = {
     digiPantryInventory: path.resolve(__dirname, 'src', 'pages', 'digiPantryInventory.js'),
     digiPantryViewPantries: path.resolve(__dirname, 'src', 'pages', 'digiPantryViewPantries.js'),
     digiPantryRecipes: path.resolve(__dirname, 'src', 'pages', 'digiPantryRecipes.js'),
+    digiPantryMealPlan: path.resolve(__dirname, 'src', 'pages', 'digiPantryMealPlan.js'),
+    digiPantryRecipeViewer: path.resolve(__dirname, 'src', 'pages', 'digiPantryRecipeViewer.js'),
 
   },
   output: {

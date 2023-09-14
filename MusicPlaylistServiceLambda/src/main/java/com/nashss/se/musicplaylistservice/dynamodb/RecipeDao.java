@@ -74,7 +74,7 @@ public class RecipeDao {
      * @return a List of Recipe objects that match the search criteria.
      */
     public List<Recipe> getRecipeList(String region) {
-        if (region == null) {
+        if (region.equals("ALL")) {
             DynamoDBScanExpression dynamoDBScanExpression = new DynamoDBScanExpression();
             return this.dynamoDbMapper.scan(Recipe.class, dynamoDBScanExpression);
         } else {
@@ -83,7 +83,7 @@ public class RecipeDao {
             DynamoDBQueryExpression<Recipe> queryExpression = new DynamoDBQueryExpression<Recipe>()
                     .withIndexName(Recipe.RECIPE_REGION_INDEX)
                     .withConsistentRead(false)
-                    .withKeyConditionExpression("region = :region")
+                    .withKeyConditionExpression("recipeRegion = :region")
                     .withExpressionAttributeValues(valueMap);
 
             return dynamoDbMapper.query(Recipe.class, queryExpression);
