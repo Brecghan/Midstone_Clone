@@ -10,7 +10,7 @@ import DataStore from "../util/DataStore";
      constructor() {
          super();
          this.bindClassMethods(['clientLoaded', 'mount', 'addRecipesToPage', 'redirectToRecipeViewer',
-            'selectRecipeRegion', 'updateRecipeView'], this);
+            'selectRecipeRegion', 'updateRecipeView', 'getRecipeRegions'], this);
          this.dataStore = new DataStore();
          this.dataStore.addChangeListener(this.addRecipesToPage);
 //         this.dataStore.addChangeListener(this.redirectToRecipeViewer);
@@ -29,7 +29,7 @@ import DataStore from "../util/DataStore";
 //        const recipeId = urlParams.get('recipeId');
         document.getElementById('recipesSelect').innerText = "Loading Recipe ...";
         const recipes = await this.client.getRecipes("ALL");
-        const regions = await this.client.getRecipeRegions(recipes);
+        const regions = await this.getRecipeRegions(recipes);
         this.dataStore.set('regions', regions);
         for (const region of regions) {
         console.log(region);
@@ -38,6 +38,13 @@ import DataStore from "../util/DataStore";
         this.dataStore.set('recipes', recipes);
         document.getElementById('regionsSelect').innerText = "(loading region...)";
 }
+    async getRecipeRegions(recipes) {
+                const regions = new Set();
+                for (const recipe of recipes){
+                regions.add(recipe.region);
+                }
+                return regions;
+        }
 
 /**
  * Add the header to the page and load the DigiPantryClient.
@@ -56,63 +63,76 @@ import DataStore from "../util/DataStore";
      */
     addRecipesToPage() {
        const recipes = this.dataStore.get('recipes');
-               console.log("are the recipes here? " + recipes);
-               if (recipes == null) {
-                   return;
-               }
+       console.log("are the recipes here? " + recipes);
+       if (recipes == null) {
+           return;
+       }
 
-               document.getElementById("recipesSelect").size = recipes.length;
-               let optionList = document.getElementById('recipesSelect').options;
-               let options = [
-                 {
-                   text: 'Option 1',
-                   value: 'Value 1'
-                 },
-                 {
-                   text: 'Option 2',
-                   value: 'Value 2',
-                   selected: true
-                 },
-                 {
-                   text: 'Option 3',
-                   value: 'Value 3'
-                 }
-               ];
+       document.getElementById("recipesSelect").size = recipes.length;
+       let optionRecipeList = document.getElementById('recipesSelect').options;
+       optionRecipeList.length = 0;
+       let options = [
+         {
+           text: 'Option 1',
+           value: 'Value 1'
+         },
+         {
+           text: 'Option 2',
+           value: 'Value 2',
+           selected: true
+         },
+         {
+           text: 'Option 3',
+           value: 'Value 3'
+         }
+       ];
 
-               recipes.forEach(recipes =>
-                 optionList.add(
-                   new Option(recipes.recipeName, recipes.recipeId)
-                 ));
-    }
+       recipes.forEach(recipes =>
+         optionRecipeList.add(
+           new Option(recipes.recipeName, recipes.recipeId)
+         ));
+}
 
     selectRecipeRegion() {
            const regions = this.dataStore.get('regions');
-                   console.log("Regions in selectRecipeRegion" + regions);
-                   if (regions == null) {
-                       return;
-                   }
+           console.log("Regions in selectRecipeRegion" + regions);
+           if (regions == null) {
+               return;
+           }
 
-//                   document.getElementById("regionsSelect").size = regions.size;
-                   let optionList = document.getElementById('regionsSelect').options;
-                   let options = [
-                     {
-                       text: 'Option 1',
-                       value: 'Value 1'
-                     },
-                     {
-                       text: 'Option 2',
-                       value: 'Value 2',
-                       selected: true
-                     },
-                     {
-                       text: 'Option 3',
-                       value: 'Value 3'
-                     }
-                   ];
-
-                   for (const region of regions) {
-                   optionList.add(new Option (new String(region), new String(region)))
-                   };
+//           document.getElementById("regionsSelect").size = regions.size + 1;
+           let optionRegionList = document.getElementById('regionsSelect').options;
+           optionRegionList.length = 0;
+           var options = ["ALL"];
+           for (const region of regions) {
+           options.push(region);
+           };
+           for(var i = 0; i < options.length; i++) {
+               var opt = options[i];
+               var el = document.createElement("option");
+               el.textContent = opt;
+               el.value = opt;
+               optionRegionList.add(el);
+           }
+//           let options = [
+//             {
+//               text: 'Option 1',
+//               value: 'Value 1'
+//             },
+//             {
+//               text: 'Option 2',
+//               value: 'Value 2',
+//               selected: true
+//             },
+//             {
+//               text: 'Option 3',
+//               value: 'Value 3'
+//             }
+//           ];
+//           optionRegionList.add(new Option ("ALL", "ALL"));
+//           for (const region of regions) {
+//           optionRegionList.add(new Option (region, new String(region)))
+//           };
 //                   regions.forEach(regions =>
 //                     optionList.add(
 //                       new Option(new String(regions), regions)

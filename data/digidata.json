@@ -18,7 +18,7 @@
           "recipeId": { "S": "0002" },
           "recipeName": { "S": "Manhattan" },
           "recipeDescription": { "S": "How the people living in its namesake deal with their day-to-day" },
-          "neededIngredients": { "S": "[{\"ingredientName\":\"Sweet Vermouth\",\"quantity\":1.0,\"unitOfMeasure\":\"SHOT\"},{\"ingredientName\":\"Whiskey\",\"quantity\":4.0,\"unitOfMeasure\":\"SHOT\"},{\"ingredientName\":\"Marashino Cherry\",\"quantity\":1.0,\"unitOfMeasure\":\"EACH\"},{\"ingredientName\":\"Bitters\",\"quantity\":0.1,\"unitOfMeasure\":\"SHOT\"}]" },
+          "neededIngredients": { "S": "[{\"ingredientName\":\"Sweet Vermouth\",\"quantity\":1.0,\"unitOfMeasure\":\"SHOT\"},{\"ingredientName\":\"Whiskey\",\"quantity\":4.0,\"unitOfMeasure\":\"SHOT\"},{\"ingredientName\":\"Maraschino Cherry\",\"quantity\":1.0,\"unitOfMeasure\":\"EACH\"},{\"ingredientName\":\"Bitters\",\"quantity\":0.1,\"unitOfMeasure\":\"SHOT\"}]" },
           "recipeRegion": { "S": "Bar" },
           "dietaryRestrictions": { "SS": [ "Gluten-Free", "Vegetarian", "Vegan" ] }
         }
@@ -30,9 +30,153 @@
           "recipeId": { "S": "0003" },
           "recipeName": { "S": "Velveeta Chip Dip" },
           "recipeDescription": { "S": "Classic chip dip, " },
-          "neededIngredients": { "S": "[{\"ingredientName\":\"Velveeta Cheese\",\"quantity\":2.0,\"unitOfMeasure\":\"LBS\"},{\"ingredientName\":\"Beef\",\"quantity\":1.0,\"unitOfMeasure\":\"LBS\"},{\"ingredientName\":\"Rotel (Strained)\",\"quantity\":1.5,\"unitOfMeasure\":\"CUP\"},{\"ingredientName\":\"Sour Cream\",\"quantity\":1.0,\"unitOfMeasure\":\"CUP\"}]" },
-          "recipeRegion": { "S": "TexMex" },
+          "neededIngredients": { "S": "[{\"ingredientName\":\"Velveeta Cheese\",\"quantity\":2.0,\"unitOfMeasure\":\"LBS\"},{\"ingredientName\":\"Beef\",\"quantity\":1.0,\"unitOfMeasure\":\"LBS\"},{\"ingredientName\":\"Can of Rotel (Strained)\",\"quantity\":1.5,\"unitOfMeasure\":\"CUP\"},{\"ingredientName\":\"Sour Cream\",\"quantity\":1.0,\"unitOfMeasure\":\"CUP\"}]" },
+          "recipeRegion": { "S": "Mexican" },
           "dietaryRestrictions": { "SS": [ "Gluten-Free" ] }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "recipeId": { "S": "0004" },
+          "recipeName": { "S": "Mac & Cheese" },
+          "recipeDescription": { "S": "Good Old Soul Food" },
+          "neededIngredients": { "S": "[ { \"ingredientName\": \"macaroni noodles\", \"quantity\": \"1.0\", \"unitOfMeasure\": \"LBS\" }, { \"ingredientName\": \"cheese\", \"quantity\": \"1.0\", \"unitOfMeasure\": \"CUP\" }, { \"ingredientName\": \"butter\", \"quantity\": \"0.5\", \"unitOfMeasure\": \"CUP\" }]" },
+          "recipeRegion": { "S": "Comfort" },
+          "dietaryRestrictions": { "SS": [ "Vegetarian" ] }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "recipeId": { "S": "0005" },
+          "recipeName": { "S": "Soup" },
+          "recipeDescription": { "S": "No Soup for You!" },
+          "neededIngredients": { "S": "[ { \"ingredientName\": \"Can of Soup\", \"quantity\": \"1.0\", \"unitOfMeasure\": \"EACH\" }]" },
+          "recipeRegion": { "S": "Comfort" },
+          "dietaryRestrictions": { "SS": [ "Gluten-Free", "Vegetarian", "Vegan" ] }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "recipeId": { "S": "0006" },
+          "recipeName": { "S": "Black and Tan" },
+          "recipeDescription": { "S": "When you want dark and light beer" },
+          "neededIngredients": { "S": "[ { \"ingredientName\": \"Stout Beer\", \"quantity\": \"1.0\", \"unitOfMeasure\": \"CUP\" }, { \"ingredientName\": \"Pale Ale\", \"quantity\": \"1.0\", \"unitOfMeasure\": \"CUP\" }]" },
+          "recipeRegion": { "S": "Bar" },
+          "dietaryRestrictions": { "SS": [ "Gluten-Free", "Vegetarian", "Vegan" ] }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "recipeId": { "S": "0007" },
+          "recipeName": { "S": "Gin and tonic" },
+          "recipeDescription": { "S": "A pine tree Air Freshener is fizzy drink form" },
+          "neededIngredients": { "S": "[ { \"ingredientName\": \"Gin\", \"quantity\": \"2.0\", \"unitOfMeasure\": \"SHOT\" }, { \"ingredientName\": \"Tonic\", \"quantity\": \"6.0\", \"unitOfMeasure\": \"SHOT\" }, { \"ingredientName\": \"Ice Cubes\", \"quantity\": \"2.0\", \"unitOfMeasure\": \"EACH\" }]" },
+          "recipeRegion": { "S": "Bar" },
+          "dietaryRestrictions": { "SS": [ "Gluten-Free", "Vegetarian", "Vegan" ] }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "recipeId": { "S": "0008" },
+          "recipeName": { "S": "Irish Car Bomb" },
+          "recipeDescription": { "S": "All the good stuff… don't order it in Ireland though" },
+          "neededIngredients": { "S": "[ { \"ingredientName\": \"Guiness\", \"quantity\": \"2.0\", \"unitOfMeasure\": \"CUP\" }, { \"ingredientName\": \"Jameson\", \"quantity\": \"0.5\", \"unitOfMeasure\": \"SHOT\" }, { \"ingredientName\": \"Bailey's\", \"quantity\": \"0.5\", \"unitOfMeasure\": \"SHOT\" }]" },
+          "recipeRegion": { "S": "Bar" },
+          "dietaryRestrictions": { "SS": [ "Gluten-Free", "Vegetarian", "Vegan" ] }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "recipeId": { "S": "0009" },
+          "recipeName": { "S": "Martini" },
+          "recipeDescription": { "S": "For all the James Bond… or Mark Bond… wannabees" },
+          "neededIngredients": { "S": "[ { \"ingredientName\": \"Gin\", \"quantity\": \"3.5\", \"unitOfMeasure\": \"SHOT\" }, { \"ingredientName\": \"Dry Vermouth\", \"quantity\": \"0.5\", \"unitOfMeasure\": \"SHOT\" }, { \"ingredientName\": \"Olive\", \"quantity\": \"1.0\", \"unitOfMeasure\": \"EACH\" }]" },
+          "recipeRegion": { "S": "Bar" },
+          "dietaryRestrictions": { "SS": [ "Gluten-Free", "Vegetarian", "Vegan" ] }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "recipeId": { "S": "0010" },
+          "recipeName": { "S": "Sake Bomb" },
+          "recipeDescription": { "S": "Beer and sake… not much to it" },
+          "neededIngredients": { "S": "[ { \"ingredientName\": \"Beer\", \"quantity\": \"2.0\", \"unitOfMeasure\": \"CUP\" }, { \"ingredientName\": \"Sake\", \"quantity\": \"0.5\", \"unitOfMeasure\": \"SHOT\" }]" },
+          "recipeRegion": { "S": "Bar" },
+          "dietaryRestrictions": { "SS": [ "Gluten-Free", "Vegetarian", "Vegan" ] }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "recipeId": { "S": "0011" },
+          "recipeName": { "S": "Snakebite" },
+          "recipeDescription": { "S": "Too many of these and you'll need some antivenom" },
+          "neededIngredients": { "S": "[ { \"ingredientName\": \"Yukon Jack\", \"quantity\": \"2.0\", \"unitOfMeasure\": \"SHOT\" }, { \"ingredientName\": \"Lime Cordial\", \"quantity\": \"0.5\", \"unitOfMeasure\": \"SHOT\" }]" },
+          "recipeRegion": { "S": "Bar" },
+          "dietaryRestrictions": { "SS": [ "Gluten-Free", "Vegetarian", "Vegan" ] }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "recipeId": { "S": "0012" },
+          "recipeName": { "S": "Tom Collins" },
+          "recipeDescription": { "S": "A drink named after a famous guy I think?" },
+          "neededIngredients": { "S": "[ { \"ingredientName\": \"Gin\", \"quantity\": \"1.5\", \"unitOfMeasure\": \"SHOT\" }, { \"ingredientName\": \"Lemon Juice\", \"quantity\": \"1.0\", \"unitOfMeasure\": \"SHOT\" }, { \"ingredientName\": \"Simple Syrup\", \"quantity\": \"0.5\", \"unitOfMeasure\": \"SHOT\" }, { \"ingredientName\": \"Club Soda\", \"quantity\": \"3.0\", \"unitOfMeasure\": \"SHOT\" },  { \"ingredientName\": \"Maraschino Cherry\", \"quantity\": \"1.0\", \"unitOfMeasure\": \"EACH\" }]" },
+          "recipeRegion": { "S": "Bar" },
+          "dietaryRestrictions": { "SS": [ "Gluten-Free", "Vegetarian", "Vegan" ] }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "recipeId": { "S": "0013" },
+          "recipeName": { "S": "Boilermaker" },
+          "recipeDescription": { "S": "When simple beer is not enough" },
+          "neededIngredients": { "S": "[ { \"ingredientName\": \"Beer\", \"quantity\": \"2.0\", \"unitOfMeasure\": \"CUP\" }, { \"ingredientName\": \"Whiskey\", \"quantity\": \"1.0\", \"unitOfMeasure\": \"SHOT\" }]" },
+          "recipeRegion": { "S": "Bar" },
+          "dietaryRestrictions": { "SS": [ "Gluten-Free", "Vegetarian", "Vegan" ] }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "recipeId": { "S": "0014" },
+          "recipeName": { "S": "Three Wise Men" },
+          "recipeDescription": { "S": "We aren't talking the biblical ones here" },
+          "neededIngredients": { "S": "[ { \"ingredientName\": \"Johnnie Walker\", \"quantity\": \"0.5\", \"unitOfMeasure\": \"SHOT\" }, { \"ingredientName\": \"Jack Daniel's\", \"quantity\": \"0.5\", \"unitOfMeasure\": \"SHOT\" }, { \"ingredientName\": \"Jim Beam\", \"quantity\": \"0.5\", \"unitOfMeasure\": \"SHOT\" }]" },
+          "recipeRegion": { "S": "Bar" },
+          "dietaryRestrictions": { "SS": [ "Gluten-Free", "Vegetarian", "Vegan" ] }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "recipeId": { "S": "0015" },
+          "recipeName": { "S": "Pizza" },
+          "recipeDescription": { "S": "Dough, Sauce, Cheese, and random other things, what can go wrong?" },
+          "neededIngredients": { "S": "[ { \"ingredientName\": \"Premade Crust\", \"quantity\": \"1.0\", \"unitOfMeasure\": \"EACH\" }, { \"ingredientName\": \"Jar of Sauce\", \"quantity\": \"1.0\", \"unitOfMeasure\": \"EACH\" }, { \"ingredientName\": \"Cheese\", \"quantity\": \"5.0\", \"unitOfMeasure\": \"CUP\" }, { \"ingredientName\": \"Other Things\", \"quantity\": \"1.0\", \"unitOfMeasure\": \"EACH\" }]" },
+          "recipeRegion": { "S": "Italian" },
+          "dietaryRestrictions": { "SS": [ "Gluten-Free", "Vegetarian", "Vegan" ] }
         }
       }
     }

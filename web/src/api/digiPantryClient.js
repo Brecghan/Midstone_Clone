@@ -16,7 +16,7 @@ export default class DigiPantryClient extends BindingClass {
         super();
 
         const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getPantry', 'getPantryIngredients',
-            'createPantry', 'getPantryList', 'getUserName', 'getRecipes', 'getRecipeRegions', 'addIngredientToPantry', 'changePantryName'];
+            'createPantry', 'getPantryList', 'getUserName', 'getRecipes', 'addIngredientToPantry', 'changePantryName'];
 
         this.bindClassMethods(methodsToBind, this);
 
@@ -122,14 +122,6 @@ export default class DigiPantryClient extends BindingClass {
             this.handleError(error)
         }
     }
-
-    async getRecipeRegions(recipes) {
-                const regions = new Set();
-                for (const recipe of recipes){
-                regions.add(recipe.region);
-                }
-                return regions;
-        }
 
         /**
          * Gets the playlist for the given ID.

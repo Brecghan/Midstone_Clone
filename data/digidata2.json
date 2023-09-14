@@ -1,0 +1,184 @@
+{
+  "Recipes": [
+    {
+      "PutRequest": {
+        "Item": {
+          "recipeId": { "S": "0016" },
+          "recipeName": { "S": "Bob's Burgers" },
+          "recipeDescription": { "S": "Is that copywritten? We'll assume not…" },
+          "neededIngredients": { "S": "[ { \"ingredientName\": \"Beef Patty (Not Human)\", \"quantity\": \"1.0\", \"unitOfMeasure\": \"EACH\" }, { \"ingredientName\": \"Burger Bun\", \"quantity\": \"1.0\", \"unitOfMeasure\": \"EACH\" }, { \"ingredientName\": \"Cheese Slice\", \"quantity\": \"1.0\", \"unitOfMeasure\": \"EACH\" }, { \"ingredientName\": \"Other Things\", \"quantity\": \"1.0\", \"unitOfMeasure\": \"EACH\" }]" },
+          "recipeRegion": { "S": "American" },
+          "dietaryRestrictions": { "SS": [ "Gluten-Free", "Vegetarian", "Vegan" ] }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "recipeId": { "S": "0017" },
+          "recipeName": { "S": "Chili Cheese Dogs" },
+          "recipeDescription": { "S": "Delicious enough for a blue, hyperactive, and charmingly witty hedgehog" },
+          "neededIngredients": { "S": "[ { \"ingredientName\": \"Hot Dog\", \"quantity\": \"1.0\", \"unitOfMeasure\": \"EACH\" }, { \"ingredientName\": \"Hot Dog Bun\", \"quantity\": \"1.0\", \"unitOfMeasure\": \"EACH\" }, { \"ingredientName\": \"Can of Chili\", \"quantity\": \"1.0\", \"unitOfMeasure\": \"EACH\" }, { \"ingredientName\": \"Shredded Cheese\", \"quantity\": \"0.5\", \"unitOfMeasure\": \"CUP\" }]" },
+          "recipeRegion": { "S": "American" },
+          "dietaryRestrictions": { "SS": [ "Gluten-Free", "Vegetarian", "Vegan" ] }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "recipeId": { "S": "0018" },
+          "recipeName": { "S": "Burrito" },
+          "recipeDescription": { "S": "Food wrapped in an edible blankey, what's not to love?" },
+          "neededIngredients": { "S": "[ { \"ingredientName\": \"Tortilla\", \"quantity\": \"1.0\", \"unitOfMeasure\": \"EACH\" }, { \"ingredientName\": \"Ground Beef\", \"quantity\": \"0.5\", \"unitOfMeasure\": \"CUP\" }, { \"ingredientName\": \"Beans & Rice\", \"quantity\": \"1.0\", \"unitOfMeasure\": \"CUP\" }, { \"ingredientName\": \"Shredded Cheese\", \"quantity\": \"0.5\", \"unitOfMeasure\": \"CUP\" }]" },
+          "recipeRegion": { "S": "Mexican" },
+          "dietaryRestrictions": { "SS": [ "Gluten-Free", "Vegetarian", "Vegan" ] }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "recipeId": { "S": "0019" },
+          "recipeName": { "S": "Chicken Noodle Soup" },
+          "recipeDescription": { "S": "Sometimes its even good for the soul" },
+          "neededIngredients": { "S": "[ { \"ingredientName\": \"Can of Campbell's Chicken Noodle\", \"quantity\": \"1.0\", \"unitOfMeasure\": \"EACH\" }]" },
+          "recipeRegion": { "S": "Comfort" },
+          "dietaryRestrictions": { "SS": [ "Gluten-Free", "Vegetarian", "Vegan" ] }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "recipeId": { "S": "0020" },
+          "recipeName": { "S": "Smores" },
+          "recipeDescription": { "S": "How can I want some more when I don't know what it is?" },
+          "neededIngredients": { "S": "[ { \"ingredientName\": \"Graham Cracker\", \"quantity\": \"2.0\", \"unitOfMeasure\": \"EACH\" }, { \"ingredientName\": \"Marshmallow\", \"quantity\": \"1.0\", \"unitOfMeasure\": \"EACH\" }, { \"ingredientName\": \"Hersey Bar\", \"quantity\": \"1.0\", \"unitOfMeasure\": \"EACH\" }]" },
+          "recipeRegion": { "S": "Dessert" },
+          "dietaryRestrictions": { "SS": [ "Gluten-Free", "Vegetarian", "Vegan" ] }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "recipeId": { "S": "0021" },
+          "recipeName": { "S": "Ralph's Pound Cake" },
+          "recipeDescription": { "S": "I'm gonna wreck it!" },
+          "neededIngredients": { "S": "[{\"ingredientName\": \"flour\",\"quantity\": \"1.0\",\"unitOfMeasure\": \"CUP\"},{\"ingredientName\": \"sugar\",\"quantity\": \"1.0\",\"unitOfMeasure\": \"CUP\"},{\"ingredientName\": \"butter\",\"quantity\": \"1.0\",\"unitOfMeasure\": \"CUP\"}]" },
+          "recipeRegion": { "S": "Dessert" },
+          "dietaryRestrictions": { "SS": [ "Gluten-Free", "Vegetarian", "Vegan" ] }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "recipeId": { "S": "0022" },
+          "recipeName": { "S": "White Russian" },
+          "recipeDescription": { "S": "They really help tie the room together" },
+          "neededIngredients": { "S": "[ { \"ingredientName\": \"Vodka\", \"quantity\": \"3.0\", \"unitOfMeasure\": \"SHOT\" }, { \"ingredientName\": \"Coffee Liqueur\", \"quantity\": \"1.5\", \"unitOfMeasure\": \"SHOT\" }, { \"ingredientName\": \"Cream\", \"quantity\": \"1.5\", \"unitOfMeasure\": \"SHOT\" }]" },
+          "recipeRegion": { "S": "Bar" },
+          "dietaryRestrictions": { "SS": [ "Gluten-Free", "Vegetarian", "Vegan" ] }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "recipeId": { "S": "0023" },
+          "recipeName": { "S": "White Girl Breakfast" },
+          "recipeDescription": { "S": "They all love it…" },
+          "neededIngredients": { "S": "[ { \"ingredientName\": \"Piece of Toast\", \"quantity\": \"1.0\", \"unitOfMeasure\": \"EACH\" }, { \"ingredientName\": \"Avocado\", \"quantity\": \"0.5\", \"unitOfMeasure\": \"EACH\" }]" },
+          "recipeRegion": { "S": "American" },
+          "dietaryRestrictions": { "SS": [ "Gluten-Free", "Vegetarian", "Vegan" ] }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+      "recipeId": { "S": "0024" },
+      "recipeName": { "S": "Speedy Gonzales Tacos" },
+      "recipeDescription": { "S": "All the deliciousness of a slightly racist cartoon" },
+      "neededIngredients": { "S": "[ { \"ingredientName\": \"Taco Shell\", \"quantity\": \"1.0\", \"unitOfMeasure\": \"EACH\" }, { \"ingredientName\": \"Shredded Cheese\", \"quantity\": \"0.5\", \"unitOfMeasure\": \"CUP\" }, { \"ingredientName\": \"Ground Beef\", \"quantity\": \"1.0\", \"unitOfMeasure\": \"CUP\" }]" },
+      "recipeRegion": { "S": "Mexican" },
+          "dietaryRestrictions": { "SS": [ "Gluten-Free", "Vegetarian", "Vegan" ] }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "recipeId": { "S": "0025" },
+          "recipeName": { "S": "Fettuccine Alfredo" },
+          "recipeDescription": { "S": "Mmmm… the classier cousin of Mac n Cheese" },
+          "neededIngredients": { "S": "[ { \"ingredientName\": \"Fettuccine Pasta\", \"quantity\": \"1.0\", \"unitOfMeasure\": \"EACH\" }, { \"ingredientName\": \"Jar of Alfredo\", \"quantity\": \"1.0\", \"unitOfMeasure\": \"EACH\" }]" },
+          "recipeRegion": { "S": "Italian" },
+          "dietaryRestrictions": { "SS": [ "Gluten-Free", "Vegetarian", "Vegan" ] }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "recipeId": { "S": "0026" },
+          "recipeName": { "S": "Bush's Baked Beans" },
+          "recipeDescription": { "S": "What did you expect of this recipe?" },
+          "neededIngredients": { "S": "[ { \"ingredientName\": \"Jar of Baked Beans\", \"quantity\": \"1.0\", \"unitOfMeasure\": \"EACH\" }]" },
+          "recipeRegion": { "S": "American" },
+          "dietaryRestrictions": { "SS": [ "Gluten-Free", "Vegetarian", "Vegan" ] }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "recipeId": { "S": "0027" },
+          "recipeName": { "S": "Jimmy's Fishsticks" },
+          "recipeDescription": { "S": "Do you like putting fishsticks in your mouth?" },
+          "neededIngredients": { "S": "[ { \"ingredientName\": \"Fishsticks\", \"quantity\": \"6.0\", \"unitOfMeasure\": \"EACH\" }]" },
+          "recipeRegion": { "S": "American" },
+          "dietaryRestrictions": { "SS": [ "Gluten-Free", "Vegetarian", "Vegan" ] }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "recipeId": { "S": "0028" },
+          "recipeName": { "S": "Italian grilled cheese" },
+          "recipeDescription": { "S": "It's Italian because we use the fancy bread and cheese" },
+          "neededIngredients": { "S": "[ { \"ingredientName\": \"Focaccia Bread\", \"quantity\": \"1.0\", \"unitOfMeasure\": \"EACH\" }, { \"ingredientName\": \"Gorgonzola\", \"quantity\": \"0.5\", \"unitOfMeasure\": \"CUP\" }]" },
+          "recipeRegion": { "S": "Italian" },
+          "dietaryRestrictions": { "SS": [ "Gluten-Free", "Vegetarian", "Vegan" ] }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "recipeId": { "S": "0029" },
+          "recipeName": { "S": "Mexican grilled cheese" },
+          "recipeDescription": { "S": "Sometimes called a \"quesadilla\"" },
+          "neededIngredients": { "S": "[ { \"ingredientName\": \"Tortilla\", \"quantity\": \"2.0\", \"unitOfMeasure\": \"EACH\" },  { \"ingredientName\": \"Shredded Cheese\", \"quantity\": \"0.5\", \"unitOfMeasure\": \"CUP\" }]" },
+          "recipeRegion": { "S": "Mexican" },
+          "dietaryRestrictions": { "SS": [ "Gluten-Free", "Vegetarian", "Vegan" ] }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "recipeId": { "S": "0030" },
+          "recipeName": { "S": "Brecghan's snickerdoodles" },
+          "recipeDescription": { "S": "Man you're really looking at all the recipes, huh? Too bad this one is secret…" },
+          "neededIngredients": { "S": "[ { \"ingredientName\": \"Love\", \"quantity\": \"99.0\", \"unitOfMeasure\": \"EACH\" }, { \"ingredientName\": \"Family (Pronounced Like Vin does)\", \"quantity\": \"99.0\", \"unitOfMeasure\": \"EACH\" }, { \"ingredientName\": \"Irish Butter\", \"quantity\": \"1.0\", \"unitOfMeasure\": \"LBS\" }]" },
+          "recipeRegion": { "S": "Dessert" },
+          "dietaryRestrictions": { "SS": [ "Gluten-Free", "Vegetarian", "Vegan" ] }
+        }
+      }
+    }
+  ]
+}
