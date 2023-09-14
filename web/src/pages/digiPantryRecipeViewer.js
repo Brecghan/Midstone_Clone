@@ -7,30 +7,34 @@ import DataStore from "../util/DataStore";
 /**
  * Logic needed for the view recipes page of the website.
  */
- class DigiPantryRecipeViewer extends BindingClass {
-     constructor() {
-         super();
-         this.bindClassMethods(['clientLoaded', 'mount', 'addRecipeToPage'], this);
-         this.dataStore = new DataStore();
-         this.dataStore.addChangeListener(this.addRecipeToPage); // <- do I need dataStore?
-         this.header = new Header(this.dataStore);
-         console.log("viewrecipes constructor");
-     }
+class DigiPantryRecipeViewer extends BindingClass {
+    constructor() {
+        super();
+        this.bindClassMethods(['clientLoaded', 'mount', 'addRecipeToPage', 'addIngredientsToPage'], this);
+        this.dataStore = new DataStore();
+        this.dataStore.addChangeListener(this.addRecipeToPage);
+        this.dataStore.addChangeListener(this.addIngredientsToPage)
+        this.header = new Header(this.dataStore);
+        console.log("view recipes constructor");
+    }
 
     /**
      * Once the client is loaded, get the playlist metadata and song list.
      */
     async clientLoaded() {
-//        const urlParams = new URLSearchParams(window.location.search);
-//        const pantryId = urlParams.get('id');
-//        document.getElementById('pantry-name').innerText = "Loading Pantry ...";
-//        const pantry = await this.client.getPantry(pantryId);
-//        this.dataStore.set('pantry', pantry);
-//        document.getElementById('ingredients').innerText = "(loading inventory...)";
-//        const ingredients = await this.client.getPantryIngredients(pantryId);
-//        this.dataStore.set('ingredients', ingredients);
-//        const userName = await this.client.getUserName();
-//        document.getElementById('user-id').innerText = "Created By: " + userName;
+        const urlParams = new URLSearchParams(window.location.search);
+        const recipeId = urlParams.get('id');
+        console.log(recipeId);
+        document.getElementById('recipe-name').innerText = "Loading Recipe ...";
+        const recipe = await this.client.getRecipe(recipeId);
+        console.log(recipe);
+        this.dataStore.set('recipe', recipe);
+        //document.getElementById('ingredients').innerText = "(Loading Ingredients...)";
+        //const ingredients = await this.client.getRecipeDetails(recipeId);
+        const ingredients = recipe.neededIngredients;
+        console.log(ingredients);
+        this.dataStore.set('ingredients', ingredients);
+        const userName = await this.client.getUserName();
     }
 
 /**
@@ -42,22 +46,35 @@ import DataStore from "../util/DataStore";
             return;
         }
 
-        document.getElementById('recipe-name').innerText = recipe.name;
-        document.getElementById('recipe-owner').innerText = recipe.customerName;
+        document.getElementById('recipe-name').innerText = recipe.recipeName;
+        document.getElementById('recipe-description').innerText = recipe.recipeDescription
+    }
 
-//        let tagHtml = '';
-//        let tag;
-//        for (tag of recipe.tags) {
-//            tagHtml += '<div class="tag">' + tag + '</div>';
-//        }
-        document.getElementById('tags').innerHTML = tagHtml;
+    addIngredientsToPage() {
+        const ingredients = this.dataStore.get('ingredients');
+        if (ingredients == null) {
+            return;
+        }
+        let ingredientHtml = '';
+        let ingredient;
+        for (ingredient of ingredients) {
+            ingredientHtml += `
+                <li class="ingredient">
+                    <span class="ingredientName">${ingredient.ingredientName}</span>
+                    <span class="ingredientQuantity">${ingredient.quantity}</span>
+                    <span class="unitOfMeasure">${ingredient.unitOfMeasure}</span>
+                </li>
+            `;
+            console.log(ingredientHtml);
+        }
+
+        document.getElementById('ingredients').innerHTML = ingredientHtml;
     }
 
 /**
      * Add the header to the page and load the DigiPantryClient.
      */
     mount() {
-//        document.getElementById('create').addEventListener('click', this.addSong);
 
         this.header.addHeaderToPage();
 
@@ -65,7 +82,6 @@ import DataStore from "../util/DataStore";
         this.clientLoaded();
     }
 }
-
 
 /**
  * Main method to run when the page contents have loaded.

@@ -17,7 +17,8 @@ export default class DigiPantryClient extends BindingClass {
 
         const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getPantry', 'getPantryIngredients',
             'createPantry', 'getPantryList', 'getUserName', 'getRecipes', 'addIngredientToPantry', 'changePantryName',
-            'getMealPlanList', 'createMealPlan'];
+            'getMealPlanList', 'createMealPlan', 'getRecipe'];
+
 
         this.bindClassMethods(methodsToBind, this);
 
@@ -100,9 +101,9 @@ export default class DigiPantryClient extends BindingClass {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can get pantries.");
             const response = await this.axiosClient.get(`digitalPantry/${id}`, {
-                  headers: {
-                      Authorization: `Bearer ${token}`
-                  }
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
             });
             return response.data.pantry;
         } catch (error) {
@@ -114,11 +115,26 @@ export default class DigiPantryClient extends BindingClass {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can get pantries.");
             const response = await this.axiosClient.get(`recipes/${region}`, {
-                 headers: {
-                     Authorization: `Bearer ${token}`
-                 }
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
             });
             return response.data.recipes;
+        } catch (error) {
+            this.handleError(error)
+        }
+    }
+
+    async getRecipe(recipeId) {
+        try{
+            const token = await this.getTokenOrThrow("Only authenticated users can get pantries.");
+            const response = await this.axiosClient.get(`recipe/${recipeId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            console.log(response);
+            return response.data.recipe;
         } catch (error) {
             this.handleError(error)
         }
@@ -135,10 +151,10 @@ export default class DigiPantryClient extends BindingClass {
                 const token = await this.getTokenOrThrow("Only authenticated users can get pantries.");
                 console.log("token loaded");
                 const response = await this.axiosClient.get(`digitalPantry`, {
-                      headers: {
-                          Authorization: `Bearer ${token}`
-                      }
-                  });
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
                 return response.data.pantries;
             } catch (error) {
                 this.handleError(error, errorCallback)
@@ -169,10 +185,10 @@ export default class DigiPantryClient extends BindingClass {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can get pantry inventories.");
             const response = await this.axiosClient.get(`digitalPantry/${id}/inventory`, {
-                 headers: {
-                     Authorization: `Bearer ${token}`
-                 }
-             });
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
             return response.data.inventory;
         } catch (error) {
             this.handleError(error, errorCallback)
