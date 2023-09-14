@@ -15,12 +15,15 @@ public class CompareRecipeAndInventoryLambda
                                         Context context) {
         return super.runActivity(
             () -> {
-                CompareRecipeAndInventoryRequest unauthenticatedRequest =
-                        input.fromBody(CompareRecipeAndInventoryRequest.class);
+                CompareRecipeAndInventoryRequest unauthenticatedRequest = input.fromPath(path ->
+                        CompareRecipeAndInventoryRequest.builder()
+                                .withPantryId(path.get("pantryId"))
+                                .withRecipeId(path.get("recipeId"))
+                                .build());
                 return input.fromUserClaims(claims ->
                         CompareRecipeAndInventoryRequest.builder()
-                                .withRecipeId(unauthenticatedRequest.getRecipeId())
                                 .withPantryId(unauthenticatedRequest.getPantryId())
+                                .withRecipeId(unauthenticatedRequest.getRecipeId())
                                 .withUserId(claims.get("email"))
                                 .build());
             },

@@ -343,7 +343,7 @@ Resources:
         MusicPlaylistService:
           Type: Api
           Properties:
-            Path: /compare
+            Path: /compare/{pantryId}/{recipeId}
             Method: get
 
   GetPantryInventoryLambda:
