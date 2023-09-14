@@ -16,7 +16,8 @@ export default class DigiPantryClient extends BindingClass {
         super();
 
         const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getPantry', 'getPantryIngredients',
-            'createPantry', 'getPantryList', 'getUserName', 'getRecipes', 'addIngredientToPantry', 'changePantryName'];
+            'createPantry', 'getPantryList', 'getUserName', 'getRecipes', 'addIngredientToPantry', 'changePantryName',
+            'getMealPlanList'];
 
         this.bindClassMethods(methodsToBind, this);
 
@@ -144,6 +145,20 @@ export default class DigiPantryClient extends BindingClass {
             }
         }
 
+        async getMealPlanList() {
+            try {
+                const token = await this.getTokenOrThrow("Only authenticated users can get meal plans.");
+                console.log("token loaded");
+                const response = await this.axiosClient.get(`mealPlan`, {
+                      headers: {
+                          Authorization: `Bearer ${token}`
+                      }
+                  });
+                return response.data.pantries;
+            } catch (error) {
+                this.handleError(error, errorCallback)
+            }
+        }
     /**
      * Get the songs on a given playlist by the playlist's identifier.
      * @param id Unique identifier for a playlist
