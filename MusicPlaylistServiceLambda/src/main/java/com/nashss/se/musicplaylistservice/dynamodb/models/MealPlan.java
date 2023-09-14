@@ -1,9 +1,12 @@
 package com.nashss.se.musicplaylistservice.dynamodb.models;
 
+import com.nashss.se.musicplaylistservice.converters.RecipeSetConverter;
+
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBRangeKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverted;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -51,6 +54,7 @@ public class MealPlan {
      *
      * @return Set of RecipeId Strings for this Pantry
      */
+    @DynamoDBTypeConverted(converter = RecipeSetConverter.class)
     @DynamoDBAttribute(attributeName = "recipeSet")
     public Set<String> getRecipeSet() {
         // normally, we would prefer to return an empty Set if there is no
