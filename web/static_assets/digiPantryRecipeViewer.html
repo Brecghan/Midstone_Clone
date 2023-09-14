@@ -10,11 +10,25 @@
 <header class="header" id="header"></header>
 <div class="card">
     <h2 id="recipe-name"></h2>
+</div>
+<div class="card">
+    <h4 style="color:silver ;" >Recipe Description:</h4>
     <h3 id="recipe-description"></h3>
 </div>
 
 <div class="card">
     <ol id="ingredients"></ol>
+</div>
+
+<div class="card">
+    <form action="#" style="text-align:center;">
+        <p class="hidden error" id="error-message2"> </p>
+        <label for="mealPlanSelect"><h2>Meal Plan List</h2>
+            <h4>Select a meal plan to add this recipe to it</h4>
+        </label>
+        <select style="text-align:center;overflow:hidden" name="recipes" id="mealPlanSelect">
+        </select><br><br>
+    </form>
 </div>
 
 </body>

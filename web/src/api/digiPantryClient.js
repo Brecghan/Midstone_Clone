@@ -146,7 +146,6 @@ export default class DigiPantryClient extends BindingClass {
                     Authorization: `Bearer ${token}`
                 }
             });
-            console.log(response);
             return response.data.recipe;
         } catch (error) {
             this.handleError(error)
@@ -266,13 +265,32 @@ export default class DigiPantryClient extends BindingClass {
         }
     }
 
+    async addRecipeToMealPlan(mealPlanId, recipeId, errorCallback) {
+        try {
+            const token = await this.getTokenOrThrow("Only authenticated users can change add Recipes to Meal Plans.");
+            console.log('AM I EVEN GETTING HERE?')
+            const response = await this.axiosClient.put(`mealPlan/${mealPlanId}/recipeSet`, {
+                mealPlanId: mealPlanId,
+                recipeId: recipeId
+              }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+
+            return response.data.mealPlan;
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+    }
+
     async changeMealPlanName(mealPlanId, newMealPlanName, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can change Meal Plan names.");
             const response = await this.axiosClient.put(`mealPlan/${mealPlanId}`, {
                 mealPlanName: newMealPlanName,
                 mealPlanId: mealPlanId
-            }, {
+              }, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
