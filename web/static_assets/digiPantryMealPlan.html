@@ -2,26 +2,33 @@
 <html>
 
 <head>
-    <script type="text/javascript" src="assets/digiPantryCreatePantry.js"></script>
+    <script type="text/javascript" src="assets/digiPantryMealPlanDetails.js"></script>
     <link rel="stylesheet" type="text/css" href="css/digiPantryStyle.css">
 </head>
 
 <body class="background">
 <header class="header" id="header"></header>
 <div class="card">
-    <h2 style="text-align:center;">View Meal Plan</h2>
-    <form class="card-content" id="create-digital-pantry-form" style="text-align:center;">
-        <p class="hidden error" id="error-message"> </p>
-        <h3 style="text-align:center;">a.	Buttons: <br>
-            i.	Create Meal Plan – creates selected meal plans using selected pantry <br>
-            b.	Forms: <br>
-            i.	Selectable List of all meal plan recipes <br>
-            ii.	Selectable List of all user pantries <br>
-            c.	Lists: <br>
-            i.	Meal Plan’s Recipe list <br>
-
-        </h3>
+    <h1 id="meal-plan-name"></h1>
+    <h3 id="user-id"></h3>
+</div>
+<div class="card">
+    <form action="#" style="text-align:center;">
+        <p class="hidden error" id="error-message2"> </p>
+        <label for="recipesSelect"><h2>Recipe List</h2>
+            <h4>Select a recipe to view its details</h4>
+        </label>
+        <select style="text-align:center;overflow:hidden" name="recipes" id="recipesSelect">
+        </select><br><br>
     </form>
+</div>
+<div class="card">
+    <form class="mealPlan" id="mealPlan-field-form"> <!-- action="Where to send the form data">-->
+        <!--        <p class="hidden error" id="error-message"> </p>-->
+        <label for="new-meal-plan-name">New Meal Plan Name</label><br>
+        <input type="text" id="new-meal-plan-name" name="newName"><br>
+        <br>
+        <input href="#" class="button" id="new-name-button" value="Submit">
 </div>
 </body>
 
