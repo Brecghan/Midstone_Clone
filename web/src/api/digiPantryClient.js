@@ -17,7 +17,7 @@ export default class DigiPantryClient extends BindingClass {
 
         const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getPantry', 'getPantryIngredients',
             'createPantry', 'getPantryList', 'getUserName', 'getRecipes', 'addIngredientToPantry', 'changePantryName',
-            'getMealPlanList', 'createMealPlan', 'getRecipe', 'changeMealPlanName', 'getMealPlanRecipeSet'];
+            'getMealPlanList', 'createMealPlan', 'getRecipe', 'changeMealPlanName', 'getMealPlanRecipeSet', 'compareIngredients'];
 
         this.bindClassMethods(methodsToBind, this);
 
@@ -268,7 +268,6 @@ export default class DigiPantryClient extends BindingClass {
     async addRecipeToMealPlan(mealPlanId, recipeId, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can change add Recipes to Meal Plans.");
-            console.log('AM I EVEN GETTING HERE?')
             const response = await this.axiosClient.put(`mealPlan/${mealPlanId}/recipeSet`, {
                 mealPlanId: mealPlanId,
                 recipeId: recipeId
@@ -279,6 +278,21 @@ export default class DigiPantryClient extends BindingClass {
             });
 
             return response.data.mealPlan;
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+    }
+
+    async compareIngredients(pantryId, recipeId, errorCallback) {
+        try {
+            const token = await this.getTokenOrThrow("Only authenticated users can do stuff.");
+            console.log('AM I EVEN GETTING HERE?')
+            const response = await this.axiosClient.get(`compare/${pantryId}/${recipeId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+            });
+            return response.data.missingIngredients;
         } catch (error) {
             this.handleError(error, errorCallback)
         }

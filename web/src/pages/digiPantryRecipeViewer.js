@@ -10,11 +10,13 @@ import DataStore from "../util/DataStore";
 class DigiPantryRecipeViewer extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['clientLoaded', 'mount', 'addRecipeToPage', 'addIngredientsToPage', 'addMealPlansToPage', 'addRecipeToMealPlan'], this);
+        this.bindClassMethods(['clientLoaded', 'mount', 'addRecipeToPage', 'addIngredientsToPage', 'addMealPlansToPage',
+             'addRecipeToMealPlan', 'letsGoShopping', 'addPantriesToPage'], this);
         this.dataStore = new DataStore();
         this.dataStore.addChangeListener(this.addRecipeToPage);
         this.dataStore.addChangeListener(this.addMealPlansToPage);
-        this.dataStore.addChangeListener(this.addIngredientsToPage)
+        this.dataStore.addChangeListener(this.addPantriesToPage);
+        this.dataStore.addChangeListener(this.addIngredientsToPage);
         this.header = new Header(this.dataStore);
         console.log("view recipes constructor");
     }
@@ -28,8 +30,8 @@ class DigiPantryRecipeViewer extends BindingClass {
         document.getElementById('recipe-name').innerText = "Loading Recipe ...";
         const recipe = await this.client.getRecipe(recipeId);
         this.dataStore.set('recipe', recipe);
-        //document.getElementById('ingredients').innerText = "(Loading Ingredients...)";
-        //const ingredients = await this.client.getRecipeDetails(recipeId);
+        const pantries = await this.client.getPantryList();
+        this.dataStore.set('pantries', pantries);
         const ingredients = recipe.neededIngredients;
         this.dataStore.set('ingredients', ingredients);
         const userName = await this.client.getUserName();
@@ -72,7 +74,6 @@ class DigiPantryRecipeViewer extends BindingClass {
 
    addMealPlansToPage() {
        const mealPlans = this.dataStore.get('mealPlans');
-       console.log("are the mealPlans here? " + mealPlans);
        if (mealPlans == null) {
            return;
        }
@@ -101,6 +102,36 @@ class DigiPantryRecipeViewer extends BindingClass {
          ));
    }
 
+    addPantriesToPage() {
+         const pantries = this.dataStore.get('pantries');
+         if (pantries == null) {
+             return;
+         }
+
+         document.getElementById("pantrySelect").size = pantries.length;
+         let optionList = document.getElementById('pantrySelect').options;
+         let options = [
+           {
+             text: 'Option 1',
+             value: 'Value 1'
+           },
+           {
+             text: 'Option 2',
+             value: 'Value 2',
+             selected: true
+           },
+           {
+             text: 'Option 3',
+             value: 'Value 3'
+           }
+         ];
+
+         pantries.forEach(pantries =>
+           optionList.add(
+             new Option(pantries.pantryName, pantries.pantryId)
+           ));
+         }
+
     async addRecipeToMealPlan() {
          const mealPlanId = document.getElementById('mealPlanSelect').value;
          const urlParams = new URLSearchParams(window.location.search);
@@ -111,11 +142,40 @@ class DigiPantryRecipeViewer extends BindingClass {
                 });
     }
 
+    async letsGoShopping() {
+         const pantryId = document.getElementById('pantrySelect').value;
+         const urlParams = new URLSearchParams(window.location.search);
+         const recipeId = urlParams.get('id');
+         const ingredients = await this.client.compareIngredients(pantryId, recipeId, (error) => {
+                    errorMessageDisplay.innerText = `Error: ${error.message}`;
+                    errorMessageDisplay.classList.remove('hidden');
+                });
+         if (ingredients == null) {
+            return;
+         } else if (ingredients.length == 0) {
+            document.getElementById('all-good-here').innerText = "You Have Everything You Need!";
+         } else {
+         let ingredientHtml = '';
+         let ingredient;
+         for (ingredient of ingredients) {
+             ingredientHtml += `
+                <li class="ingredient">
+                    <span class="ingredientName">${ingredient.ingredientName}</span>
+                    <span class="ingredientQuantity">${ingredient.quantity}</span>
+                    <span class="unitOfMeasure">${ingredient.unitOfMeasure}</span>
+                </li>
+            `;
+         }
+         document.getElementById('shoppingList').innerHTML = ingredientHtml;
+         }
+    }
+
 /**
      * Add the header to the page and load the DigiPantryClient.
      */
     mount() {
         document.getElementById('mealPlanSelect').addEventListener('click', this.addRecipeToMealPlan);
+        document.getElementById('pantrySelect').addEventListener('click', this.letsGoShopping);
 
         this.header.addHeaderToPage();
 
