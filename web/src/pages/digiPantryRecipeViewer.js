@@ -10,9 +10,10 @@ import DataStore from "../util/DataStore";
 class DigiPantryRecipeViewer extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['clientLoaded', 'mount', 'addRecipeToPage', 'addIngredientsToPage'], this);
+        this.bindClassMethods(['clientLoaded', 'mount', 'addRecipeToPage', 'addIngredientsToPage', 'addMealPlansToPage', 'addRecipeToMealPlan'], this);
         this.dataStore = new DataStore();
         this.dataStore.addChangeListener(this.addRecipeToPage);
+        this.dataStore.addChangeListener(this.addMealPlansToPage);
         this.dataStore.addChangeListener(this.addIngredientsToPage)
         this.header = new Header(this.dataStore);
         console.log("view recipes constructor");
@@ -24,17 +25,16 @@ class DigiPantryRecipeViewer extends BindingClass {
     async clientLoaded() {
         const urlParams = new URLSearchParams(window.location.search);
         const recipeId = urlParams.get('id');
-        console.log(recipeId);
         document.getElementById('recipe-name').innerText = "Loading Recipe ...";
         const recipe = await this.client.getRecipe(recipeId);
-        console.log(recipe);
         this.dataStore.set('recipe', recipe);
         //document.getElementById('ingredients').innerText = "(Loading Ingredients...)";
         //const ingredients = await this.client.getRecipeDetails(recipeId);
         const ingredients = recipe.neededIngredients;
-        console.log(ingredients);
         this.dataStore.set('ingredients', ingredients);
         const userName = await this.client.getUserName();
+        const mealPlans = await this.client.getMealPlanList();
+        this.dataStore.set('mealPlans', mealPlans);
     }
 
 /**
@@ -65,16 +65,57 @@ class DigiPantryRecipeViewer extends BindingClass {
                     <span class="unitOfMeasure">${ingredient.unitOfMeasure}</span>
                 </li>
             `;
-            console.log(ingredientHtml);
         }
 
         document.getElementById('ingredients').innerHTML = ingredientHtml;
+    }
+
+   addMealPlansToPage() {
+       const mealPlans = this.dataStore.get('mealPlans');
+       console.log("are the mealPlans here? " + mealPlans);
+       if (mealPlans == null) {
+           return;
+       }
+
+       document.getElementById("mealPlanSelect").size = mealPlans.length;
+       let optionList = document.getElementById('mealPlanSelect').options;
+       let options = [
+         {
+           text: 'Option 1',
+           value: 'Value 1'
+         },
+         {
+           text: 'Option 2',
+           value: 'Value 2',
+           selected: true
+         },
+         {
+           text: 'Option 3',
+           value: 'Value 3'
+         }
+       ];
+
+       mealPlans.forEach(mealPlans =>
+         optionList.add(
+           new Option(mealPlans.mealPlanName, mealPlans.mealPlanId)
+         ));
+   }
+
+    async addRecipeToMealPlan() {
+         const mealPlanId = document.getElementById('mealPlanSelect').value;
+         const urlParams = new URLSearchParams(window.location.search);
+         const recipeId = urlParams.get('id');
+         const results = await this.client.addRecipeToMealPlan(mealPlanId, recipeId, (error) => {
+                    errorMessageDisplay.innerText = `Error: ${error.message}`;
+                    errorMessageDisplay.classList.remove('hidden');
+                });
     }
 
 /**
      * Add the header to the page and load the DigiPantryClient.
      */
     mount() {
+        document.getElementById('mealPlanSelect').addEventListener('click', this.addRecipeToMealPlan);
 
         this.header.addHeaderToPage();
 
