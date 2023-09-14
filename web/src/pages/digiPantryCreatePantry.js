@@ -41,7 +41,7 @@ class CreatePantry extends BindingClass {
         const origButtonText = createButton.innerText;
         createButton.innerText = 'Loading...';
 
-        const pantryName = document.getElementById('pantry-name').value;
+        const pantryName = document.getElementById('new-pantry-name').value;
         console.log(pantryName);
 
 
