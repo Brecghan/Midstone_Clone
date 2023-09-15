@@ -23,8 +23,16 @@ body {
         <p class="hidden error" id="error-message"> </p>
         <label for="regionsSelect"><h4>Click the dropdown menu below to select a type filter</h4>
         </label>
-        <select name="recipeRegion" id="regionsSelect" style="text-align:center;">
-        </select><br>
+        <select name="recipeRegion" id="regionsSelect" style="text-align:center;overflow:hidden" size="7">
+            <option value="ALL" selected="selected">All</option>
+            <option value="American">American</option>
+            <option value="Bar">Bar</option>
+            <option value="Comfort">Comfort</option>
+            <option value="Dessert">Dessert</option>
+            <option value="Italian">Italian</option>
+            <option value="Mexican">Mexican</option>
+        </select><br><br>
+        <a  class="button" id="filter-btn">Filter</a>
     </form>
 </div>
     <div class="card">

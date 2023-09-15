@@ -112,7 +112,7 @@ export default class DigiPantryClient extends BindingClass {
 
     async getRecipes(region) {
         try {
-            const token = await this.getTokenOrThrow("Only authenticated users can get pantries.");
+            const token = await this.getTokenOrThrow("Only authenticated users can get recipes.");
             const response = await this.axiosClient.get(`recipes/${region}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
