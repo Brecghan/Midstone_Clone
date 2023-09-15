@@ -1,0 +1,76 @@
+{
+  "Pantries": [
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": { "S": "daubyjs@gmail.com" },
+          "pantryId": { "S": "RCfjN" },
+          "inventory": { "S": "[{\"ingredientName\":\"Bottle of Dijon Mustard\",\"quantity\":1.0,\"unitOfMeasure\":\"EACH\"}, {\"ingredientName\":\"Hot Dog\",\"quantity\":10.0,\"unitOfMeasure\":\"EACH\"}, {\"ingredientName\":\"Hot Dog Bun\",\"quantity\":8.0,\"unitOfMeasure\":\"EACH\"}, {\"ingredientName\":\"Tobasco Sauce\",\"quantity\":100.0,\"unitOfMeasure\":\"Cup\"}, {\"ingredientName\":\"Halibut Eyes\",\"quantity\":3.0,\"unitOfMeasure\":\"EACH\"}]" },
+          "pantryName": { "S": "Richard's Food Pantry" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": { "S": "daubyjs@gmail.com" },
+          "pantryId": { "S": "TFJER" },
+          "inventory": { "S": "[{\"ingredientName\":\"Fishsticks\",\"quantity\":12.0,\"unitOfMeasure\":\"EACH\"}]" },
+          "pantryName": { "S": "Richard's Liquor Cabinet" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": { "S": "daubyjs@gmail.com" },
+          "pantryId": { "S": "VJETH" },
+          "inventory": { "S": "[{\"ingredientName\":\"Coffee (Un-roasted)\",\"quantity\":400.0,\"unitOfMeasure\":\"LBS\"}]" },
+          "pantryName": { "S": "Charlie's Coffee Pantry" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": { "S": "daubyjs@gmail.com" },
+          "pantryId": { "S": "OPENF" },
+          "inventory": { "S": "[{\"ingredientName\":\"Long Pork\",\"quantity\":1.0,\"unitOfMeasure\":\"LBS\"}]" },
+          "pantryName": { "S": "100% NOT Scott's Pantry" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": { "S": "daubyjs@gmail.com" },
+          "pantryId": { "S": "LSERR" },
+          "inventory": { "S": "[{\"ingredientName\":\"Fishsticks\",\"quantity\":12.0,\"unitOfMeasure\":\"EACH\"}]" },
+          "pantryName": { "S": "Kanye's Pantry" }
+        }
+      }
+    }
+  ],
+  "MealPlans": [
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": { "S": "daubyjs@gmail.com" },
+          "mealPlanId": { "S": "10my0" },
+          "mealPlanName": { "S": "Let's just DoorDash" },
+          "recipeSet": { "S": "[]" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": { "S": "daubyjs@gmail.com" },
+          "mealPlanId": { "S": "19my0" },
+          "mealPlanName": { "S": "Richard's Weekly Meal Plan" },
+          "recipeSet": { "S": "[]" }
+        }
+      }
+    }
+  ]
+}
