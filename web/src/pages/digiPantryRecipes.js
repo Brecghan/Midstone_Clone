@@ -10,11 +10,11 @@ import DataStore from "../util/DataStore";
      constructor() {
          super();
          this.bindClassMethods(['clientLoaded', 'mount', 'addRecipesToPage', 'redirectToRecipeViewer',
-            'selectRecipeRegion', 'updateRecipeView', 'getRecipeRegions'], this);
+            'updateRecipeView', 'getRecipeRegions'], this);
          this.dataStore = new DataStore();
          this.dataStore.addChangeListener(this.addRecipesToPage);
 //         this.dataStore.addChangeListener(this.redirectToRecipeViewer);
-         this.dataStore.addChangeListener(this.selectRecipeRegion);
+//         this.dataStore.addChangeListener(this.selectRecipeRegion);
 //         this.dataStore.addChangeListener(this.updateRecipeView);
          this.header = new Header(this.dataStore);
          console.log("viewRecipes constructor");
@@ -36,7 +36,6 @@ import DataStore from "../util/DataStore";
         }
         console.log("Show me the regions" + regions)
         this.dataStore.set('recipes', recipes);
-        document.getElementById('regionsSelect').innerText = "(loading region...)";
 }
     async getRecipeRegions(recipes) {
                 const regions = new Set();
@@ -50,7 +49,7 @@ import DataStore from "../util/DataStore";
  * Add the header to the page and load the DigiPantryClient.
      */
     mount() {
-        document.getElementById('regionsSelect').addEventListener('click', this.updateRecipeView);
+        document.getElementById('filter-btn').addEventListener('click', this.updateRecipeView);
         document.getElementById('recipesSelect').addEventListener('click', this.redirectToRecipeViewer);
 
         this.header.addHeaderToPage();
@@ -92,52 +91,27 @@ import DataStore from "../util/DataStore";
            new Option(recipes.recipeName, recipes.recipeId)
          ));
 }
-
-    selectRecipeRegion() {
-           const regions = this.dataStore.get('regions');
-           console.log("Regions in selectRecipeRegion" + regions);
-           if (regions == null) {
-               return;
-           }
-
-//           document.getElementById("regionsSelect").size = regions.size + 1;
-           let optionRegionList = document.getElementById('regionsSelect').options;
-           optionRegionList.length = 0;
-           var options = ["ALL"];
-           for (const region of regions) {
-           options.push(region);
-           };
-           for(var i = 0; i < options.length; i++) {
-               var opt = options[i];
-               var el = document.createElement("option");
-               el.textContent = opt;
-               el.value = opt;
-               optionRegionList.add(el);
-           }
-//           let options = [
-//             {
-//               text: 'Option 1',
-//               value: 'Value 1'
-//             },
-//             {
-//               text: 'Option 2',
-//               value: 'Value 2',
-//               selected: true
-//             },
-//             {
-//               text: 'Option 3',
-//               value: 'Value 3'
-//             }
-//           ];
-//           optionRegionList.add(new Option ("ALL", "ALL"));
+//
+//    selectRecipeRegion() {
+//           const regions = this.dataStore.get('regions');
+//           console.log("Regions in selectRecipeRegion" + regions);
+//           if (regions == null) {
+//               return;
+//           }
+//           let optionRegionList = document.getElementById('regionsSelect').options;
+//           optionRegionList.length = 0;
+//           var options = ["ALL"];
 //           for (const region of regions) {
-//           optionRegionList.add(new Option (region, new String(region)))
+//           options.push(region);
 //           };
-//                   regions.forEach(regions =>
-//                     optionList.add(
-//                       new Option(new String(regions), regions)
-//                     ));
-        }
+//           for(var i = 0; i < options.length; i++) {
+//               var opt = options[i];
+//               var el = document.createElement("option");
+//               el.textContent = opt;
+//               el.value = opt;
+//               optionRegionList.add(el);
+//           }
+//        }
 
    async updateRecipeView() {
            const region = document.getElementById('regionsSelect').value;
