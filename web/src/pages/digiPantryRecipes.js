@@ -10,7 +10,7 @@ import DataStore from "../util/DataStore";
      constructor() {
          super();
          this.bindClassMethods(['clientLoaded', 'mount', 'addRecipesToPage', 'redirectToRecipeViewer',
-            'updateRecipeView', 'getRecipeRegions'], this);
+            'updateRecipeView'], this);
          this.dataStore = new DataStore();
          this.dataStore.addChangeListener(this.addRecipesToPage);
 //         this.dataStore.addChangeListener(this.redirectToRecipeViewer);
@@ -29,21 +29,21 @@ import DataStore from "../util/DataStore";
 //        const recipeId = urlParams.get('recipeId');
         document.getElementById('recipesSelect').innerText = "Loading Recipe ...";
         const recipes = await this.client.getRecipes("ALL");
-        const regions = await this.getRecipeRegions(recipes);
-        this.dataStore.set('regions', regions);
-        for (const region of regions) {
-        console.log(region);
-        }
-        console.log("Show me the regions" + regions)
+//        const regions = await this.getRecipeRegions(recipes);
+//        this.dataStore.set('regions', regions);
+//        for (const region of regions) {
+//        console.log(region);
+//        }
+//        console.log("Show me the regions" + regions)
         this.dataStore.set('recipes', recipes);
 }
-    async getRecipeRegions(recipes) {
-                const regions = new Set();
-                for (const recipe of recipes){
-                regions.add(recipe.region);
-                }
-                return regions;
-        }
+//    async getRecipeRegions(recipes) {
+//                const regions = new Set();
+//                for (const recipe of recipes){
+//                regions.add(recipe.region);
+//                }
+//                return regions;
+//        }
 
 /**
  * Add the header to the page and load the DigiPantryClient.
@@ -118,7 +118,6 @@ import DataStore from "../util/DataStore";
            console.log("Region in updateReviewView: " + region);
            const recipes = await this.client.getRecipes(region);
            this.dataStore.set('recipes', recipes);
-
    }
 
 
