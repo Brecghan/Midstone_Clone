@@ -9,10 +9,10 @@ on:
 env:
 
   # STUDENTS: Set these environment variables
-  API_BASE_URL: https://ws1jbwak97.execute-api.us-east-2.amazonaws.com/Prod/
-  COGNITO_DOMAIN: project-digitalpantry-mint-chip.auth.us-east-2.amazoncognito.com
-  COGNITO_REDIRECT_SIGNIN: https://dyvv3n789l5yh.cloudfront.net
-  COGNITO_REDIRECT_SIGNOUT: https://dyvv3n789l5yh.cloudfront.net
+  API_BASE_URL: https://kocqu0xkje.execute-api.us-east-2.amazonaws.com/Prod/
+  COGNITO_DOMAIN: project-digitalpantry-mint-chip
+  COGNITO_REDIRECT_SIGNIN: https://d3rb6ysdepe9b.cloudfront.net
+  COGNITO_REDIRECT_SIGNOUT: https://d3rb6ysdepe9b.cloudfront.net
 
   COGNITO_USER_POOL_ID: ${{ secrets.COGNITO_USER_POOL_ID }}
   COGNITO_USER_POOL_CLIENT_ID: ${{ secrets.COGNITO_USER_POOL_CLIENT_ID }}
