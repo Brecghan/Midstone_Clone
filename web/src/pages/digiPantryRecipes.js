@@ -28,14 +28,15 @@ import DataStore from "../util/DataStore";
 //        const urlParams = new URLSearchParams(window.location.search);
 //        const recipeId = urlParams.get('recipeId');
         document.getElementById('recipesSelect').innerText = "Loading Recipe ...";
-        const recipes = await this.client.getRecipes("ALL");
+        const recipesAll = await this.client.getRecipes("ALL");
 //        const regions = await this.getRecipeRegions(recipes);
 //        this.dataStore.set('regions', regions);
 //        for (const region of regions) {
 //        console.log(region);
 //        }
 //        console.log("Show me the regions" + regions)
-        this.dataStore.set('recipes', recipes);
+        this.dataStore.set('recipesAll', recipesAll);
+        this.dataStore.set('recipes', recipesAll);
 }
 //    async getRecipeRegions(recipes) {
 //                const regions = new Set();
@@ -116,7 +117,13 @@ import DataStore from "../util/DataStore";
    async updateRecipeView() {
            const region = document.getElementById('regionsSelect').value;
            console.log("Region in updateReviewView: " + region);
-           const recipes = await this.client.getRecipes(region);
+           const recipesAll= this.dataStore.get('recipesAll');
+           const recipes = new Set();
+           for (const recipe of recipesAll) {
+            if (recipe.region == region) {
+               recipes.add(recipe);
+            }
+           }
            this.dataStore.set('recipes', recipes);
    }
 
